@@ -50,8 +50,27 @@
             .sidenav {padding-top: 15px;}
             .sidenav a {font-size: 18px;}
         }
+
+        form {
+
+        }
+
+        .createFormDiv{
+            margin: 10px;
+            border: 2px solid green;
+            border-radius: 5px;
+        }
     </style>
     <body>
+
+        <!-- Establish connection with DB -->
+            <?php
+                // Establish connection
+                include('../../../connectDB.php');
+                $db = connectDb();
+                $id = collectID($db, 'clients');
+            ?>
+        <!-- /Establish connection with DB -->
 
         <!--NavBar-->
             <?php
@@ -74,11 +93,106 @@
             <a href="../../../login/logout.php">Logout</a>
         </div>
 
+        <!-- Create form action -->
+            <?php
+                if(isset($_POST['create'])){
+                    $name = $_POST['name'];
+	                $surname = $_POST['surname'];
+	                $birth_date = $_POST['birth_date'];
+	                $phone = $_POST['phone'];
+	                $email = $_POST['email'];
+	                $username = $_POST['username'];
+	                $password = $_POST['password'];
+	                $bill = $_POST['bill'];
+                    echo "INSERT INTO 'clients' ('client_ID', 'name', 'surname', 'birth_date', 'phone', 'email', 'username', 'password', 'case_ID', 'bill') VALUES ('$id', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0', '$bill')";
+	                $createQuery = mysqli_query($db, "INSERT INTO 'clients' ('client_ID', 'name', 'surname', 'birth_date', 'phone', 'email', 'username', 'password', 'case_ID', 'bill') VALUES ('$id', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0', '$bill')");
+
+                }
+            ?>
+        <!-- /Create form action -->
+
         <div class="main">
-            <h2>Please, select an option:</h2>
-            <p><a href="create.php">Create client</a></p>
-            <p><a href="modify.php">Modify client</a></p>
-            <p><a href="overview.php">See all clients</a></p> <!-- Include search & delete on this option -->
+            <div class="createFormDiv">
+                <form action="index.php" method="post">
+                    <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" style="display:none" disabled>
+
+                    <label for="name">First name</label>
+                    <input type="text" id="name" name="name">
+
+                    <label for="surname">Last name</label>
+                    <input type="text" id="surname" name="surname">
+
+                    <label for="birth_date">Birth date</label>
+                    <input type="date" id="birth_date" name="birth_date">
+
+                    <br>
+
+                    <label for="phone">Phone</label>
+                    <input type="text" id="phone" name="phone">
+
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username">
+
+                    <br>
+
+                    <label for="password">Password</label>
+                    <input type="text" id="password" name="password">
+
+                    <label for="bill">Bill</label>
+                    <input type="text" id="bill" name="bill">
+
+                    <input type="submit" value="Submit" name="create">
+                </form>
+            </div>
+
+            <div class="clientList">
+                <?php
+                    $listQuery = mysqli_query($db, "SELECT * FROM clients");
+
+	                if($row = mysqli_fetch_array($listQuery)){
+                        echo "<table>";
+
+                            echo "<tr>";
+                                echo "<td>ID</td>";
+                                echo "<td>Name</td>";
+                                echo "<td>Surname</td>";
+                                echo "<td>Birth Date</td>";
+                                echo "<td>Phone</td>";
+                                echo "<td>Email</td>";
+                                echo "<td>Username</td>";
+                                echo "<td>Password</td>";
+                                echo "<td>Case ID</td>";
+                                echo "<td>Bill</td>";
+                            echo "</tr>";
+
+                            echo "<tr>";
+                                echo "<td></td>";
+                            echo "</tr>";
+
+
+                            do{
+                                echo "<tr>";
+                                    $listID=$row['client_ID'];
+                                    echo "<td>".$listID."</td>";
+                                    echo "<td>".$row["name"]."</td>";
+                                    echo "<td>".$row["surname"]."</td>";
+                                    echo "<td>".$row["birth_date"]."</td>";
+                                    echo "<td>".$row["phone"]."</td>";
+                                    echo "<td>".$row["email"]."</td>";
+                                    echo "<td>".$row["username"]."</td>";
+                                    echo "<td>".$row["password"]."</td>";
+                                    echo "<td>".$row["case_ID"]."</td>";
+                                    echo "<td>".$row["bill"]."</td>";
+                                echo "</tr>";
+                            }while($row = mysqli_fetch_array($listQuery));
+	                }else{
+	                    echo "There is no record";
+                    }
+                ?>
+            </div>
         </div>
     </body>
 </html>

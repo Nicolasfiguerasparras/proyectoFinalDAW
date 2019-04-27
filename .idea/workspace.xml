@@ -50,28 +50,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/personalArea/Admin/Clients/create.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2640">
+            <state relative-caret-position="1870">
               <caret line="110" column="28" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/personalArea/Admin/Clients/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1752">
-              <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/login/index.php">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="96">
-              <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+              <caret line="106" column="266" selection-start-line="106" selection-start-column="266" selection-end-line="106" selection-end-column="266" />
               <folding>
-                <element signature="n#style#0;n#h4#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,8 +71,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/personalArea/Client/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1248">
+            <state relative-caret-position="884">
               <caret line="52" column="40" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/personalArea/Admin/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="776">
+              <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -98,10 +98,17 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>border</find>
+      <find>`</find>
     </findStrings>
+    <replaceStrings>
+      <replace>'</replace>
+    </replaceStrings>
     <dirStrings>
       <dir>C:\xampp\htdocs\proyectoFinal\personalArea</dir>
     </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -122,8 +129,8 @@
         <option value="$PROJECT_DIR$/personalArea/Admin/Clients/modify.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/personalArea/Admin/Clients/create.php" />
-        <option value="$PROJECT_DIR$/personalArea/Admin/Clients/index.php" />
         <option value="$PROJECT_DIR$/login/index.php" />
+        <option value="$PROJECT_DIR$/personalArea/Admin/Clients/index.php" />
       </list>
     </option>
   </component>
@@ -142,49 +149,31 @@
         <subPane>
           <expand>
             <path>
-              <item name="proyectoFinal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyectoFinal" type="462c0819:PsiDirectoryNode" />
+              <item name="proyectoFinalDAW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyectoFinalDAW" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="proyectoFinal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyectoFinal" type="462c0819:PsiDirectoryNode" />
+              <item name="proyectoFinalDAW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyectoFinalDAW" type="462c0819:PsiDirectoryNode" />
               <item name="login" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="proyectoFinal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyectoFinal" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-              <item name="forgotPassword" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyectoFinal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyectoFinal" type="462c0819:PsiDirectoryNode" />
+              <item name="proyectoFinalDAW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyectoFinalDAW" type="462c0819:PsiDirectoryNode" />
               <item name="personalArea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="proyectoFinal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyectoFinal" type="462c0819:PsiDirectoryNode" />
+              <item name="proyectoFinalDAW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyectoFinalDAW" type="462c0819:PsiDirectoryNode" />
               <item name="personalArea" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="proyectoFinal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyectoFinal" type="462c0819:PsiDirectoryNode" />
+              <item name="proyectoFinalDAW" type="b2602c69:ProjectViewProjectNode" />
+              <item name="proyectoFinalDAW" type="462c0819:PsiDirectoryNode" />
               <item name="personalArea" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
               <item name="Clients" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyectoFinal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyectoFinal" type="462c0819:PsiDirectoryNode" />
-              <item name="personalArea" type="462c0819:PsiDirectoryNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="proyectoFinal" type="b2602c69:ProjectViewProjectNode" />
-              <item name="proyectoFinal" type="462c0819:PsiDirectoryNode" />
-              <item name="personalArea" type="462c0819:PsiDirectoryNode" />
-              <item name="NavBar" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -196,7 +185,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../OmibuTasks/OmibuTasks" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -255,11 +244,12 @@
       <workItem from="1556201638245" duration="1298000" />
       <workItem from="1556202951787" duration="2897000" />
       <workItem from="1556275669760" duration="22000" />
+      <workItem from="1556359934356" duration="4574000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45281000" />
+    <option name="totallyTimeSpent" value="49855000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -271,10 +261,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.10660981" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.10731319" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32998884" />
       <window_info anchor="bottom" id="Database Changes" order="1" weight="0.32998884" />
@@ -349,13 +340,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/personalArea/Admin/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1085">
-          <caret line="84" column="14" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="84" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/personalArea/Admin/Clients/overview.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="776">
@@ -379,31 +363,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/personalArea/Admin/Clients/create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2640">
+        <state relative-caret-position="1870">
           <caret line="110" column="28" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/personalArea/Admin/Clients/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1752">
-          <caret line="73" column="29" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/personalArea/Client/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1248">
+        <state relative-caret-position="884">
           <caret line="52" column="40" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/personalArea/Admin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="776">
+          <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/login/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+        <state relative-caret-position="249">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
           <folding>
             <element signature="n#style#0;n#h4#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/personalArea/Admin/Clients/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="106" column="266" selection-start-line="106" selection-start-column="266" selection-end-line="106" selection-end-column="266" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
