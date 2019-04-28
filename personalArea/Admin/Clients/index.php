@@ -51,10 +51,6 @@
             .sidenav a {font-size: 18px;}
         }
 
-        form {
-
-        }
-
         .createFormDiv{
             margin: 10px;
             border: 2px solid green;
@@ -104,9 +100,7 @@
 	                $username = $_POST['username'];
 	                $password = $_POST['password'];
 	                $bill = $_POST['bill'];
-                    echo "INSERT INTO 'clients' ('client_ID', 'name', 'surname', 'birth_date', 'phone', 'email', 'username', 'password', 'case_ID', 'bill') VALUES ('$id', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0', '$bill')";
-	                $createQuery = mysqli_query($db, "INSERT INTO 'clients' ('client_ID', 'name', 'surname', 'birth_date', 'phone', 'email', 'username', 'password', 'case_ID', 'bill') VALUES ('$id', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0', '$bill')");
-
+	                $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0', '$bill')") or die(mysqli_error($db));
                 }
             ?>
         <!-- /Create form action -->
@@ -179,7 +173,8 @@
                                     echo "<td>".$listID."</td>";
                                     echo "<td>".$row["name"]."</td>";
                                     echo "<td>".$row["surname"]."</td>";
-                                    echo "<td>".$row["birth_date"]."</td>";
+                                    $bDateFormatted = date("d-m-Y", strtotime($row["birth_date"]));   
+                                    echo "<td>".$bDateFormatted."</td>";
                                     echo "<td>".$row["phone"]."</td>";
                                     echo "<td>".$row["email"]."</td>";
                                     echo "<td>".$row["username"]."</td>";
