@@ -1,0 +1,48 @@
+h1{
+    font-family: arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 15px;
+    margin-bottom: 1px;
+}
+
+.client{
+    padding-top: 26px;
+}
+
+.addClient{
+    text-align: right;
+}
+
+.client{
+    text-align: center;
+}
+
+body{
+    background-color: rgb(27, 19, 19) !important;
+}
+
+.mainBox{
+    margin: 30px !important;
+    background: white !important;
+    height:95vh;
+    border-radius: 10px;
+}
+
+.addClientBtn{
+    font-size: 60px;
+    color: dodgerblue;
+    padding-top: 5px;
+}
+
+.addClientBox{
+    text-align: center;
+}
+
+/* Fonts */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+body{
+    font-family: Poppins-Regular, sans-serif;
+}
