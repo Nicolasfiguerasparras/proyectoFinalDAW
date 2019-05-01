@@ -59,7 +59,7 @@
                             setcookie("sesion", $dataSesion, time()+(60*60*60), "/");
                         }
 
-                        header("Location: ../personalArea/Clients/");
+                        header("Location: ../personalArea/Client/");
                     }elseif($queryLawer != ""){
                         $_SESSION['login_ok'] = true;
                         $_SESSION['user'] = $user;

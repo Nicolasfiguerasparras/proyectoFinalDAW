@@ -25,6 +25,15 @@
     </head>
     <body>
 
+        <!-- Establish connection with DB -->
+            <?php
+                // Establish connection
+                include('../../../connectDB.php');
+                $db = connectDb();
+                //$id = collectID($db, 'firmas');
+            ?>
+        <!-- /Establish connection with DB -->
+
         <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
@@ -46,7 +55,7 @@
 				<div class="row">
 					<!-- Add client button -->
 						<div class="col-3 addClientBox">
-							<a href="#"><i class="fas fa-plus-circle addClientBtn"></i></a>
+							<!-- <a href="#"><i class="fas fa-plus-circle addClientBtn"></i></a> -->
 						</div>
 					<!-- /Add client button -->
 

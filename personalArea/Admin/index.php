@@ -25,6 +25,15 @@
     </head>
     <body>
 
+        <!-- Establish connection with DB -->
+            <?php
+                // Establish connection
+                include('../../connectDB.php');
+                $db = connectDb();
+                //$id = collectID($db, 'firmas');
+            ?>
+        <!-- /Establish connection with DB -->
+
         <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
@@ -46,7 +55,7 @@
 				<div class="row">
 					<!-- Add client button -->
 						<div class="col-3 addClientBox">
-							<a href="#"><i class="fas fa-plus-circle addClientBtn"></i></a>
+							<!-- <a href="#"><i class="fas fa-plus-circle addClientBtn"></i></a> -->
 						</div>
 					<!-- /Add client button -->
 
@@ -64,7 +73,7 @@
 							<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <a class='nav-link active' href='index.php'>Index</a>
                                 <a class='nav-link' href='Clients/'>Clients</a>
-								<a class="nav-link" href="../../../login/logout.php">Logout</a>
+								<a class="nav-link" href="../../login/logout.php">Logout</a>
 							</div>
 						<!-- /Lateral NavBar -->
 
