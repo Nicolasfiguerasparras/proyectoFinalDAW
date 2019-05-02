@@ -44,8 +44,7 @@
 	                $email = $_POST['email'];
 	                $username = $_POST['username'];
 	                $password = $_POST['password'];
-	                $bill = $_POST['bill'];
-	                $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0', '$bill')") or die(mysqli_error($db));
+	                $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0', '0')") or die(mysqli_error($db));
                 }
             ?>
         <!-- /Create form action -->
@@ -95,37 +94,40 @@
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="listClients" role="tabpanel" aria-labelledby="listClients">
                                             <form action="index.php" method="post">
-                                                <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" style="display:none" disabled>
-
-                                                <label for="name">First name</label>
-                                                <input type="text" id="name" name="name">
-
-                                                <label for="surname">Last name</label>
-                                                <input type="text" id="surname" name="surname">
-
-                                                <label for="birth_date">Birth date</label>
-                                                <input type="date" id="birth_date" name="birth_date">
-
-                                                <br>
-
-                                                <label for="phone">Phone</label>
-                                                <input type="text" id="phone" name="phone">
-
-                                                <label for="email">Email</label>
-                                                <input type="text" id="email" name="email">
-
-                                                <label for="username">Username</label>
-                                                <input type="text" id="username" name="username">
-
-                                                <br>
-
-                                                <label for="password">Password</label>
-                                                <input type="text" id="password" name="password">
-
-                                                <label for="bill">Bill</label>
-                                                <input type="text" id="bill" name="bill">
-
-                                                <input type="submit" value="Submit" name="create">
+                                                <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" hidden disabled>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="name">First name</label>
+                                                        <input type="text" class="form-control" id="name" name="name" placeholder="Insert name">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="surname">Last name</label>
+                                                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Insert last name">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="birth_date">Birth date</label>
+                                                        <input type="date" class="form-control" id="birth_date" name="birth_date">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-2">
+                                                        <label for="phone">Phone number</label>
+                                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="+34 639 941 992">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="email">Email</label>
+                                                        <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="username">Username</label>
+                                                        <input type="text" class="form-control" id="username" name="username">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="password">Password</label>
+                                                        <input type="password" class="form-control" id="password" name="password">
+                                                    </div>
+                                                </div>
+                                                <input type="submit" class="btn btn-primary" value="Submit" name="create">
                                             </form>
                                         </div>
                                     </div>
