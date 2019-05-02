@@ -71,8 +71,8 @@
                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <a class="nav-item nav-link" href="index.php" role="tab" aria-selected="false">List clients</a>
                                             <a class="nav-item nav-link" id="mediumPriority" href="create.php" role="tab" aria-selected="true">Create client</a>
-                                            <a class="nav-item nav-link active" id="lowPriority" href="modify.php" role="tab" aria-controls="nav-contact" aria-selected="false">Modify client</a>
-                                            <a class="nav-item nav-link" id="options" href="options.php" role="tab" aria-controls="nav-contact2" aria-selected="false">Options</a>
+                                            <a class="nav-item nav-link" id="lowPriority" href="modify.php" role="tab" aria-controls="nav-contact" aria-selected="false">Modify client</a>
+                                            <a class="nav-item nav-link active" id="options" href="options.php" role="tab" aria-controls="nav-contact2" aria-selected="false">Options</a>
                                         </div>
                                     </nav>
 

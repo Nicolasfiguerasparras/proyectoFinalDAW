@@ -34,22 +34,6 @@
             ?>
         <!-- /Establish connection with DB -->
 
-        <!-- Create form action -->
-            <?php
-                if(isset($_POST['create'])){
-                    $name = $_POST['name'];
-	                $surname = $_POST['surname'];
-	                $birth_date = $_POST['birth_date'];
-	                $phone = $_POST['phone'];
-	                $email = $_POST['email'];
-	                $username = $_POST['username'];
-	                $password = $_POST['password'];
-	                $bill = $_POST['bill'];
-	                $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0', '$bill')") or die(mysqli_error($db));
-                }
-            ?>
-        <!-- /Create form action -->
-
         <div class="container-fluid">
 			<div class="mainBox">
 				<div class="row">
@@ -85,50 +69,15 @@
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                     <nav>
                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="highPriority" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Create client</a>
-                                            <a class="nav-item nav-link" id="mediumPriority" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">List clients</a>
-                                            <a class="nav-item nav-link" id="lowPriority" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Prioridad baja</a>
-                                            <a class="nav-item nav-link" id="options" data-toggle="tab" href="#nav-contact2" role="tab" aria-controls="nav-contact2" aria-selected="false">Opciones</a>
+                                            <a class="nav-item nav-link active" id="highPriority" href="index.php" role="tab" aria-selected="true">List clients</a>
+                                            <a class="nav-item nav-link" id="mediumPriority" href="create.php" role="tab" aria-selected="false">Create client</a>
+                                            <a class="nav-item nav-link" id="lowPriority" href="modify.php" role="tab" aria-selected="false">Modify client</a>
+                                            <a class="nav-item nav-link" id="options" href="options.php" role="tab" aria-selected="false">Options</a>
                                         </div>
                                     </nav>
 
                                     <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="highPriority">
-                                            <form action="index.php" method="post">
-                                                <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" style="display:none" disabled>
-
-                                                <label for="name">First name</label>
-                                                <input type="text" id="name" name="name">
-
-                                                <label for="surname">Last name</label>
-                                                <input type="text" id="surname" name="surname">
-
-                                                <label for="birth_date">Birth date</label>
-                                                <input type="date" id="birth_date" name="birth_date">
-
-                                                <br>
-
-                                                <label for="phone">Phone</label>
-                                                <input type="text" id="phone" name="phone">
-
-                                                <label for="email">Email</label>
-                                                <input type="text" id="email" name="email">
-
-                                                <label for="username">Username</label>
-                                                <input type="text" id="username" name="username">
-
-                                                <br>
-
-                                                <label for="password">Password</label>
-                                                <input type="text" id="password" name="password">
-
-                                                <label for="bill">Bill</label>
-                                                <input type="text" id="bill" name="bill">
-
-                                                <input type="submit" value="Submit" name="create">
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="mediumPriority">
+                                        <div class="tab-pane fade show active" id="listClients" role="tabpanel" aria-labelledby="highPriority">
                                             <?php
                                                 $listQuery = mysqli_query($db, "SELECT * FROM clients");
 
@@ -173,14 +122,6 @@
                                                     echo "There is no record";
                                                 }
                                             ?>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="lowPriority">
-                                            <p>Tarea</p>
-                                            <p>Tarea</p>
-                                            <p>Tarea</p>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-contact2" role="tabpanel" aria-labelledby="options">
-                                            <a href="">Añadir tarea</a>
                                         </div>
                                     </div>
                                 </div>
