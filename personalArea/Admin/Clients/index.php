@@ -71,57 +71,58 @@
                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <a class="nav-item nav-link active" id="highPriority" href="index.php" role="tab" aria-selected="true">List clients</a>
                                             <a class="nav-item nav-link" id="mediumPriority" href="create.php" role="tab" aria-selected="false">Create client</a>
-                                            <a class="nav-item nav-link" id="lowPriority" href="modify.php" role="tab" aria-selected="false">Modify client</a>
-                                            <a class="nav-item nav-link" id="options" href="options.php" role="tab" aria-selected="false">Options</a>
-                                        </div>
                                     </nav>
 
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="listClients" role="tabpanel" aria-labelledby="highPriority">
-                                            <?php
-                                                $listQuery = mysqli_query($db, "SELECT * FROM clients");
+                                            <div class="col-10">
+                                                    <br>
+                                                <?php
+                                                    $listQuery = mysqli_query($db, "SELECT * FROM clients");
 
-                                                if($row = mysqli_fetch_array($listQuery)){
-                                                    echo "<table>";
+                                                    if($row = mysqli_fetch_array($listQuery)){
+                                                        echo "<table class='table table-bordered'>";
 
-                                                        echo "<tr>";
-                                                            echo "<td>ID</td>";
-                                                            echo "<td>Name</td>";
-                                                            echo "<td>Surname</td>";
-                                                            echo "<td>Birth Date</td>";
-                                                            echo "<td>Phone</td>";
-                                                            echo "<td>Email</td>";
-                                                            echo "<td>Username</td>";
-                                                            echo "<td>Password</td>";
-                                                            echo "<td>Case ID</td>";
-                                                            echo "<td>Bill</td>";
-                                                        echo "</tr>";
-
-                                                        echo "<tr>";
-                                                            echo "<td></td>";
-                                                        echo "</tr>";
+                                                            echo "<thead>";
+                                                                echo "<tr>";
+                                                                    echo "<th scope='col'>ID</th>";
+                                                                    echo "<th scope='col'>Name</th>";
+                                                                    echo "<th scope='col'>Surname</th>";
+                                                                    echo "<th scope='col'>Birth Date</th>";
+                                                                    echo "<th scope='col'>Phone</th>";
+                                                                    echo "<th scope='col'>Email</th>";
+                                                                    echo "<th scope='col'>Username</th>";
+                                                                    echo "<th scope='col'>Password</th>";
+                                                                    echo "<th scope='col'>Cases</th>";
+                                                                    echo "<th scope='col'>Bill</th>";
+                                                                echo "</tr>";
+                                                            echo "</thead>";
 
 
-                                                        do{
-                                                            echo "<tr>";
-                                                                $listID=$row['client_ID'];
-                                                                echo "<td>".$listID."</td>";
-                                                                echo "<td>".$row["name"]."</td>";
-                                                                echo "<td>".$row["surname"]."</td>";
-                                                                $bDateFormatted = date("d-m-Y", strtotime($row["birth_date"]));   
-                                                                echo "<td>".$bDateFormatted."</td>";
-                                                                echo "<td>".$row["phone"]."</td>";
-                                                                echo "<td>".$row["email"]."</td>";
-                                                                echo "<td>".$row["username"]."</td>";
-                                                                echo "<td>".$row["password"]."</td>";
-                                                                echo "<td>".$row["case_ID"]."</td>";
-                                                                echo "<td>".$row["bill"]."</td>";
-                                                            echo "</tr>";
-                                                        }while($row = mysqli_fetch_array($listQuery));
-                                                }else{
-                                                    echo "There is no record";
-                                                }
-                                            ?>
+                                                            do{
+                                                                echo "<tr>";
+                                                                    $listID=$row['client_ID'];
+                                                                    echo "<td>".$listID."</td>";
+                                                                    echo "<td>".$row["name"]."</td>";
+                                                                    echo "<td>".$row["surname"]."</td>";
+                                                                    $bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   
+                                                                    echo "<td>".$bDateFormatted."</td>";
+                                                                    echo "<td>".$row["phone"]."</td>";
+                                                                    echo "<td>".$row["email"]."</td>";
+                                                                    echo "<td>".$row["username"]."</td>";
+                                                                    echo "<td>".$row["password"]."</td>";
+                                                                    echo "<td>Here will be all numbers of cases</td>";
+                                                                    echo "<td>".$row["bill"]."</td>";
+                                                                    echo "<td style='text-align: center'><a href='#'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
+                                                                    echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
+                                                                    echo "<td style='text-align: center'><a href='' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                                echo "</tr>";
+                                                            }while($row = mysqli_fetch_array($listQuery));
+                                                    }else{
+                                                        echo "There is no record";
+                                                    }
+                                                ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +131,29 @@
                     <!-- /Main content -->
 				</div>
 			</div>
-		</div>
+        </div>
+        
+        <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Are you sure you want to delete this client?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>This action cannot be undone</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No, take me back</button>
+                            <a href="delete.php?client="><button type="button" class="btn btn-danger">Yes, delete it</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /Modal -->
 
 		<!-- Bootstrap JS -->
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

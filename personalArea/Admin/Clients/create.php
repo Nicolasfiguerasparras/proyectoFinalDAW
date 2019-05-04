@@ -30,7 +30,7 @@
                 // Establish connection
                 include('../../../connectDB.php');
                 $db = connectDb();
-                //$id = collectID($db, 'firmas');
+                $id = collectID($db, 'clients');
             ?>
         <!-- /Establish connection with DB -->
 
@@ -44,7 +44,8 @@
 	                $email = $_POST['email'];
 	                $username = $_POST['username'];
 	                $password = $_POST['password'];
-	                $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0', '0')") or die(mysqli_error($db));
+                    $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0')") or die(mysqli_error($db));
+                    header("location: index.php");
                 }
             ?>
         <!-- /Create form action -->
@@ -86,14 +87,12 @@
                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                             <a class="nav-item nav-link" href="index.php" role="tab" aria-selected="false">List clients</a>
                                             <a class="nav-item nav-link active" id="mediumPriority" href="create.php" role="tab" aria-selected="true">Create client</a>
-                                            <a class="nav-item nav-link" id="lowPriority" href="modify.php" role="tab" aria-controls="nav-contact" aria-selected="false">Modify client</a>
-                                            <a class="nav-item nav-link" id="options" href="options.php" role="tab" aria-controls="nav-contact2" aria-selected="false">Options</a>
                                         </div>
                                     </nav>
 
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="listClients" role="tabpanel" aria-labelledby="listClients">
-                                            <form action="index.php" method="post">
+                                            <form action="create.php" method="post">
                                                 <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" hidden disabled>
                                                 <div class="form-row">
                                                     <div class="form-group col-md-4">

@@ -34,6 +34,13 @@
             ?>
         <!-- /Establish connection with DB -->
 
+        <!-- Query for Form -->
+            <?php
+                $idActualClient = $_GET['client'];
+                $actualClientQuery = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = $idActualClient"));
+            ?>
+        <!-- /Query for Form -->
+
         <div class="container-fluid">
 			<div class="mainBox">
 				<div class="row">
@@ -45,7 +52,7 @@
 
 					<!-- Welcome message -->
 						<div class="col-9 welcomeMessage">
-							<h1>Welcome back</h1>
+							<h1>Modify client <?php echo $actualClientQuery['name']." ".$actualClientQuery['surname'] ?></h1>
 						</div>
 					<!-- /Welcome message -->
 				</div>
@@ -67,61 +74,44 @@
                         <div class="col-9">
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                    <nav>
-                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link" href="index.php" role="tab" aria-selected="false">List clients</a>
-                                            <a class="nav-item nav-link" id="mediumPriority" href="create.php" role="tab" aria-selected="true">Create client</a>
-                                            <a class="nav-item nav-link active" id="lowPriority" href="modify.php" role="tab" aria-controls="nav-contact" aria-selected="false">Modify client</a>
-                                            <a class="nav-item nav-link" id="options" href="options.php" role="tab" aria-controls="nav-contact2" aria-selected="false">Options</a>
-                                        </div>
-                                    </nav>
-
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="listClients" role="tabpanel" aria-labelledby="listClients">
-                                            <?php
-                                                $listQuery = mysqli_query($db, "SELECT * FROM clients");
-
-                                                if($row = mysqli_fetch_array($listQuery)){
-                                                    echo "<table>";
-
-                                                        echo "<tr>";
-                                                            echo "<td>ID</td>";
-                                                            echo "<td>Name</td>";
-                                                            echo "<td>Surname</td>";
-                                                            echo "<td>Birth Date</td>";
-                                                            echo "<td>Phone</td>";
-                                                            echo "<td>Email</td>";
-                                                            echo "<td>Username</td>";
-                                                            echo "<td>Password</td>";
-                                                            echo "<td>Case ID</td>";
-                                                            echo "<td>Bill</td>";
-                                                        echo "</tr>";
-
-                                                        echo "<tr>";
-                                                            echo "<td></td>";
-                                                        echo "</tr>";
-
-
-                                                        do{
-                                                            echo "<tr>";
-                                                                $listID=$row['client_ID'];
-                                                                echo "<td>".$listID."</td>";
-                                                                echo "<td>".$row["name"]."</td>";
-                                                                echo "<td>".$row["surname"]."</td>";
-                                                                $bDateFormatted = date("d-m-Y", strtotime($row["birth_date"]));   
-                                                                echo "<td>".$bDateFormatted."</td>";
-                                                                echo "<td>".$row["phone"]."</td>";
-                                                                echo "<td>".$row["email"]."</td>";
-                                                                echo "<td>".$row["username"]."</td>";
-                                                                echo "<td>".$row["password"]."</td>";
-                                                                echo "<td>".$row["case_ID"]."</td>";
-                                                                echo "<td>".$row["bill"]."</td>";
-                                                            echo "</tr>";
-                                                        }while($row = mysqli_fetch_array($listQuery));
-                                                }else{
-                                                    echo "There is no record";
-                                                }
-                                            ?>
+                                            <form action="create.php" method="post">
+                                                <input type="text" id="ID" name="ID" value="<?php echo $id ?>" hidden disabled>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="name">First name</label>
+                                                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $actualClientQuery['name'] ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="surname">Last name</label>
+                                                        <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $actualClientQuery['surname'] ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="birth_date">Birth date</label>
+                                                        <input type="date" class="form-control" id="birth_date" name="birth_date" value="<?php echo $actualClientQuery['birth_date'] ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-2">
+                                                        <label for="phone">Phone number</label>
+                                                        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $actualClientQuery['phone'] ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="email">Email</label>
+                                                        <input type="text" class="form-control" id="email" name="email" value="<?php echo $actualClientQuery['email'] ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="username">Username</label>
+                                                        <input type="text" class="form-control" id="username" name="username" value="<?php echo $actualClientQuery['username'] ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label for="password">Password</label>
+                                                        <input type="password" class="form-control" id="password" name="password" value="<?php echo $actualClientQuery['password'] ?>">
+                                                    </div>
+                                                </div>
+                                                <input type="submit" class="btn btn-primary" value="Modify" name="modify">
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
