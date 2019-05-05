@@ -53,6 +53,7 @@
         <div class="container-fluid">
 			<div class="mainBox">
 				<div class="row">
+                
 					<!-- Add client button -->
 						<div class="col-3 addClientBox">
 							<!-- <a href="#"><i class="fas fa-plus-circle addClientBtn"></i></a> -->

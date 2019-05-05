@@ -37,7 +37,8 @@
         <div class="container-fluid">
 			<div class="mainBox">
 				<div class="row">
-					<!-- Add client button -->
+                
+                    <!-- Add client button -->
 						<div class="col-3 addClientBox">
 							<!-- <a href="#"><i class="fas fa-plus-circle addClientBtn"></i></a> -->
 						</div>
@@ -47,7 +48,8 @@
 						<div class="col-9 welcomeMessage">
 							<h1>Welcome back</h1>
 						</div>
-					<!-- /Welcome message -->
+                    <!-- /Welcome message -->
+                    
 				</div>
 
 				<div class="row">
@@ -113,9 +115,9 @@
                                                                     echo "<td>".$row["password"]."</td>";
                                                                     echo "<td>Here will be all numbers of cases</td>";
                                                                     echo "<td>".$row["bill"]."</td>";
-                                                                    echo "<td style='text-align: center'><a href='#'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
+                                                                    echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
                                                                     echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
-                                                                    echo "<td style='text-align: center'><a href='' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                                    echo "<td style='text-align: center'><a href='index.php?client=$listID' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
                                                                 echo "</tr>";
                                                             }while($row = mysqli_fetch_array($listQuery));
                                                     }else{
@@ -129,6 +131,7 @@
                             </div>
                         </div>
                     <!-- /Main content -->
+
 				</div>
 			</div>
         </div>
@@ -148,7 +151,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No, take me back</button>
-                            <a href="delete.php?client="><button type="button" class="btn btn-danger">Yes, delete it</button></a>
+                            <a href="delete.php?client="><button type="button" class="btn btn-danger">Yes, delete it</button></a> <!-- Cómo selecciono el id al que corresponde? -->
                         </div>
                     </div>
                 </div>
