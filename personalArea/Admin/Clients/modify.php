@@ -41,6 +41,12 @@
             ?>
         <!-- /Query for Form -->
 
+        <!-- Form action -->
+            <?php
+                $update = mysqli_fetch_array(mysqli_query($db, "UPDATE clients SET () VALUES ()"));
+            ?>
+        <!-- /Form action -->
+
         <div class="container-fluid">
 			<div class="mainBox">
 				<div class="row">
