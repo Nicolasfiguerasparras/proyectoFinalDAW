@@ -43,7 +43,18 @@
 
         <!-- Form action -->
             <?php
-                $update = mysqli_fetch_array(mysqli_query($db, "UPDATE clients SET () VALUES ()"));
+                if(isset($_POST['modify'])){
+                    $name = $_POST['name'];
+	                $surname = $_POST['surname'];
+	                $birth_date = $_POST['birth_date'];
+	                $phone = $_POST['phone'];
+	                $email = $_POST['email'];
+	                $username = $_POST['username'];
+	                $password = $_POST['password'];
+                    
+                    $update = mysqli_query($db, "UPDATE clients SET client_ID = $idActualClient, name = '$name', surname = '$surname', birth_date = '$birth_date', phone = '$phone', email = '$email', username = '$username', password = '$password' WHERE client_ID = '$idActualClient'");
+                    header("location: index.php");
+                }
             ?>
         <!-- /Form action -->
 
@@ -82,7 +93,7 @@
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="listClients" role="tabpanel" aria-labelledby="listClients">
-                                            <form action="create.php" method="post">
+                                            <form action="modify.php" method="post">
                                                 <input type="text" id="ID" name="ID" value="<?php echo $id ?>" hidden disabled>
                                                 <div class="form-row">
                                                     <div class="form-group col-md-4">
