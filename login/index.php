@@ -73,10 +73,10 @@
                         }
 
                         header("Location: ../personalArea/Lawer/");
-                    }elseif($queryWorker != ""){
+                    }elseif($queryWorker['worker_ID'] != ""){
                         $_SESSION['login_ok'] = true;
                         $_SESSION['user'] = $user;
-                        $_SESSION['id_user']= $queryWorker['ID'];
+                        $_SESSION['id_user']= $queryWorker['worker_ID'];
                         
                         // Codificate session and save in cookie if openSession exist
                         $dataSesion = session_encode();
@@ -86,7 +86,7 @@
                         }
 
                         header("Location: ../personalArea/Worker/");
-                    }elseif($user == admin && $password = admin){
+                    }elseif($user == 'admin' && $password = 'admin'){
                         $_SESSION['login_ok'] = true;
                         $_SESSION['user'] = "admin";
                         $_SESSION['id_user']= 0;

@@ -34,6 +34,18 @@
             ?>
         <!-- /Establish connection with DB -->
 
+		<!-- Restrictions -->
+			<?php
+				if(isset($_SESSION['login_ok'])){
+					if(!$_SESSION['id_user'] == 0){
+						header("location: ../../notAllowed.php");
+					}
+				}else{
+					header("location: ../notAllowed.php");
+				}
+			?>
+		<!-- /Restrictions -->
+
         <div class="container-fluid">
 			<div class="mainBox">
 				<div class="row">
@@ -56,7 +68,9 @@
 						<!-- Lateral NavBar -->
 							<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <a class='nav-link active' href='index.php'>Index</a>
+                                <a class='nav-link' href="Lawers/">Lawers</a>
                                 <a class='nav-link' href='Clients/'>Clients</a>
+                                <a class='nav-link' href="Workers/">Workers</a>
 								<a class="nav-link" href="../../login/logout.php">Logout</a>
 							</div>
 						<!-- /Lateral NavBar -->

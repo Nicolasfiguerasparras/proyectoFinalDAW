@@ -1,5 +1,5 @@
 <!-- Extract session -->
-    <?php
+<?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -34,6 +34,18 @@
             ?>
         <!-- /Establish connection with DB -->
 
+        <!-- Restrictions -->
+			<?php
+				if(isset($_SESSION['login_ok'])){
+					if(!$_SESSION['id_user'] == 0){
+						header("location: ../../notAllowed.php");
+					}
+				}else{
+					header("location: ../notAllowed.php");
+				}
+			?>
+		<!-- /Restrictions -->
+
         <div class="container-fluid">
 			<div class="mainBox">
 				<div class="row">
@@ -58,8 +70,8 @@
 						<!-- Lateral NavBar -->
 							<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <a class='nav-link' href='../index.php'>Index</a>
-                                <a href="../Lawers/">Lawers</a>
-                                <a class='nav-link active' href='index.php'>Clients</a>
+                                <a class='nav-link active' href="index.php">Lawers</a>
+                                <a class='nav-link' href='../Clients/'>Clients</a>
                                 <a class='nav-link' href="../Workers/">Workers</a>
 								<a class="nav-link" href="../../../login/logout.php">Logout</a>
 							</div>
@@ -73,8 +85,9 @@
                                 <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                     <nav>
                                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="highPriority" href="index.php" role="tab" aria-selected="true">List clients</a>
-                                            <a class="nav-item nav-link" id="mediumPriority" href="create.php" role="tab" aria-selected="false">Create client</a>
+                                            <a class="nav-item nav-link active" id="highPriority" href="index.php" role="tab" aria-selected="true">List lawers</a>
+                                            <a class="nav-item nav-link" id="mediumPriority" href="create.php" role="tab" aria-selected="false">Create lawer</a>
+                                        </div>
                                     </nav>
 
                                     <div class="tab-content" id="nav-tabContent">
@@ -82,7 +95,7 @@
                                             <div class="col-10">
                                                     <br>
                                                 <?php
-                                                    $listQuery = mysqli_query($db, "SELECT * FROM clients");
+                                                    $listQuery = mysqli_query($db, "SELECT * FROM lawers");
 
                                                     if($row = mysqli_fetch_array($listQuery)){
                                                         echo "<table class='table table-bordered'>";
@@ -97,15 +110,14 @@
                                                                     echo "<th scope='col'>Email</th>";
                                                                     echo "<th scope='col'>Username</th>";
                                                                     echo "<th scope='col'>Password</th>";
-                                                                    echo "<th scope='col'>Cases</th>";
-                                                                    echo "<th scope='col'>Bill</th>";
+                                                                    echo "<th scope='col'>Salary</th>";
                                                                 echo "</tr>";
                                                             echo "</thead>";
 
 
                                                             do{
                                                                 echo "<tr>";
-                                                                    $listID=$row['client_ID'];
+                                                                    $listID=$row['lawer_ID'];
                                                                     echo "<td>".$listID."</td>";
                                                                     echo "<td>".$row["name"]."</td>";
                                                                     echo "<td>".$row["surname"]."</td>";
@@ -115,13 +127,12 @@
                                                                     echo "<td>".$row["email"]."</td>";
                                                                     echo "<td>".$row["username"]."</td>";
                                                                     echo "<td>".$row["password"]."</td>";
-                                                                    echo "<td>Here will be all numbers of cases</td>";
-                                                                    echo "<td>".$row["bill"]."</td>";
-                                                                    echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
-                                                                    echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
+                                                                    echo "<td>".$row["salary"]."$</td>";
+                                                                    // echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
+                                                                    echo "<td style='text-align: center'><a href='modify.php?lawer=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
                                                                     
                                                                     /* ¡¡¡¡¡¡¡¡¡¡ COMO METER EL ID EN EL MODAL !!!!!!!!!!!! */
-                                                                    echo "<td style='text-align: center'><a href='index.php?client=$listID' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                                    echo "<td style='text-align: center'><a href='index.php?lawer=$listID' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
                                                                 echo "</tr>";
                                                             }while($row = mysqli_fetch_array($listQuery));
                                                     }else{
@@ -145,7 +156,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Are you sure you want to delete this client?</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Are you sure you want to delete this lawer?</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -155,7 +166,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No, take me back</button>
-                            <a href="delete.php?client="><button type="button" class="btn btn-danger">Yes, delete it</button></a> <!-- Cómo selecciono el id al que corresponde? -->
+                            <a href="delete.php?lawer="><button type="button" class="btn btn-danger">Yes, delete it</button></a> <!-- Cómo selecciono el id al que corresponde? -->
                         </div>
                     </div>
                 </div>

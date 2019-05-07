@@ -1,3 +1,9 @@
+<!-- Extract session -->
+    <?php
+        session_start();
+    ?>
+<!-- /Extract session -->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,6 +52,29 @@
         }
     </style>
     <body>
+
+        <!-- Establish connection with DB -->
+            <?php
+                // Establish connection
+                include('../../connectDB.php');
+                $db = connectDb();
+                //$id = collectID($db, 'firmas');
+            ?>
+        <!-- /Establish connection with DB -->
+
+        <!-- Restrictions -->
+			<?php
+				if(isset($_SESSION['login_ok'])){
+					$check = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE worker_ID = $_SESSION[id_user]"));
+					if($check == ""){
+						header("location: ../notAllowed.php");
+					}
+				}else{
+					header("location: ../notAllowed.php");
+				}
+			?>
+        <!-- /Restrictions -->
+        
         <div class="sidenav">
             <a href="index.php">Index</a>
             <a href="#about">Workers</a>
