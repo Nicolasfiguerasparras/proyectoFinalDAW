@@ -47,8 +47,8 @@
 
         <!-- Query for Form -->
             <?php
-                $idActualClient = $_GET['client'];
-                $actualClientQuery = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = $idActualClient"));
+                $idActualWorker = $_GET['worker'];
+                $actualWorkerQuery = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE worker_ID = $idActualWorker"));
             ?>
         <!-- /Query for Form -->
 
@@ -62,20 +62,21 @@
 	                $email = $_POST['email'];
 	                $username = $_POST['username'];
                     $password = $_POST['password'];
-                    $id = $_POST['client_ID'];
-                    
-                    $update = mysqli_query($db, "
-                                                    UPDATE clients 
-                                                    SET name = '$name',
-                                                        surname = '$surname',
-                                                        birth_date = '$birth_date',
-                                                        phone = '$phone',
-                                                        email = '$email',
-                                                        username = '$username',
-                                                        password = '$password',
-                                                        bill = $actualClientQuery[bill]
-                                                    WHERE client_ID = '$id'
-                                                ");
+                    $salary = $_POST['salary'];
+                    $id = $_POST['worker_ID'];
+
+                    mysqli_query($db, "
+                                        UPDATE workers 
+                                        SET name = '$name',
+                                            surname = '$surname',
+                                            birth_date = '$birth_date',
+                                            phone = '$phone',
+                                            email = '$email',
+                                            username = '$username',
+                                            password = '$password',
+                                            salary = $salary
+                                        WHERE worker_ID = '$id'
+                                ");
                     header("location: index.php");
                 }
             ?>
@@ -93,7 +94,7 @@
 
 					<!-- Welcome message -->
 						<div class="col-9 welcomeMessage">
-							<h1>Modify client <?php echo $actualClientQuery['name']." ".$actualClientQuery['surname'] ?></h1>
+							<h1>Modify client <?php echo $actualWorkerQuery['name']." ".$actualWorkerQuery['surname'] ?></h1>
 						</div>
 					<!-- /Welcome message -->
 				</div>
@@ -105,8 +106,8 @@
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <a class='nav-link' href='../index.php'>Index</a>
                                 <a class='nav-link' href="../Lawers/">Lawers</a>
-                                <a class='nav-link active' href='index.php'>Clients</a>
-                                <a class='nav-link' href="../Workers/">Workers</a>
+                                <a class='nav-link' href='index.php'>Clients</a>
+                                <a class='nav-link active' href="../Workers/">Workers</a>
 								<a class="nav-link" href="../../../login/logout.php">Logout</a>
 							</div>
 						<!-- /Lateral NavBar -->
@@ -120,40 +121,43 @@
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="listClients" role="tabpanel" aria-labelledby="listClients">
                                             <form action="modify.php" method="post">
-                                                <input type="text" id="ID" name="ID" value="<?php echo $id ?>" hidden disabled>
                                                 <div class="form-row">
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-3">
                                                         <label for="name">First name</label>
-                                                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $actualClientQuery['name'] ?>">
+                                                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $actualWorkerQuery['name'] ?>">
                                                     </div>
-                                                    <div class="form-group col-md-4">
+                                                    <div class="form-group col-md-3">
                                                         <label for="surname">Last name</label>
-                                                        <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $actualClientQuery['surname'] ?>">
+                                                        <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $actualWorkerQuery['surname'] ?>">
                                                     </div>
                                                     <div class="form-group col-md-2">
                                                         <label for="birth_date">Birth date</label>
-                                                        <input type="date" class="form-control" id="birth_date" name="birth_date" value="<?php echo $actualClientQuery['birth_date'] ?>">
+                                                        <input type="date" class="form-control" id="birth_date" name="birth_date" value="<?php echo $actualWorkerQuery['birth_date'] ?>">
+                                                    </div>
+                                                    <div class="form-group col-md-2">
+                                                        <label for="salary">Salary</label>
+                                                        <input type="text" class="form-control" id="salary" name="salary" value="<?php echo $actualWorkerQuery['salary'] ?>">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-md-2">
                                                         <label for="phone">Phone number</label>
-                                                        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $actualClientQuery['phone'] ?>">
+                                                        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $actualWorkerQuery['phone'] ?>">
                                                     </div>
                                                     <div class="form-group col-md-2">
                                                         <label for="email">Email</label>
-                                                        <input type="text" class="form-control" id="email" name="email" value="<?php echo $actualClientQuery['email'] ?>">
+                                                        <input type="text" class="form-control" id="email" name="email" value="<?php echo $actualWorkerQuery['email'] ?>">
                                                     </div>
                                                     <div class="form-group col-md-3">
                                                         <label for="username">Username</label>
-                                                        <input type="text" class="form-control" id="username" name="username" value="<?php echo $actualClientQuery['username'] ?>">
+                                                        <input type="text" class="form-control" id="username" name="username" value="<?php echo $actualWorkerQuery['username'] ?>">
                                                     </div>
                                                     <div class="form-group col-md-3">
                                                         <label for="password">Password</label>
-                                                        <input type="password" class="form-control" id="password" name="password" value="<?php echo $actualClientQuery['password'] ?>">
+                                                        <input type="password" class="form-control" id="password" name="password" value="<?php echo $actualWorkerQuery['password'] ?>">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="client_ID" value="<?php echo $_GET[client] ?>">
+                                                <input type="hidden" name="worker_ID" value="<?php echo $_GET['worker'] ?>">
                                                 <input type="submit" class="btn btn-primary" value="Modify" name="modify">
                                             </form>
                                         </div>

@@ -41,7 +41,7 @@
 						header("location: ../../notAllowed.php");
 					}
 				}else{
-					header("location: ../notAllowed.php");
+					header("location: ../../notAllowed.php");
 				}
 			?>
 		<!-- /Restrictions -->
