@@ -65,8 +65,8 @@
 		<!-- Restrictions -->
 			<?php
 				if(isset($_SESSION['login_ok'])){
-					$check = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = $_SESSION[id_user]"));
-					if($check == ""){
+					$check = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = $_SESSION[id_user]"));
+					if($check['lawer_ID'] == ""){
 						header("location: ../notAllowed.php");
 					}
 				}else{

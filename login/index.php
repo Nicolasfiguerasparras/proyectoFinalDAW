@@ -44,13 +44,13 @@
                     // Create query for all possible login
                     $queryClient = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE username = '$user' && password = '$password'"));
                     $queryWorker = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE username = '$user' && password = '$password'"));
-                    $queryLawer = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawer WHERE username = '$user' && password = '$password'"));
+                    $queryLawer = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE username = '$user' && password = '$password'"));
 
                     // Possible actions
                     if($queryClient != ""){
                         $_SESSION['login_ok'] = true;
                         $_SESSION['user'] = $user;
-                        $_SESSION['id_user']= $queryClient['ID'];
+                        $_SESSION['id_user']= $queryClient['client_ID'];
                         
                         // Codificate session and save in cookie if openSession exist
                         $dataSesion = session_encode();
@@ -63,7 +63,7 @@
                     }elseif($queryLawer != ""){
                         $_SESSION['login_ok'] = true;
                         $_SESSION['user'] = $user;
-                        $_SESSION['id_user']= $queryLawer['ID'];
+                        $_SESSION['id_user']= $queryLawer['lawer_ID'];
                         
                         // Encode session and save in cookie if openSession exist
                         $dataSesion = session_encode();

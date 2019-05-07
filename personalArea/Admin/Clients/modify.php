@@ -18,7 +18,6 @@
 		<!-- --------------------------------------------------------------------------------------------- -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 		<!-- --------------------------------------------------------------------------------------------- -->
-
         <link href="styles.css" rel="stylesheet">
 
         <title>Index</title>
@@ -72,8 +71,7 @@
                                                         phone = '$phone',
                                                         email = '$email',
                                                         username = '$username',
-                                                        password = '$password',
-                                                        bill = $actualClientQuery[bill]
+                                                        password = '$password'
                                                     WHERE client_ID = '$id'
                                                 ");
                     header("location: index.php");
@@ -153,7 +151,7 @@
                                                         <input type="password" class="form-control" id="password" name="password" value="<?php echo $actualClientQuery['password'] ?>">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="client_ID" value="<?php echo $_GET[client] ?>">
+                                                <input type="hidden" name="client_ID" value="<?php echo $_GET['client'] ?>">
                                                 <input type="submit" class="btn btn-primary" value="Modify" name="modify">
                                             </form>
                                         </div>
