@@ -63,17 +63,7 @@
                     $password = $_POST['password'];
                     $id = $_POST['client_ID'];
                     
-                    $update = mysqli_query($db, "
-                                                    UPDATE clients 
-                                                    SET name = '$name',
-                                                        surname = '$surname',
-                                                        birth_date = '$birth_date',
-                                                        phone = '$phone',
-                                                        email = '$email',
-                                                        username = '$username',
-                                                        password = '$password'
-                                                    WHERE client_ID = '$id'
-                                                ");
+                    $update = mysqli_query($db, "UPDATE clients SET name = '$name', surname = '$surname', birth_date = '$birth_date', phone = '$phone', email = '$email', username = '$username', password = '$password' WHERE client_ID = '$id'");
                     header("location: index.php");
                 }
             ?>

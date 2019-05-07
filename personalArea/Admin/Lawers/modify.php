@@ -48,7 +48,7 @@
         <!-- Query for Form -->
             <?php
                 $idActualLawer= $_GET['lawer'];
-                $actualLawerQuery = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE client_ID = $idActualLawer"));
+                $actualLawerQuery = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = $idActualLawer"));
             ?>
         <!-- /Query for Form -->
 
@@ -158,7 +158,7 @@
                                                         <input type="password" class="form-control" id="password" name="password" value="<?php echo $actualLawerQuery['password'] ?>">
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="client_ID" value="<?php echo $_GET[lawer] ?>">
+                                                <input type="hidden" name="client_ID" value="<?php echo $_GET['lawer'] ?>">
                                                 <input type="submit" class="btn btn-primary" value="Modify" name="modify">
                                             </form>
                                         </div>
