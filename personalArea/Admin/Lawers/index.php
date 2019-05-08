@@ -1,5 +1,5 @@
 <!-- Extract session -->
-<?php
+    <?php
         session_start();
     ?>
 <!-- /Extract session -->

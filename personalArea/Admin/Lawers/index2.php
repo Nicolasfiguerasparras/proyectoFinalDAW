@@ -1,3 +1,9 @@
+<!-- Extract session -->
+<?php
+        session_start();
+    ?>
+<!-- /Extract session -->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -53,6 +59,26 @@
         }
     </style>
     <body>
+
+        <!-- Establish connection with DB -->
+            <?php
+                include('../../../connectDB.php');
+                $db = connectDb();
+            ?>
+        <!-- /Establish connection with DB -->
+
+		<!-- Restrictions -->
+            <?php
+				if(isset($_SESSION['login_ok'])){
+					if(!$_SESSION['id_user'] == 0){
+						header("location: ../../notAllowed.php");
+					}
+				}else{
+					header("location: ../../notAllowed.php");
+				}
+			?>
+		<!-- /Restrictions -->
+
         <div class="container-fluid content">
             <div class="row">
                 <div class="col-10 offset-1 insideContainer">
@@ -67,25 +93,39 @@
                     <br>
                     <div class="row">
                         <div class="col-2">
-                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-                                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-                                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-                                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi natus molestias nostrum minima fugit! Dignissimos non neque dolore perferendis, quaerat voluptate alias fugiat veniam mollitia numquam eius deserunt illo sapiente!
+
+                            <!-- Lateral NavBar -->
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a class='nav-link' href='../index.php'>Index</a>
+                                    <a class='nav-link active' href='index.php'>Lawers</a>
+                                    <div class="table-danger" style="width:50%; margin-left: 20px;">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <a class='nav-link' href='index.php'>List lawers</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a class='nav-link' href='index.php'>Create lawer</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <a class='nav-link' href='../Clients/'>Clients</a>
+                                    <a class='nav-link' href="../Workers/">Workers</a>
+                                    <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
-                                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                    Hola
-                                </div>
-                                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-                                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-                            </div>
+                            <!-- /Lateral NavBar -->
+
                         </div>
+                        
+                        <!-- Main content -->
+                            <div class="col-9">
+                            
+                            </div>
+                        <!-- /Main content -->
+
                     </div>
                 </div>
             </div>
