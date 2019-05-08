@@ -41,7 +41,7 @@
             color:black;
             border-radius: 2px;
             margin-bottom: 15px;
-            font-size: 18px;
+            font-size: 16px;
             background: #ececec;
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
             padding: 30px;
@@ -84,7 +84,7 @@
                 <div class="col-10 offset-1 insideContainer">
                     <div class="row">
                         <div class="col-2 avatar">
-                            <img src="../img/iconAvatar.png" alt="Avatar">
+                            <img src="../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
                             <h1>Bienvenido</h1>
