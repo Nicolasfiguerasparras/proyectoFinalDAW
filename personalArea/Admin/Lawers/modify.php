@@ -105,8 +105,8 @@
 						<!-- Lateral NavBar -->
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <a class='nav-link' href='../index.php'>Index</a>
-                                <a class='nav-link' href="../Lawers/">Lawers</a>
-                                <a class='nav-link active' href='index.php'>Clients</a>
+                                <a class='nav-link active' href="../Lawers/">Lawers</a>
+                                <a class='nav-link' href='index.php'>Clients</a>
                                 <a class='nav-link' href="../Workers/">Workers</a>
 								<a class="nav-link" href="../../../login/logout.php">Logout</a>
 							</div>
