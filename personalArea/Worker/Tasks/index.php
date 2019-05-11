@@ -1,5 +1,5 @@
 <!-- Extract session -->
-    <?php
+<?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -62,7 +62,7 @@
 
         <!-- Establish connection with DB -->
             <?php
-                include('../../connectDB.php');
+                include('../../../connectDB.php');
                 $db = connectDb();
             ?>
         <!-- /Establish connection with DB -->
@@ -86,7 +86,7 @@
                 <div class="col-10 offset-1 insideContainer">
                     <div class="row">
                         <div class="col-2 avatar">
-                            <img src="../../img/iconAvatar.png" alt="Avatar">
+                            <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
                             <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
@@ -98,9 +98,9 @@
 
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class='nav-link active' href='index.php'>Index</a>
-                                    <a class='nav-link' href='Clients/'>Clients</a>
-                                    <a class='nav-link' href="Tasks/">Tasks</a>
+                                    <a class='nav-link' href='../index.php'>Index</a>
+                                    <a class='nav-link' href='../Clients/'>Clients</a>
+                                    <a class='nav-link active' href="../Tasks/">Tasks</a>
                                     <a class="nav-link" href="../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->

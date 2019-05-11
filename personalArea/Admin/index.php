@@ -71,7 +71,7 @@
 			<?php
 				if(isset($_SESSION['login_ok'])){
 					if(!$_SESSION['id_user'] == 0){
-						header("location: ../../notAllowed.php");
+						header("location: ../notAllowed.php");
 					}
 				}else{
 					header("location: ../notAllowed.php");

@@ -100,17 +100,17 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link active' href='index.php'>Lawers</a>
+                                    <a class='nav-link' href='index.php'>Lawers</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='index.php'>List lawers</a>
+                                                    <a class='nav-link active' href='index.php'>List lawers</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='index.php'>Create lawer</a>
+                                                    <a class='nav-link' href='create.php'>Create lawer</a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -183,5 +183,12 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<!-- /Bootstrap JS -->
+
+        <!-- Connection close -->
+            <?php
+                mysqli_close($db);
+            ?>
+        <!-- /Connection close -->
+
     </body>
 </html>
