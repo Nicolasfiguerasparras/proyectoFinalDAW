@@ -159,11 +159,8 @@
                                                     echo "<td>".$row["username"]."</td>";
                                                     echo "<td>".$row["password"]."</td>";
                                                     echo "<td>".$row["salary"]."$</td>";
-                                                    // echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
                                                     echo "<td style='text-align: center'><a href='modify.php?lawer=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
-                                                    
-                                                    /* ¡¡¡¡¡¡¡¡¡¡ COMO METER EL ID EN EL MODAL !!!!!!!!!!!! */
-                                                    echo "<td style='text-align: center'><a href='index.php?lawer=$listID' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?lawer=$listID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
                                                 echo "</tr>";
                                             }while($row = mysqli_fetch_array($listQuery));
                                     }else{
@@ -177,6 +174,17 @@
                 </div>
             </div>
         </div>
+
+        <!-- Delete confirmation -->
+            <script type="text/javascript">
+                $('.delete_button').click(function(e){
+                    var result = confirm("Are you sure you want to delete this client?");
+                    if(!result) {
+                        e.preventDefault();
+                    }
+                });
+            </script>
+        <!-- /Delete confirmation -->
 
         <!-- Bootstrap JS -->
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

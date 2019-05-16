@@ -159,13 +159,12 @@
                                                     echo "<td>".$row["email"]."</td>";
                                                     echo "<td>".$row["username"]."</td>";
                                                     echo "<td>".$row["password"]."</td>";
-                                                    echo "<td>Here will be all numbers of cases</td>";
+                                                    echo "<td>a</td>";
                                                     echo "<td>".$row["bill"]."</td>";
+                                                    echo "<td><i class='fa fa-plus' aria-hidden='true'></i></td>";
                                                     echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
                                                     echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
-                                                    
-                                                    /* ¡¡¡¡¡¡¡¡¡¡ COMO METER EL ID EN EL MODAL !!!!!!!!!!!! */
-                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$listID' data-toggle='modal' data-target='#exampleModalCenter'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$listID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
                                                 echo "</tr>";
                                             }while($row = mysqli_fetch_array($listQuery));
                                     }else{
