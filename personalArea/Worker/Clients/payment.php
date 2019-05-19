@@ -91,6 +91,28 @@
 			?>
 		<!-- /Restrictions -->
 
+        <!-- Form action -->
+            <?php
+                $acutalDate = date('o-m-d');
+                if(isset($_POST['pay'])){
+                    $insert = mysqli_query($db, "INSERT INTO payment (payment_ID, quantity, client_ID, worker_ID, date, type) VALUES ('NULL', '$_POST[amount]', '$_POST[client_ID]', '$_POST[worker_ID]', '$acutalDate', '$_POST[type]')");
+                    if($_POST['type'] == "3"){
+                        $newBill = $_POST['actualBill'] - $_POST['amount'];
+                    }else{
+                        $newBill = $_POST['actualBill'] + $_POST['amount'];
+                    }
+                    $updateBill = mysqli_query($db, "UPDATE clients SET bill = '$newBill' WHERE client_ID = '$_POST[client_ID]'");
+                    header("location: index.php");
+                }
+            ?>
+        <!-- /Form action -->
+
+        <!-- Data extract -->
+            <?php
+                $actualBill = mysqli_fetch_array(mysqli_query($db, "SELECT bill FROM clients WHERE client_ID = '$_GET[client]'"));
+            ?>
+        <!-- /Data extract -->
+
         <div class="container-fluid content">
             <div class="row">
                 <div class="col-10 offset-1 insideContainer">
@@ -116,67 +138,42 @@
                             <!-- /Lateral NavBar -->
 
                         </div>
-                        
+
                         <!-- Main content -->
                             <div class="col-9">
                                 <form action="payment.php" method="post">
 
-                                    <input type="hidden" value="<?php echo $_GET['client'] ?>" name="client_ID">
+                                    <!-- Hidden inputs -->
+                                        <input type="hidden" value="<?php echo $_GET['client'] ?>" name="client_ID">
+                                        <input type="hidden" value="<?php echo $_SESSION['id_user'] ?>" name="worker_ID">
+                                        <input type="hidden" value="<?php echo $actualBill ?>" name="actualBill">
+                                    <!-- /Hidden inputs -->
 
                                     <div class="form-row">
                                         <div class="form-group col-md-3">
                                             <label for="type">Type</label>
                                             <select id="type" class="form-control" name="type">
                                                 <option selected disabled>Chose...</option>
-                                                <option value=0>First consultation</option>
+                                                <option value="0">First consultation</option>
                                                 <option value="1">Retention of services</option>
                                                 <option value="2">Monthly payment</option>
                                                 <option value="3">Refund</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="quantity">Quantity</label>
-                                            <span class="quantityInput">$<input type="text" name="quantity" id="cuantity"></span>
+                                        <div class="form-group col-md-1">
+                                            <label for="amout">Amount</label>
+                                            <div class="input-group-prepend">
+                                                <input type="text" class="form-control" id="amout" name="amount">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                            
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress">Address</label>
-                                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress2">Address 2</label>
-                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="inputCity">City</label>
-                                            <input type="text" class="form-control" id="inputCity">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="inputState">State</label>
-                                            <select id="inputState" class="form-control">
-                                                <option selected>Choose...</option>
-                                                <option>...</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="inputZip">Zip</label>
-                                            <input type="text" class="form-control" id="inputZip">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                                            <label class="form-check-label" for="gridCheck">
-                                                Check me out
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+
+                                    <input type="submit" value="Insert payment" class="btn btn-primary" name="pay">
+                                    <?php echo $acutalDate ?>
                                 </form>
-                                <?php
-                                    print_r($_SESSION);
-                                ?>
+
                             </div>
                         <!-- /Main content -->
 
