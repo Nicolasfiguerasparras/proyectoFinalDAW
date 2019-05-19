@@ -59,6 +59,14 @@
             width: 95px;
             height: 95px;
         }
+
+        .quantityInput {
+            border: 1px inset #ccc;
+        }
+
+        .quantityInput input {
+            border: 0;
+        }
     </style>
     <body>
 
@@ -112,14 +120,23 @@
                         <!-- Main content -->
                             <div class="col-9">
                                 <form action="payment.php" method="post">
+
+                                    <input type="hidden" value="<?php echo $_GET['client'] ?>" name="client_ID">
+
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="inputEmail4">Email</label>
-                                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                        <div class="form-group col-md-3">
+                                            <label for="type">Type</label>
+                                            <select id="type" class="form-control" name="type">
+                                                <option selected disabled>Chose...</option>
+                                                <option value=0>First consultation</option>
+                                                <option value="1">Retention of services</option>
+                                                <option value="2">Monthly payment</option>
+                                                <option value="3">Refund</option>
+                                            </select>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="inputPassword4">Password</label>
-                                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                        <div class="form-group col-md-3">
+                                            <label for="quantity">Quantity</label>
+                                            <span class="quantityInput">$<input type="text" name="quantity" id="cuantity"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
