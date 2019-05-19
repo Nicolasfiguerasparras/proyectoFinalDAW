@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-05-2019 a las 13:00:50
+-- Tiempo de generación: 19-05-2019 a las 11:05:12
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -81,6 +81,28 @@ CREATE TABLE `lawers` (
   `salary` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `lawers`
+--
+
+INSERT INTO `lawers` (`lawer_ID`, `name`, `surname`, `birth_date`, `phone`, `email`, `username`, `password`, `salary`) VALUES
+(1, 'Nicolás', 'Figueras Parras', '1999-03-22', 639941992, 'nico@law.com', 'nicoLawer', 'nicoLawer', 1999);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `payment`
+--
+
+CREATE TABLE `payment` (
+  `payment_ID` bigint(20) UNSIGNED NOT NULL,
+  `quantity` float(7,2) NOT NULL,
+  `client_ID` int(5) NOT NULL,
+  `worker_ID` int(5) NOT NULL,
+  `date` date NOT NULL,
+  `type` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -120,7 +142,7 @@ CREATE TABLE `workers` (
 --
 
 INSERT INTO `workers` (`worker_ID`, `name`, `surname`, `birth_date`, `phone`, `email`, `username`, `password`, `salary`) VALUES
-(1, 'NicolásWorker', 'Figueras Parras', '1999-03-22', 639941992, 'nicolas@nicolas.com', 'nicoWorker', 'nicoWorker', 1000);
+(1, 'Nicolás', 'Figueras Parras', '1999-03-22', 639941992, 'nicolas@worker.com', 'nicoWorker', 'nicoWorker', 800);
 
 --
 -- Índices para tablas volcadas
@@ -146,6 +168,12 @@ ALTER TABLE `clients`
 ALTER TABLE `lawers`
   ADD PRIMARY KEY (`lawer_ID`),
   ADD UNIQUE KEY `lawer_ID` (`lawer_ID`);
+
+--
+-- Indices de la tabla `payment`
+--
+ALTER TABLE `payment`
+  ADD UNIQUE KEY `payment_ID` (`payment_ID`);
 
 --
 -- Indices de la tabla `tasks`
@@ -181,7 +209,13 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT de la tabla `lawers`
 --
 ALTER TABLE `lawers`
-  MODIFY `lawer_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `lawer_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `payment_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tasks`

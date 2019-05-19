@@ -111,51 +111,54 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
+                                <form action="payment.php" method="post">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4">Email</label>
+                                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">Password</label>
+                                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress">Address</label>
+                                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Address 2</label>
+                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputCity">City</label>
+                                            <input type="text" class="form-control" id="inputCity">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputState">State</label>
+                                            <select id="inputState" class="form-control">
+                                                <option selected>Choose...</option>
+                                                <option>...</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label for="inputZip">Zip</label>
+                                            <input type="text" class="form-control" id="inputZip">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                                            <label class="form-check-label" for="gridCheck">
+                                                Check me out
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                </form>
                                 <?php
-                                    $listQuery = mysqli_query($db, "SELECT * FROM clients");
-
-                                    if($row = mysqli_fetch_array($listQuery)){
-                                        echo "<table class='table table-bordered'>";
-
-                                            echo "<thead>";
-                                                echo "<tr>";
-                                                    echo "<th scope='col'>ID</th>";
-                                                    echo "<th scope='col'>Name</th>";
-                                                    echo "<th scope='col'>Surname</th>";
-                                                    echo "<th scope='col'>Birth Date</th>";
-                                                    echo "<th scope='col'>Phone</th>";
-                                                    echo "<th scope='col'>Email</th>";
-                                                    echo "<th scope='col'>Username</th>";
-                                                    echo "<th scope='col'>Password</th>";
-                                                    echo "<th scope='col'>Cases</th>";
-                                                    echo "<th scope='col'>Bill</th>";
-                                                echo "</tr>";
-                                            echo "</thead>";
-
-
-                                            do{
-                                                echo "<tr>";
-                                                    $listID=$row['client_ID'];
-                                                    echo "<td>".$listID."</td>";
-                                                    echo "<td>".$row["name"]."</td>";
-                                                    echo "<td>".$row["surname"]."</td>";
-                                                    $bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   
-                                                    echo "<td>".$bDateFormatted."</td>";
-                                                    echo "<td>".$row["phone"]."</td>";
-                                                    echo "<td>".$row["email"]."</td>";
-                                                    echo "<td>".$row["username"]."</td>";
-                                                    echo "<td>".$row["password"]."</td>";
-                                                    echo "<td>a</td>";
-                                                    echo "<td>".$row["bill"]."</td>";
-                                                    echo "<td><i class='fa fa-plus' aria-hidden='true'></i></td>";
-                                                    echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
-                                                    echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
-                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$listID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
-                                                echo "</tr>";
-                                            }while($row = mysqli_fetch_array($listQuery));
-                                    }else{
-                                        echo "There is no record";
-                                    }
+                                    print_r($_SESSION);
                                 ?>
                             </div>
                         <!-- /Main content -->

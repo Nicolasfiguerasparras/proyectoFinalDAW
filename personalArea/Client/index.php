@@ -52,7 +52,6 @@
 				<div class="row">
 					<!-- Add client button -->
 						<div class="col-3 addClientBox">
-							<!-- <a href="#"><i class="fas fa-plus-circle addClientBtn"></i></a> -->
 						</div>
 					<!-- /Add client button -->
 
@@ -80,7 +79,52 @@
 
 					<!-- Main content -->
                         <div class="col-9">
-                           
+							<?php
+								$listQuery = mysqli_query($db, "SELECT * FROM clients");
+
+								if($row = mysqli_fetch_array($listQuery)){
+									echo "<table class='table table-bordered'>";
+
+										echo "<thead>";
+											echo "<tr>";
+												echo "<th scope='col'>ID</th>";
+												echo "<th scope='col'>Name</th>";
+												echo "<th scope='col'>Surname</th>";
+												echo "<th scope='col'>Birth Date</th>";
+												echo "<th scope='col'>Phone</th>";
+												echo "<th scope='col'>Email</th>";
+												echo "<th scope='col'>Username</th>";
+												echo "<th scope='col'>Password</th>";
+												echo "<th scope='col'>Cases</th>";
+												echo "<th scope='col'>Bill</th>";
+											echo "</tr>";
+										echo "</thead>";
+
+
+										do{
+											echo "<tr>";
+												$listID=$row['client_ID'];
+												echo "<td>".$listID."</td>";
+												echo "<td>".$row["name"]."</td>";
+												echo "<td>".$row["surname"]."</td>";
+												$bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   
+												echo "<td>".$bDateFormatted."</td>";
+												echo "<td>".$row["phone"]."</td>";
+												echo "<td>".$row["email"]."</td>";
+												echo "<td>".$row["username"]."</td>";
+												echo "<td>".$row["password"]."</td>";
+												echo "<td>a</td>";
+												echo "<td>".$row["bill"]."</td>";
+												echo "<td><i class='fa fa-plus' aria-hidden='true'></i></td>";
+												echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
+												echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
+												echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$listID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+											echo "</tr>";
+										}while($row = mysqli_fetch_array($listQuery));
+								}else{
+									echo "There is no record";
+								}
+							?>
                         </div>
                     <!-- /Main content -->
 					
