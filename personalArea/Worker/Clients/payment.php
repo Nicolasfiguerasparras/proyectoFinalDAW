@@ -171,7 +171,6 @@
                                     </div>
 
                                     <input type="submit" value="Insert payment" class="btn btn-primary" name="pay">
-                                    <?php echo $acutalDate ?>
                                 </form>
 
                             </div>
