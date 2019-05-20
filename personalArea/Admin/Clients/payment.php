@@ -46,21 +46,27 @@
 			?>
 		<!-- /Restrictions -->
 
-        <!-- Create form action -->
+        <!-- Form action -->
             <?php
-                if(isset($_POST['create'])){
-                    $name = $_POST['name'];
-	                $surname = $_POST['surname'];
-	                $birth_date = $_POST['birth_date'];
-	                $phone = $_POST['phone'];
-	                $email = $_POST['email'];
-	                $username = $_POST['username'];
-	                $password = $_POST['password'];
-                    $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0')") or die(mysqli_error($db));
+                $acutalDate = date('o-m-d');
+                if(isset($_POST['pay'])){
+                    $insert = mysqli_query($db, "INSERT INTO payment (payment_ID, quantity, client_ID, worker_ID, date, type) VALUES ('NULL', '$_POST[amount]', '$_POST[client_ID]', '$_POST[worker_ID]', '$acutalDate', '$_POST[type]')");
+                    if($_POST['type'] == "3"){
+                        $newBill = $_POST['actualBill'] - $_POST['amount'];
+                    }else{
+                        $newBill = $_POST['actualBill'] + $_POST['amount'];
+                    }
+                    $updateBill = mysqli_query($db, "UPDATE clients SET bill = '$newBill' WHERE client_ID = '$_POST[client_ID]'");
                     header("location: index.php");
                 }
             ?>
-        <!-- /Create form action -->
+        <!-- /Form action -->
+
+        <!-- Data extract -->
+            <?php
+                $actualBill = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = '$_GET[client]'"));
+            ?>
+        <!-- /Data extract -->
 
         <div class="container-fluid">
 			<div class="mainBox">

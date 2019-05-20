@@ -100,7 +100,7 @@
                         $newBill = $_POST['actualBill'] - $_POST['amount'];
                     }else{
                         $newBill = $_POST['actualBill'] + $_POST['amount'];
-                    }   
+                    }
                     $updateBill = mysqli_query($db, "UPDATE clients SET bill = '$newBill' WHERE client_ID = '$_POST[client_ID]'");
                     header("location: index.php");
                 }
@@ -109,7 +109,7 @@
 
         <!-- Data extract -->
             <?php
-                $actualBill = mysqli_fetch_array(mysqli_query($db, "SELECT bill FROM clients WHERE client_ID = '$_GET[client]'"));
+                $actualBill = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = '$_GET[client]'"));
             ?>
         <!-- /Data extract -->
 
@@ -146,7 +146,7 @@
                                     <!-- Hidden inputs -->
                                         <input type="hidden" value="<?php echo $_GET['client'] ?>" name="client_ID">
                                         <input type="hidden" value="<?php echo $_SESSION['id_user'] ?>" name="worker_ID">
-                                        <input type="hidden" value="<?php echo $actualBill ?>" name="actualBill">
+                                        <input type="hidden" value="<?php echo $actualBill['bill'] ?>" name="actualBill">
                                     <!-- /Hidden inputs -->
 
                                     <div class="form-row">
@@ -166,7 +166,6 @@
                                                 <input type="text" class="form-control" id="amout" name="amount">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            
                                         </div>
                                     </div>
 
