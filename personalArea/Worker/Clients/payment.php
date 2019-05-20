@@ -100,7 +100,7 @@
                         $newBill = $_POST['actualBill'] - $_POST['amount'];
                     }else{
                         $newBill = $_POST['actualBill'] + $_POST['amount'];
-                    }
+                    }   
                     $updateBill = mysqli_query($db, "UPDATE clients SET bill = '$newBill' WHERE client_ID = '$_POST[client_ID]'");
                     header("location: index.php");
                 }
