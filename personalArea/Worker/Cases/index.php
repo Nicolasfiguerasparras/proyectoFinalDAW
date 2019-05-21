@@ -1,5 +1,5 @@
 <!-- Extract session -->
-<?php
+    <?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-         
+
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
@@ -102,22 +102,22 @@
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
                                     <a class='nav-link' href='../Clients/'>Clients</a>
+                                    <a class='nav-link' href="../Tasks/">Tasks</a>
+                                    <a class="nav-link" href="../Cases/">Cases</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='index.php'>List clients</a>
+                                                    <a class='nav-link active' href='index.php'>List cases</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='create.php'>Create client</a>
+                                                    <a class='nav-link' href='create.php'>Create case</a>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class='nav-link' href="../Tasks/">Tasks</a>
-                                    <a class="nav-link" href="../Cases/">Cases</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
@@ -127,43 +127,36 @@
                         <!-- Main content -->
                             <div class="col-9">
                                 <?php
-                                    $listQuery = mysqli_query($db, "SELECT * FROM clients");
+                                    $listQuery = mysqli_query($db, "SELECT * FROM cases");
 
                                     if($row = mysqli_fetch_array($listQuery)){
                                         echo "<table class='table table-bordered'>";
 
                                             echo "<thead>";
                                                 echo "<tr>";
-                                                    echo "<th scope='col'>Name</th>";
-                                                    echo "<th scope='col'>Surname</th>";
-                                                    echo "<th scope='col'>Birth Date</th>";
-                                                    echo "<th scope='col'>Phone</th>";
-                                                    echo "<th scope='col'>Email</th>";
-                                                    echo "<th scope='col'>Username</th>";
-                                                    echo "<th scope='col'>Password</th>";
-                                                    echo "<th scope='col'>Cases</th>";
-                                                    echo "<th scope='col'>Bill</th>";
+                                                    echo "<th scope='col'>Title</th>";
+                                                    echo "<th scope='col'>Description</th>";
+                                                    echo "<th scope='col'>Lawer</th>";
+                                                    echo "<th scope='col'>Client</th>";
+                                                    echo "<th scope='col'>Type</th>";
                                                 echo "</tr>";
                                             echo "</thead>";
 
 
                                             do{
                                                 echo "<tr>";
-                                                    $listID=$row['client_ID'];
-                                                    echo "<td>".$row["name"]."</td>";
-                                                    echo "<td>".$row["surname"]."</td>";
-                                                    $bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   
-                                                    echo "<td>".$bDateFormatted."</td>";
-                                                    echo "<td>".$row["phone"]."</td>";
-                                                    echo "<td>".$row["email"]."</td>";
-                                                    echo "<td>".$row["username"]."</td>";
-                                                    echo "<td>".$row["password"]."</td>";
-                                                    echo "<td>Cases</td>";
-                                                    echo "<td>".$row["bill"]."</td>";
-                                                    echo "<td style='text-align: center'><a href='addCase.php?client=$listID'><i class='fa fa-plus' style='font-size:20px; color:black' aria-hidden='true'></i></a></td>";
-                                                    echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:#B8860B'></i></a></td>";
-                                                    echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
-                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$listID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                    $caseID=$row['case_ID'];
+                                                    echo "<td>".$row["title"]."</td>";
+                                                    echo "<td>".$row["description"]."</td>";
+                                                    
+                                                    $lawerName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = '$row[lawer_ID]'"));
+                                                    echo "<td>".$lawerName["name"]." ".$lawerName["surname"]."</td>";
+                                                    
+                                                    $clientName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = '$row[client_ID]'"));
+                                                    echo "<td>".$clientName["name"]." ".$clientName["name"]."</td>";
+                                                    echo "<td>".$row["type"]."</td>";
+                                                    echo "<td style='text-align: center'><a href='modify.php?client=$caseID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
+                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$caseID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
                                                 echo "</tr>";
                                             }while($row = mysqli_fetch_array($listQuery));
                                     }else{
@@ -181,7 +174,7 @@
         <!-- Delete confirmation -->
             <script type="text/javascript">
                 $('.delete_button').click(function(e){
-                    var result = confirm("Are you sure you want to delete this client?");
+                    var result = confirm("Are you sure you want to delete this case?");
                     if(!result) {
                         e.preventDefault();
                     }

@@ -59,14 +59,6 @@
             width: 95px;
             height: 95px;
         }
-
-        .quantityInput {
-            border: 1px inset #ccc;
-        }
-
-        .quantityInput input {
-            border: 0;
-        }
     </style>
     <body>
 
@@ -80,36 +72,20 @@
 		<!-- Restrictions -->
 			<?php
                 $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
-
+                
                 if(!isset($_SESSION['login_ok'])){
 					header("location: ../notAllowed.php");
                 }
-
+                
                 if($userData == ""){
                     header("location: ../notAllowed.php");
                 }
 			?>
 		<!-- /Restrictions -->
 
-        <!-- Form action -->
-            <?php
-                $acutalDate = date('o-m-d');
-                if(isset($_POST['pay'])){
-                    $insert = mysqli_query($db, "INSERT INTO payment (payment_ID, quantity, client_ID, worker_ID, date, type) VALUES ('NULL', '$_POST[amount]', '$_POST[client_ID]', '$_POST[worker_ID]', '$acutalDate', '$_POST[type]')");
-                    if($_POST['type'] == "3"){
-                        $newBill = $_POST['actualBill'] - $_POST['amount'];
-                    }else{
-                        $newBill = $_POST['actualBill'] + $_POST['amount'];
-                    }
-                    $updateBill = mysqli_query($db, "UPDATE clients SET bill = '$newBill' WHERE client_ID = '$_POST[client_ID]'");
-                    header("location: index.php");
-                }
-            ?>
-        <!-- /Form action -->
-
         <!-- Data extract -->
             <?php
-                $actualBill = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = '$_GET[client]'"));
+
             ?>
         <!-- /Data extract -->
 
@@ -148,7 +124,7 @@
                                     </div>
                                     <a class='nav-link' href="../Tasks/">Tasks</a>
                                     <a class="nav-link" href="../Cases/">Cases</a>
-                                    <a class="nav-link" href="../../login/logout.php">Logout</a>
+                                    <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
 
@@ -156,37 +132,7 @@
 
                         <!-- Main content -->
                             <div class="col-9">
-                                <form action="payment.php" method="post">
-
-                                    <!-- Hidden inputs -->
-                                        <input type="hidden" value="<?php echo $_GET['client'] ?>" name="client_ID">
-                                        <input type="hidden" value="<?php echo $_SESSION['id_user'] ?>" name="worker_ID">
-                                        <input type="hidden" value="<?php echo $actualBill['bill'] ?>" name="actualBill">
-                                    <!-- /Hidden inputs -->
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-3">
-                                            <label for="type">Type</label>
-                                            <select id="type" class="form-control" name="type">
-                                                <option selected disabled>Chose...</option>
-                                                <option value="0">First consultation</option>
-                                                <option value="1">Retention of services</option>
-                                                <option value="2">Monthly payment</option>
-                                                <option value="3">Refund</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-1">
-                                            <label for="amout">Amount</label>
-                                            <div class="input-group-prepend">
-                                                <input type="text" class="form-control" id="amout" name="amount">
-                                                <span class="input-group-text">$</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <input type="submit" value="Insert payment" class="btn btn-primary" name="pay">
-                                </form>
-
+                                
                             </div>
                         <!-- /Main content -->
 
@@ -194,5 +140,29 @@
                 </div>
             </div>
         </div>
+
+        <!-- Delete confirmation -->
+            <script type="text/javascript">
+                $('.delete_button').click(function(e){
+                    var result = confirm("Are you sure you want to delete this client?");
+                    if(!result) {
+                        e.preventDefault();
+                    }
+                });
+            </script>
+        <!-- /Delete confirmation -->
+
+        <!-- Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<!-- /Bootstrap JS -->
+
+        <!-- Connection close -->
+            <?php
+                mysqli_close($db);
+            ?>
+        <!-- /Connection close -->
+
     </body>
 </html>
