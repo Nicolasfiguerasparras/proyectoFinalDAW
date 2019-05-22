@@ -158,7 +158,21 @@
                                                     echo "<td>".$row["email"]."</td>";
                                                     echo "<td>".$row["username"]."</td>";
                                                     echo "<td>".$row["password"]."</td>";
-                                                    echo "<td>Cases</td>";
+                                                    $cases = mysqli_query($db, "SELECT * FROM cases WHERE client_ID = '$row[client_ID]'");
+                                                    if($row_cases = mysqli_fetch_array($cases)){
+                                                        $count = 0;
+                                                        echo "<td>";
+                                                            do{
+                                                                echo $row_cases['title'];
+                                                                if($count>0){
+                                                                    echo ", ";
+                                                                }
+                                                                $count++;
+                                                            }while($row_cases = mysqli_fetch_array($cases));
+                                                        echo "</td>";
+                                                    }else{
+                                                        echo "<td>No record</td>";
+                                                    }
                                                     echo "<td>".$row["bill"]."</td>";
                                                     echo "<td style='text-align: center'><a href='addCase.php?client=$listID'><i class='fa fa-plus' style='font-size:20px; color:black' aria-hidden='true'></i></a></td>";
                                                     echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:#B8860B'></i></a></td>";

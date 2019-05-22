@@ -86,14 +86,7 @@
         <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
-                    $name = $_POST['name'];
-	                $surname = $_POST['surname'];
-	                $birth_date = $_POST['birth_date'];
-	                $phone = $_POST['phone'];
-	                $email = $_POST['email'];
-	                $username = $_POST['username'];
-	                $password = $_POST['password'];
-                    $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('NULL', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0')") or die(mysqli_error($db));
+                    $createQuery = mysqli_query($db, "INSERT INTO cases (case_ID, title, description, lawer_ID, client_ID, type) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_POST[lawer_ID]', '$_POST[client_ID]', '$_POST[type]')") or die(mysqli_error($db));
                     header("location: index.php");
                 }
             ?>
@@ -142,9 +135,9 @@
 
                         <!-- Main content -->
                             <div class="col-9">
-                            <form>
+                                <form action="create.php" method="POST">
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-6">
                                             <label for="title">Title</label>
                                             <input type="title" class="form-control" id="title" name="title" placeholder="Title">
                                         </div>
@@ -152,11 +145,12 @@
                                             <label for="description">Description</label>
                                             <input type="description" class="form-control" id="description" name="description" placeholder="Description">
                                         </div>
+                                        
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="lawer">Lawer</label>
-                                            <select id="lawer" class="form-control">
+                                            <select id="lawer" name="lawer_ID" class="form-control">
                                                 <option value="0" selected disabled>Choose...</option>
                                                 <?php
                                                     $lawers = mysqli_query($db, "SELECT * FROM lawers");
@@ -169,38 +163,28 @@
                                                 ?>
                                             </select>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="inputAddress2">Address 2</label>
-                                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="inputCity">City</label>
-                                            <input type="text" class="form-control" id="inputCity">
-                                        </div>
                                         <div class="form-group col-md-4">
-                                            <label for="inputState">State</label>
-                                            <select id="inputState" class="form-control">
-                                                <option selected>Choose...</option>
-                                                <option>...</option>
+                                            <label for="client">Client</label>
+                                            <select id="client" name="client_ID" class="form-control">
+                                                <option value="0" selected disabled>Choose...</option>
+                                                <?php
+                                                    $clients = mysqli_query($db, "SELECT * FROM clients");
+
+                                                    if($row = mysqli_fetch_array($clients)){
+                                                        do{
+                                                            echo "<option value='$row[client_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                        }while($row = mysqli_fetch_array($clients));
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="inputZip">Zip</label>
-                                            <input type="text" class="form-control" id="inputZip">
+                                        <div class="form-group col-md-4">
+                                            <label for="description">Type</label>
+                                            <input type="type" class="form-control" id="type" name="type" placeholder="Type">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                                            <label class="form-check-label" for="gridCheck">
-                                                Check me out
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+
+                                    <input type="submit" class="btn btn-primary" name="create">
                                 </form>
                             </div>
                         <!-- /Main content -->

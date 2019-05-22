@@ -175,7 +175,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="salary">Salary</label>
-                                            <input type="text" class="form-control" id="salary" name="salary" value="<?php echo $actualLawerQuery['birth_date'] ?>">
+                                            <input type="text" class="form-control" id="salary" name="salary" value="<?php echo $actualLawerQuery['salary'] ?>">
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="birth_date">Birth date</label>
