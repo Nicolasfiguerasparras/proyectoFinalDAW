@@ -136,7 +136,7 @@
 
                         <!-- Main content -->
                             <div class="col-9">
-                                <form action="create.php" method="POST">
+                                <form action="addCase.php" method="POST">
 
                                     <input type="hidden" value="<?php echo $_GET['client'] ?>" name="client_ID">
 

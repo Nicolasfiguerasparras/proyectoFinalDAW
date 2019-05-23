@@ -119,7 +119,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Welcome back, admin</h1>
+                            <h1>Clients > Add payment</h1>
                         </div>
                     </div>
                     <br>
@@ -130,6 +130,20 @@
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
                                     <a class='nav-link active' href='../Clients/'>Clients</a>
+                                    <div class="table-primary" style="padding-left: 20px;">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <a class='nav-link' href='index.php'>List clients</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a class='nav-link' href='create.php'>Create client</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                     <a class='nav-link' href="../Tasks/">Tasks</a>
                                     <a class="nav-link" href="../../login/logout.php">Logout</a>
                                 </div>

@@ -90,7 +90,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Bienvenido</h1>
+                            <h1>Clients > List clients</h1>
                         </div>
                     </div>
                     <br>
@@ -101,12 +101,12 @@
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
                                     <a class='nav-link' href='../Lawers/'>Lawers</a>
-                                    <a class='nav-link' href='../Clients/'>Clients</a>
+                                    <a class='nav-link active' href='../Clients/'>Clients</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='index.php'>List clients</a>
+                                                    <a class='nav-link' href='index.php'>List clients</a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -133,7 +133,6 @@
 
                                             echo "<thead>";
                                                 echo "<tr>";
-                                                    echo "<th scope='col'>ID</th>";
                                                     echo "<th scope='col'>Name</th>";
                                                     echo "<th scope='col'>Surname</th>";
                                                     echo "<th scope='col'>Birth Date</th>";
@@ -150,7 +149,6 @@
                                             do{
                                                 echo "<tr>";
                                                     $listID=$row['client_ID'];
-                                                    echo "<td>".$listID."</td>";
                                                     echo "<td>".$row["name"]."</td>";
                                                     echo "<td>".$row["surname"]."</td>";
                                                     $bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   
@@ -159,7 +157,21 @@
                                                     echo "<td>".$row["email"]."</td>";
                                                     echo "<td>".$row["username"]."</td>";
                                                     echo "<td>".$row["password"]."</td>";
-                                                    echo "<td>a</td>";
+                                                    $cases = mysqli_query($db, "SELECT * FROM cases WHERE client_ID = '$row[client_ID]'");
+                                                    $num = mysqli_num_rows($cases);
+                                                    if($row_cases = mysqli_fetch_array($cases)){
+                                                        echo "<td>";
+                                                            do{
+                                                                echo $row_cases['title'];
+                                                                $num--;
+                                                                if(!$num == 0){
+                                                                    echo ", ";
+                                                                }
+                                                            }while($row_cases = mysqli_fetch_array($cases));
+                                                        echo "</td>";
+                                                    }else{
+                                                        echo "<td>No record</td>";
+                                                    }
                                                     echo "<td>".$row["bill"]."</td>";
                                                     echo "<td style='text-align: center'><a href='addCase.php?client=$listID'><i class='fa fa-plus' aria-hidden='true'></i></a></td>";
                                                     echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";

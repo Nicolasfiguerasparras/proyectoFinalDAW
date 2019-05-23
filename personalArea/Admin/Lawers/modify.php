@@ -127,7 +127,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Bienvenido</h1>
+                            <h1>Lawers > Modify lawer</h1>
                         </div>
                     </div>
                     <br>
@@ -137,7 +137,7 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link' href='index.php'>Lawers</a>
+                                    <a class='nav-link active' href='index.php'>Lawers</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
@@ -147,7 +147,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='create.php'>Create lawer</a>
+                                                    <a class='nav-link' href='create.php'>Create lawer</a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -173,21 +173,21 @@
                                             <label for="surname">Last name</label>
                                             <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $actualLawerQuery['surname'] ?>">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="salary">Salary</label>
                                             <input type="text" class="form-control" id="salary" name="salary" value="<?php echo $actualLawerQuery['salary'] ?>">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="birth_date">Birth date</label>
                                             <input type="date" class="form-control" id="birth_date" name="birth_date" value="<?php echo $actualLawerQuery['birth_date'] ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="phone">Phone number</label>
                                             <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $actualLawerQuery['phone'] ?>">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="email">Email</label>
                                             <input type="text" class="form-control" id="email" name="email" value="<?php echo $actualLawerQuery['email'] ?>">
                                         </div>

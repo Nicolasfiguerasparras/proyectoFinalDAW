@@ -90,7 +90,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Bienvenido</h1>
+                            <h1>Lawers > List lawers</h1>
                         </div>
                     </div>
                     <br>
@@ -100,12 +100,12 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link' href='index.php'>Lawers</a>
+                                    <a class='nav-link active' href='../Lawers/'>Lawers</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='index.php'>List lawers</a>
+                                                    <a class='nav-link' href='index.php'>List lawers</a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -133,7 +133,6 @@
 
                                             echo "<thead>";
                                                 echo "<tr>";
-                                                    echo "<th scope='col'>ID</th>";
                                                     echo "<th scope='col'>Name</th>";
                                                     echo "<th scope='col'>Surname</th>";
                                                     echo "<th scope='col'>Birth Date</th>";
@@ -149,7 +148,6 @@
                                             do{
                                                 echo "<tr>";
                                                     $listID=$row['lawer_ID'];
-                                                    echo "<td>".$listID."</td>";
                                                     echo "<td>".$row["name"]."</td>";
                                                     echo "<td>".$row["surname"]."</td>";
                                                     $bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   

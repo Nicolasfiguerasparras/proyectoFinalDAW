@@ -1,5 +1,5 @@
 <!-- Extract session -->
-    <?php
+<?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -11,13 +11,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-         <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
@@ -82,19 +82,10 @@
 			?>
 		<!-- /Restrictions -->
 
-        <!-- Create form action -->
+         <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
-                    $name = $_POST['name'];
-	                $surname = $_POST['surname'];
-	                $birth_date = $_POST['birth_date'];
-	                $phone = $_POST['phone'];
-	                $email = $_POST['email'];
-	                $username = $_POST['username'];
-                    $password = $_POST['password'];
-                    $salary = $_POST['salary'];
-
-                    $createQuery = mysqli_query($db, "INSERT INTO lawers (lawer_ID, name, surname, birth_date, phone, email, username, password, salary) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '$salary')") or die(mysqli_error($db));
+                    $createQuery = mysqli_query($db, "INSERT INTO cases (case_ID, title, description, lawer_ID, client_ID, type) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_POST[lawer_ID]', '$_POST[client_ID]', '$_POST[type]')") or die(mysqli_error($db));
                     header("location: index.php");
                 }
             ?>
@@ -108,7 +99,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Lawers > Create lawer</h1>
+                            <h1>Clients > List clients</h1>
                         </div>
                     </div>
                     <br>
@@ -118,22 +109,22 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link active' href='../Lawers/'>Lawers</a>
+                                    <a class='nav-link' href='../Lawers/'>Lawers</a>
+                                    <a class='nav-link active' href='../Clients/'>Clients</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='index.php'>List lawers</a>
+                                                    <a class='nav-link' href='index.php'>List clients</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='create.php'>Create lawer</a>
+                                                    <a class='nav-link' href='create.php'>Create client</a>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class='nav-link' href='../Clients/'>Clients</a>
                                     <a class='nav-link' href="../Workers/">Workers</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
@@ -143,45 +134,43 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
-                                <form action="create.php" method="post">
-                                    <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" hidden disabled>
+                                <form action="addCase.php" method="POST">
+
+                                    <input type="hidden" value="<?php echo $_GET['client'] ?>" name="client_ID">
+
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
-                                            <label for="name">First name</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Insert name">
+                                        <div class="form-group col-md-6">
+                                            <label for="title">Title</label>
+                                            <input type="title" class="form-control" id="title" name="title" placeholder="Title">
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="surname">Last name</label>
-                                            <input type="text" class="form-control" id="surname" name="surname" placeholder="Insert last name">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="birth_date">Birth date</label>
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="salary">Salary</label>
-                                            <input type="text" class="form-control" id="salary" name="salary">
+                                        <div class="form-group col-md-6">
+                                            <label for="description">Description</label>
+                                            <input type="description" class="form-control" id="description" name="description" placeholder="Description">
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
-                                            <label for="phone">Phone number</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="+34 639 941 992">
+                                        <div class="form-group col-md-6">
+                                            <label for="lawer">Lawer</label>
+                                            <select id="lawer" name="lawer_ID" class="form-control">
+                                                <option value="0" selected disabled>Choose...</option>
+                                                <?php
+                                                    $lawers = mysqli_query($db, "SELECT * FROM lawers");
+
+                                                    if($row = mysqli_fetch_array($lawers)){
+                                                        do{
+                                                            echo "<option value='$row[lawer_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                        }while($row = mysqli_fetch_array($lawers));
+                                                    }
+                                                ?>
+                                            </select>
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password">
+                                        <div class="form-group col-md-6">
+                                            <label for="type">Type</label>
+                                            <input type="type" class="form-control" id="type" name="type" placeholder="Type">
                                         </div>
                                     </div>
-                                    <input type="submit" class="btn btn-primary" value="Submit" name="create">
+
+                                    <input type="submit" class="btn btn-primary" name="create">
                                 </form>
                             </div>
                         <!-- /Main content -->
@@ -190,6 +179,17 @@
                 </div>
             </div>
         </div>
+
+        <!-- Delete confirmation -->
+            <script type="text/javascript">
+                $('.delete_button').click(function(e){
+                    var result = confirm("Are you sure you want to delete this client?");
+                    if(!result) {
+                        e.preventDefault();
+                    }
+                });
+            </script>
+        <!-- /Delete confirmation -->
 
         <!-- Bootstrap JS -->
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
