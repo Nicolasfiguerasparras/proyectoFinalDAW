@@ -1,5 +1,5 @@
 <!-- Extract session -->
-    <?php
+<?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-         
+
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
@@ -70,8 +70,8 @@
         <!-- /Establish connection with DB -->
 
 		<!-- Restrictions -->
-			<?php
-                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
+            <?php
+				$userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
 					header("location: ../notAllowed.php");
@@ -83,11 +83,18 @@
 			?>
 		<!-- /Restrictions -->
 
+        <!-- Data extract -->
+            <?php
+                if(isset($_GET['case'])){
+                    $caseData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM cases WHERE case_ID = '$_GET[case]'"));
+                }
+            ?>
+        <!-- /Data extract -->
 
         <!-- Create form action -->
             <?php
-                if(isset($_POST['create'])){
-                    $createQuery = mysqli_query($db, "INSERT INTO cases (case_ID, title, description, lawer_ID, client_ID, type) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_POST[lawer_ID]', '$_POST[client_ID]', '$_POST[type]')") or die(mysqli_error($db));
+                if(isset($_POST['modify'])){
+                    $createQuery = mysqli_query($db, "UPDATE cases SET title = '$_POST[title]', description = '$_POST[description]', lawer_ID = '$_POST[lawer_ID]', client_ID = '$_POST[client_ID]', type = '$_POST[type]'") or die(mysqli_error($db));
                     header("location: index.php");
                 }
             ?>
@@ -101,7 +108,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                            <h1>Bienvenido</h1>
                         </div>
                     </div>
                     <br>
@@ -111,23 +118,23 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link active' href='../Clients/'>Clients</a>
+                                    <a class='nav-link' href='../Clients/'>Clients</a>
+                                    <a class='nav-link' href="../Tasks/">Tasks</a>
+                                    <a class="nav-link" href="../Cases/">Cases</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='index.php'>List clients</a>
+                                                    <a class='nav-link' href='index.php'>List cases</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='create.php'>Create client</a>
+                                                    <a class='nav-link active' href='create.php'>Create case</a>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class='nav-link' href="../Tasks/">Tasks</a>
-                                    <a class="nav-link" href="../Cases/">Cases</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
@@ -136,43 +143,65 @@
 
                         <!-- Main content -->
                             <div class="col-9">
-                                <form action="create.php" method="POST">
-
-                                    <input type="hidden" value="<?php echo $_GET['client'] ?>" name="client_ID">
-
+                                <form action="modify.php" method="POST">
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="title">Title</label>
-                                            <input type="title" class="form-control" id="title" name="title" placeholder="Title">
+                                            <input type="title" class="form-control" id="title" name="title" value="<?php echo $caseData['title'] ?>">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="description">Description</label>
-                                            <input type="description" class="form-control" id="description" name="description" placeholder="Description">
+                                            <input type="description" class="form-control" id="description" name="description" value="<?php echo $caseData['description'] ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="lawer">Lawer</label>
                                             <select id="lawer" name="lawer_ID" class="form-control">
-                                                <option value="0" selected disabled>Choose...</option>
+                                                <?php
+                                                    $lawerData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = '$caseData[lawer_ID]'"));
+                                                ?>
+                                                <option value="<?php echo $caseData['lawer_ID'] ?>" selected><?php echo $lawerData['name']." ".$lawerData['surname'] ?></option>
                                                 <?php
                                                     $lawers = mysqli_query($db, "SELECT * FROM lawers");
 
                                                     if($row = mysqli_fetch_array($lawers)){
                                                         do{
-                                                            echo "<option value='$row[lawer_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                            if(!$row['lawer_ID'] == $lawerData['lawer_ID']){
+                                                                echo "<option value='$row[lawer_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                            }
                                                         }while($row = mysqli_fetch_array($lawers));
                                                     }
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="type">Type</label>
-                                            <input type="type" class="form-control" id="type" name="type" placeholder="Type">
+                                        <div class="form-group col-md-4">
+                                            <label for="client">Client</label>
+                                            <select id="client" name="client_ID" class="form-control">
+                                                <?php
+                                                    $clientData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = '$caseData[client_ID]'"));
+                                                ?>
+                                                <option value="<?php echo $clientData['client_ID'] ?>" selected><?php echo $clientData['name']." ".$clientData['surname'] ?></option>
+                                                <?php
+                                                    $clients = mysqli_query($db, "SELECT * FROM clients");
+
+                                                    if($row = mysqli_fetch_array($clients)){
+                                                        do{
+                                                            if(!$row['client_ID'] == $clientData['client_ID']){
+                                                                echo "<option value='$row[client_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                            }
+                                                        }while($row = mysqli_fetch_array($clients));
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="description">Type</label>
+                                            <input type="type" class="form-control" id="type" name="type" value="<?php echo $caseData['type'] ?>">
                                         </div>
                                     </div>
 
-                                    <input type="submit" class="btn btn-primary" name="create">
+                                    <input type="submit" class="btn btn-primary" name="modify">
                                 </form>
                             </div>
                         <!-- /Main content -->
@@ -181,17 +210,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Delete confirmation -->
-            <script type="text/javascript">
-                $('.delete_button').click(function(e){
-                    var result = confirm("Are you sure you want to delete this client?");
-                    if(!result) {
-                        e.preventDefault();
-                    }
-                });
-            </script>
-        <!-- /Delete confirmation -->
 
         <!-- Bootstrap JS -->
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

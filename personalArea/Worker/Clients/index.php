@@ -146,7 +146,6 @@
                                                 echo "</tr>";
                                             echo "</thead>";
 
-
                                             do{
                                                 echo "<tr>";
                                                     $listID=$row['client_ID'];
@@ -159,15 +158,15 @@
                                                     echo "<td>".$row["username"]."</td>";
                                                     echo "<td>".$row["password"]."</td>";
                                                     $cases = mysqli_query($db, "SELECT * FROM cases WHERE client_ID = '$row[client_ID]'");
+                                                    $num = mysqli_num_rows($cases);
                                                     if($row_cases = mysqli_fetch_array($cases)){
-                                                        $count = 0;
                                                         echo "<td>";
                                                             do{
                                                                 echo $row_cases['title'];
-                                                                if($count>0){
+                                                                $num--;
+                                                                if(!$num == 0){
                                                                     echo ", ";
                                                                 }
-                                                                $count++;
                                                             }while($row_cases = mysqli_fetch_array($cases));
                                                         echo "</td>";
                                                     }else{

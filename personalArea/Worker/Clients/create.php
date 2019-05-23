@@ -144,7 +144,7 @@
                         <!-- Main content -->
                             <div class="col-9">
                                 <form action="create.php" method="post">
-                                    <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" hidden disabled>
+                                    <input type="hidden" id="ID" name="ID" placeholder="<?php echo $id ?>" disabled>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="name">First name</label>

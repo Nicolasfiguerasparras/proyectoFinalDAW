@@ -155,8 +155,8 @@
                                                     $clientName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = '$row[client_ID]'"));
                                                     echo "<td>".$clientName["name"]." ".$clientName["surname"]."</td>";
                                                     echo "<td>".$row["type"]."</td>";
-                                                    echo "<td style='text-align: center'><a href='modify.php?client=$caseID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
-                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$caseID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                    echo "<td style='text-align: center'><a href='modify.php?case=$caseID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
+                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?case=$caseID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
                                                 echo "</tr>";
                                             }while($row = mysqli_fetch_array($listQuery));
                                     }else{

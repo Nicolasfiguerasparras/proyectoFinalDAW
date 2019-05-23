@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2019 a las 10:59:15
+-- Tiempo de generación: 23-05-2019 a las 02:00:29
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -37,6 +37,13 @@ CREATE TABLE `cases` (
   `type` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `cases`
+--
+
+INSERT INTO `cases` (`case_ID`, `title`, `description`, `lawer_ID`, `client_ID`, `type`) VALUES
+(1, 'Titulo', 'Descripcion', 1, 2, 'AOWA');
+
 -- --------------------------------------------------------
 
 --
@@ -60,7 +67,7 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`client_ID`, `name`, `surname`, `birth_date`, `phone`, `email`, `username`, `password`, `bill`) VALUES
-(2, 'Nicolás', 'Figueras Parras', '1999-03-22', 639941992, 'nicolasfiguerasparras@gmail.com', 'nicoClient', 'nicoClient', 350),
+(2, 'Nicolás', 'Figueras Parras', '1999-03-22', 639941992, 'nicolasfiguerasparras@gmail.com', 'nicoClient', 'nicoClient', 850),
 (3, 'Fernando', 'Juanez ', '1998-12-03', 626451200, 'fernando@gmail.com', 'fernando', 'fernando', 0);
 
 -- --------------------------------------------------------
@@ -108,7 +115,15 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`payment_ID`, `quantity`, `client_ID`, `worker_ID`, `date`, `type`) VALUES
-(3, 350.00, 2, 1, '2019-05-19', 0);
+(3, 350.00, 2, 1, '2019-05-19', 0),
+(4, 380.00, 2, 1, '2019-05-20', 0),
+(5, 350.00, 2, 1, '2019-05-20', 0),
+(6, 350.00, 2, 1, '2019-05-20', 3),
+(7, 380.00, 2, 1, '2019-05-20', 3),
+(8, 1.00, 2, 1, '2019-05-20', 3),
+(9, 1.00, 2, 1, '2019-05-20', 0),
+(10, 350.00, 2, 0, '2019-05-22', 0),
+(11, 500.00, 2, 0, '2019-05-22', 1);
 
 -- --------------------------------------------------------
 
@@ -125,6 +140,13 @@ CREATE TABLE `tasks` (
   `worker_ID` bigint(20) NOT NULL,
   `lawer_ID` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tasks`
+--
+
+INSERT INTO `tasks` (`task_ID`, `title`, `description`, `start_date`, `end_date`, `worker_ID`, `lawer_ID`) VALUES
+(1, 'Task 1', 'Descripcion', '2019-05-08', '2019-05-30', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -204,7 +226,7 @@ ALTER TABLE `workers`
 -- AUTO_INCREMENT de la tabla `cases`
 --
 ALTER TABLE `cases`
-  MODIFY `case_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `case_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `clients`
@@ -222,13 +244,13 @@ ALTER TABLE `lawers`
 -- AUTO_INCREMENT de la tabla `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `payment_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `task_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `task_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `workers`
