@@ -81,14 +81,22 @@
 			?>
 		<!-- /Restrictions -->
 
-        <!-- Create form action -->
+        <!-- Data extract -->
             <?php
-                if(isset($_POST['create'])){
-                    $createQuery = mysqli_query($db, "INSERT INTO tasks (task_ID, title, description, start_date, end_date, worker_ID, lawer_ID) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_POST[start_date]', '$_POST[end_date]', '$_POST[worker_ID]', '$_POST[lawer_ID]')") or die(mysqli_error($db));
+                if(isset($_GET['task'])){
+                    $taskData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM tasks WHERE task_ID = '$_GET[task]'"));
+                }
+            ?>
+        <!-- /Data extract -->
+
+        <!-- Modify form action -->
+            <?php
+                if(isset($_POST['modify'])){
+                    $modifyQuery = mysqli_query($db, "INSERT INTO tasks (task_ID, title, description, start_date, end_date, worker_ID, lawer_ID) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_POST[start_date]', '$_POST[end_date]', '$_POST[worker_ID]', '$_POST[lawer_ID]')") or die(mysqli_error($db));
                     header("location: index.php");
                 }
             ?>
-        <!-- /Create form action -->
+        <!-- /Modify form action -->
 
         <div class="container-fluid content">
             <div class="row">
@@ -109,7 +117,7 @@
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
                                     <a class='nav-link' href='../Clients/'>Clients</a>
-                                    <a class='nav-link' href="../Tasks/">Tasks</a>
+                                    <a class='nav-link active' href="../Tasks/">Tasks</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
@@ -119,7 +127,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='create.php'>Create task</a>
+                                                    <a class='nav-link' href='create.php'>Create task</a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -137,11 +145,11 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="title">Title</label>
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="Insert title">
+                                            <input type="text" class="form-control" id="title" name="title" value="<?php echo $taskData['title'] ?>">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="description">Description</label>
-                                            <input type="text" class="form-control" id="description" name="description" placeholder="Insert description">
+                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo $taskData['description'] ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -163,13 +171,18 @@
                                         <div class="form-group col-md-4">
                                             <label for="worker_ID">Worker</label>
                                             <select id="worker_ID" name="worker_ID" class="form-control">
-                                                <option value="0" selected disabled>Choose...</option>
+                                                <?php
+                                                    $workerData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM worker WHERE worker_ID = '$taskData[worker_ID]'"));
+                                                ?>
+                                                <option value="<?php echo $workerData['worker_ID'] ?>" selected><?php $workerData['name']." ".$workerData['surname'] ?></option>
                                                 <?php
                                                     $workers = mysqli_query($db, "SELECT * FROM workers");
 
                                                     if($row = mysqli_fetch_array($workers)){
                                                         do{
-                                                            echo "<option value='$row[worker_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                            if(!$row['worker_ID'] == $taskData['worker_ID']){
+                                                                echo "<option value='$row[worker_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                            }
                                                         }while($row = mysqli_fetch_array($workers));
                                                     }
                                                 ?>
@@ -177,11 +190,11 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="start_date">Start date</label>
-                                            <input type="date" class="form-control" id="start_date" name="start_date">
+                                            <input type="date" class="form-control" id="start_date" name="start_date" value="<?php echo $taskData['start_date'] ?>">
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="end_date">End date</label>
-                                            <input type="date" class="form-control" id="end_date" name="end_date">
+                                            <input type="date" class="form-control" id="end_date" name="end_date" value="<?php echo $taskData['end_date'] ?>">
                                         </div>
                                     </div>
                                     <input type="submit" class="btn btn-primary" value="Submit" name="create">

@@ -1,97 +1,122 @@
 <!-- Extract session -->
-    <?php
+<?php
         session_start();
     ?>
 <!-- /Extract session -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Personal area</title>
+
+         <!-- Bootstrap CSS -->
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+
+        <title>Document</title>
     </head>
     <style>
-        body {
-            font-family: "Lato", sans-serif;
-        }
-
-        .sidenav {
-            height: 100%;
-            width: 160px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
+        html, body{
             overflow-x: hidden;
-            padding-top: 20px;
         }
 
-        .sidenav a {
-            padding: 6px 8px 6px 16px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
+        body{
+            color: #fff;
+            background: #d47677;
         }
 
-        .sidenav a:hover {
-            color: #f1f1f1;
+        .content{
+            margin: 0 auto;
+            padding: 50px 0px 300px;
         }
 
-        .main {
-            margin-left: 160px; /* Same as the width of the sidenav */
-            padding: 0px 10px;
+        .insideContainer{
+            color:black;
+            border-radius: 2px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            background: #ececec;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            position: relative;
+            width:80vw;
         }
 
-        @media screen and (max-height: 450px) {
-            .sidenav {padding-top: 15px;}
-            .sidenav a {font-size: 18px;}
+        .avatar{
+            text-align: center;
+        }
+
+        .avatar img{
+            width: 95px;
+            height: 95px;
         }
     </style>
     <body>
 
         <!-- Establish connection with DB -->
             <?php
-                // Establish connection
                 include('../../connectDB.php');
                 $db = connectDb();
-                //$id = collectID($db, 'firmas');
             ?>
-		<!-- /Establish connection with DB -->
-		
+        <!-- /Establish connection with DB -->
+
 		<!-- Restrictions -->
 			<?php
-				if(isset($_SESSION['login_ok'])){
-					$check = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = $_SESSION[id_user]"));
-					if($check['lawer_ID'] == ""){
-						header("location: ../notAllowed.php");
-					}
-				}else{
+                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers where lawer_ID = '$_SESSION[id_user]'"));
+                
+                if(!isset($_SESSION['login_ok'])){
 					header("location: ../notAllowed.php");
-				}
+                }
+                
+                if($userData == ""){
+                    header("location: ../notAllowed.php");
+                }
 			?>
-        <!-- /Restrictions -->
+		<!-- /Restrictions -->
 
-        <div class="sidenav">
-            <a href="index.php">Index</a>
-            <a href="#about">Workers</a>
-            <a href="#services">Lawers</a>
-            <a href="#clients">Tasks</a>
-            <a href="#contact">Clients</a>
-            <a href="../../login/">Logout</a>
-        </div>
+        <div class="container-fluid content">
+            <div class="row">
+                <div class="col-10 offset-1 insideContainer">
+                    <div class="row">
+                        <div class="col-2 avatar">
+                            <img src="../../img/iconAvatar.png" alt="Avatar">
+                        </div>
+                        <div class="col-9">
+                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-2">
 
-        <div class="main">
-            <h2>Sidebar</h2>
-            <p>This sidebar is of full height (100%) and always shown.</p>
-            <p>Scroll down the page to see the result.</p>
-            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-            <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+                            <!-- Lateral NavBar -->
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a class='nav-link active' href='index.php'>Index</a>
+                                    <a class='nav-link' href='Clients/'>My clients</a>
+                                    <a class='nav-link' href="Tasks/">My cases</a>
+                                    <a class="nav-link" href="../Cases/">Tasks</a>
+                                    <a class="nav-link" href="../../login/logout.php">Logout</a>
+                                </div>
+                            <!-- /Lateral NavBar -->
+
+                        </div>
+                        
+                        <!-- Main content -->
+                            <div class="col-9">
+                            
+                            </div>
+                        <!-- /Main content -->
+
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

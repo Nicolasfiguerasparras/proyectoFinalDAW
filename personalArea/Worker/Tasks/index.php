@@ -100,12 +100,12 @@
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
                                     <a class='nav-link' href='../Clients/'>Clients</a>
-                                    <a class='nav-link active' href="../Tasks/">Tasks</a>
+                                    <a class='nav-link' href="../Tasks/">Tasks</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='index.php'>List tasks</a>
+                                                    <a class='nav-link active' href='index.php'>My tasks</a>
                                                 </td>
                                             </tr>
                                             <tr>
