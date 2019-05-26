@@ -91,7 +91,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                            <h1>Cases > List cases</h1>
                         </div>
                     </div>
                     <br>
@@ -103,12 +103,12 @@
                                     <a class='nav-link' href='../index.php'>Index</a>
                                     <a class='nav-link' href='../Clients/'>Clients</a>
                                     <a class='nav-link' href="../Tasks/">Tasks</a>
-                                    <a class="nav-link" href="../Cases/">Cases</a>
+                                    <a class="nav-link active" href="../Cases/">Cases</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='index.php'>List cases</a>
+                                                    <a class='nav-link' href='index.php'>List cases</a>
                                                 </td>
                                             </tr>
                                             <tr>

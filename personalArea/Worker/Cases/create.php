@@ -100,7 +100,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Bienvenido</h1>
+                            <h1>Cases > Create case</h1>
                         </div>
                     </div>
                     <br>
@@ -112,7 +112,7 @@
                                     <a class='nav-link' href='../index.php'>Index</a>
                                     <a class='nav-link' href='../Clients/'>Clients</a>
                                     <a class='nav-link' href="../Tasks/">Tasks</a>
-                                    <a class="nav-link" href="../Cases/">Cases</a>
+                                    <a class="nav-link active" href="../Cases/">Cases</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
@@ -122,7 +122,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='create.php'>Create case</a>
+                                                    <a class='nav-link' href='create.php'>Create case</a>
                                                 </td>
                                             </tr>
                                         </table>
