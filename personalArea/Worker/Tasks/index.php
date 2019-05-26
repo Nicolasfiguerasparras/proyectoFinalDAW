@@ -18,7 +18,8 @@
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
+
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
         <title>Document</title>
     </head>
@@ -89,7 +90,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                            <h1>Tasks > List tasks</h1>
                         </div>
                     </div>
                     <br>
@@ -100,12 +101,12 @@
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
                                     <a class='nav-link' href='../Clients/'>Clients</a>
-                                    <a class='nav-link' href="../Tasks/">Tasks</a>
+                                    <a class='nav-link active' href="../Tasks/">Tasks</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='index.php'>My tasks</a>
+                                                    <a class='nav-link' href='index.php'>My tasks</a>
                                                 </td>
                                             </tr>
                                             <tr>

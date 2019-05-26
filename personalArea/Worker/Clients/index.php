@@ -91,7 +91,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                            <h1>Clients > List clients</h1>
                         </div>
                     </div>
                     <br>
@@ -101,12 +101,12 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link' href='../Clients/'>Clients</a>
+                                    <a class='nav-link active' href='../Clients/'>Clients</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='index.php'>List clients</a>
+                                                    <a class='nav-link' href='index.php'>List clients</a>
                                                 </td>
                                             </tr>
                                             <tr>

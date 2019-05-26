@@ -115,7 +115,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Bienvenido</h1>
+                            <h1>Clients > Modify client</h1>
                         </div>
                     </div>
                     <br>

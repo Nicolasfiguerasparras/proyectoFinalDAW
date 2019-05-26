@@ -108,7 +108,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Bienvenido</h1>
+                            <h1>Clients > Create client</h1>
                         </div>
                     </div>
                     <br>
@@ -118,7 +118,7 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link' href='../Clients/'>Clients</a>
+                                    <a class='nav-link active' href='../Clients/'>Clients</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
@@ -128,7 +128,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='create.php'>Create client</a>
+                                                    <a class='nav-link' href='create.php'>Create client</a>
                                                 </td>
                                             </tr>
                                         </table>

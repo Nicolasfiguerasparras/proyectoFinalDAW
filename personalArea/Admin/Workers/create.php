@@ -108,7 +108,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Welcome back</h1>
+                            <h1>Workers > Create worker</h1>
                         </div>
                     </div>
                     <br>
@@ -120,7 +120,7 @@
                                     <a class='nav-link' href='../index.php'>Index</a>
                                     <a class='nav-link' href='../Lawers/'>Lawers</a>
                                     <a class='nav-link' href='../Clients/'>Clients</a>
-                                    <a class='nav-link' href="../Workers/">Workers</a>
+                                    <a class='nav-link active' href="../Workers/">Workers</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
@@ -130,7 +130,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link active' href='create.php'>Create lawer</a>
+                                                    <a class='nav-link' href='create.php'>Create lawer</a>
                                                 </td>
                                             </tr>
                                         </table>

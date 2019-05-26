@@ -127,7 +127,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Welcome back</h1>
+                            <h1>Workers > Modify worker</h1>
                         </div>
                     </div>
                     <br>
