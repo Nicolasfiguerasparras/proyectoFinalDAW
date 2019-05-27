@@ -130,6 +130,11 @@
                                                     <a class='nav-link' href='create.php'>Create task</a>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>
+                                                    <a class='nav-link' href='finished.php'>Finished tasks</a>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </div>
                                     <a class="nav-link" href="../Cases/">Cases</a>
@@ -156,13 +161,18 @@
                                         <div class="form-group col-md-4">
                                             <label for="lawer_ID">Lawer</label>
                                             <select id="client" name="lawer_ID" class="form-control">
-                                                <option value="0" selected disabled>Choose...</option>
+                                                <?php
+                                                    $lawerData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = '$taskData[lawer_ID]'"));
+                                                ?> 
+                                                <option value="<?php echo $lawerData['lawer_ID'] ?>" selected><?php echo $lawerData['name']." ".$lawerData['surname'] ?></option>
                                                 <?php
                                                     $lawers = mysqli_query($db, "SELECT * FROM lawers");
 
                                                     if($row = mysqli_fetch_array($lawers)){
                                                         do{
-                                                            echo "<option value='$row[lawer_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                            if(!$row['lawer_ID'] == $taskData['lawer_ID']){
+                                                                echo "<option value='$row[lawer_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                            }
                                                         }while($row = mysqli_fetch_array($lawers));
                                                     }
                                                 ?>
@@ -172,9 +182,9 @@
                                             <label for="worker_ID">Worker</label>
                                             <select id="worker_ID" name="worker_ID" class="form-control">
                                                 <?php
-                                                    $workerData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM worker WHERE worker_ID = '$taskData[worker_ID]'"));
+                                                    $workerData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE worker_ID = '$taskData[worker_ID]'"));
                                                 ?>
-                                                <option value="<?php echo $workerData['worker_ID'] ?>" selected><?php $workerData['name']." ".$workerData['surname'] ?></option>
+                                                <option value="<?php echo $workerData['worker_ID'] ?>" selected><?php echo $workerData['name']." ".$workerData['surname'] ?></option>
                                                 <?php
                                                     $workers = mysqli_query($db, "SELECT * FROM workers");
 
@@ -206,5 +216,18 @@
                 </div>
             </div>
         </div>
+
+        <!-- Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<!-- /Bootstrap JS -->
+
+        <!-- Connection close -->
+            <?php
+                mysqli_close($db);
+            ?>
+        <!-- /Connection close -->
+        
     </body>
 </html>

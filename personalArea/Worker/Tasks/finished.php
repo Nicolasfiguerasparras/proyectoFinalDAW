@@ -1,5 +1,5 @@
 <!-- Extract session -->
-<?php
+    <?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -90,7 +90,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Tasks > List tasks</h1>
+                            <h1>Tasks > Finished tasks</h1>
                         </div>
                     </div>
                     <br>
@@ -135,7 +135,7 @@
 
                                     if($row = mysqli_fetch_array($listQuery)){
 
-                                        echo "<table class  ='table table-bordered'>";
+                                        echo "<table class='table table-bordered'>";
 
                                             echo "<thead>";
                                                 echo "<tr>";
@@ -149,7 +149,7 @@
                                             echo "</thead>";
 
                                             do{
-                                                if($row['status'] == 0){
+                                                if(!$row['status'] == 0){
 
                                                     echo "<tr>";
                                                         $taskID=$row['task_ID'];
@@ -163,7 +163,6 @@
                                                         
                                                         $clientName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE worker_ID = '$row[worker_ID]'"));
                                                         echo "<td>".$clientName["name"]." ".$clientName["surname"]."</td>";
-                                                        echo "<td style='text-align: center'><a class='done_button' href='done.php?task=$taskID'><i class='fa fa-check-circle' style='font-size:20px;color:blue'></i></a></td>";
                                                         echo "<td style='text-align: center'><a href='modify.php?task=$taskID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
                                                         echo "<td style='text-align: center'><a class='delete_button' href='delete.php?task=$taskID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
                                                     echo "</tr>";
@@ -191,17 +190,6 @@
                 });
             </script>
         <!-- /Delete confirmation -->
-
-        <!-- Done confirmation -->
-            <script type="text/javascript">
-                $('.done_button').click(function(e){
-                    var result = confirm("Are you sure you want to finish this task?");
-                    if(!result) {
-                        e.preventDefault();
-                    }
-                });
-            </script>
-        <!-- /Done confirmation -->
 
         <!-- Bootstrap JS -->
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
