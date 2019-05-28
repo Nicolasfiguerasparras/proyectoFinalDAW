@@ -74,11 +74,11 @@
 				$userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../notAllowed.php");
+					header("location: ../../notAllowed.php");
                 }
                 
                 if($userData == ""){
-                    header("location: ../notAllowed.php");
+                    header("location: ../../notAllowed.php");
                 }
 			?>
 		<!-- /Restrictions -->

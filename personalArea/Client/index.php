@@ -72,11 +72,11 @@
                 $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients where client_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../notAllowed.php");
+					header("location: ../../../notAllowed.php");
                 }
                 
                 if($userData == ""){
-                    header("location: ../notAllowed.php");
+                    header("location: ../../../notAllowed.php");
                 }
 			?>
 		<!-- /Restrictions -->
@@ -98,10 +98,10 @@
 
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class='nav-link active' href='index.php'>Index</a>
-                                    <a class='nav-link' href='Clients/'>Cases</a>
-                                    <a class='nav-link' href="Tasks/">Your lawer</a>
-                                    <a class="nav-link" href="../Cases/">Your info</a>
+                                    <a class='nav-link active' href='../Client/'>Index</a>
+                                    <a class='nav-link' href='Cases/'>Cases</a>
+                                    <a class='nav-link' href="Lawer/">Your lawer</a>
+                                    <a class="nav-link" href="Info/">Your info</a>
                                     <a class="nav-link" href="../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->

@@ -62,21 +62,21 @@
 
         <!-- Establish connection with DB -->
             <?php
-                include('../../connectDB.php');
+                include('../../../connectDB.php');
                 $db = connectDb();
             ?>
         <!-- /Establish connection with DB -->
 
 		<!-- Restrictions -->
 			<?php
-                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers where lawer_ID = '$_SESSION[id_user]'"));
+                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients where client_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../notAllowed.php");
+					header("location: ../../../notAllowed.php");
                 }
                 
                 if($userData == ""){
-                    header("location: ../notAllowed.php");
+                    header("location: ../../../notAllowed.php");
                 }
 			?>
 		<!-- /Restrictions -->
@@ -86,7 +86,7 @@
                 <div class="col-10 offset-1 insideContainer">
                     <div class="row">
                         <div class="col-2 avatar">
-                            <img src="../../img/iconAvatar.png" alt="Avatar">
+                            <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
                             <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
@@ -98,11 +98,11 @@
 
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class='nav-link active' href='../Lawer/'>Index</a>
-                                    <a class='nav-link' href='Clients/'>My clients</a>
-                                    <a class='nav-link' href="Cases/">My cases</a>
-                                    <a class="nav-link" href="Tasks/">Tasks</a>
-                                    <a class="nav-link" href="../../login/logout.php">Logout</a>
+                                    <a class='nav-link' href='../../Client/'>Index</a>
+                                    <a class='nav-link' href='../Cases/'>Cases</a>
+                                    <a class='nav-link' href="../Lawer/">Your lawer</a>
+                                    <a class="nav-link active" href="../Info/">Your info</a>
+                                    <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
 
