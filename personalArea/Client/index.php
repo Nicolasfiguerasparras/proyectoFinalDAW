@@ -88,7 +88,7 @@
                         <div class="col-2 avatar">
                             <img src="../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
                             <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
                         </div>
                     </div>
@@ -99,8 +99,8 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link active' href='../Client/'>Index</a>
-                                    <a class='nav-link' href='Cases/'>Cases</a>
-                                    <a class='nav-link' href="Lawer/">Your lawer</a>
+                                    <a class='nav-link' href='Cases/'>Your cases</a>
+                                    <a class='nav-link' href="Lawer/">Your lawers</a>
                                     <a class="nav-link" href="Info/">Your info</a>
                                     <a class="nav-link" href="../../login/logout.php">Logout</a>
                                 </div>

@@ -1,5 +1,5 @@
 <!-- Extract session -->
-<?php
+    <?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -88,8 +88,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1>Your cases</h1>
                         </div>
                     </div>
                     <br>
@@ -99,8 +99,8 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../../Client/'>Index</a>
-                                    <a class='nav-link active' href='../Cases/'>Cases</a>
-                                    <a class='nav-link' href="../Lawer/">Your lawer</a>
+                                    <a class='nav-link active' href='../Cases/'>Your cases</a>
+                                    <a class='nav-link' href="../Lawer/">Your lawers</a>
                                     <a class="nav-link" href="../Info/">Your info</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
@@ -110,7 +110,38 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
-                            
+                                <?php
+                                    $listQuery = mysqli_query($db, "SELECT * FROM cases WHERE client_ID = '$_SESSION[id_user]'");
+
+                                    if($row = mysqli_fetch_array($listQuery)){
+
+                                        echo "<table class  ='table table-bordered'>";
+
+                                            echo "<thead>";
+                                                echo "<tr>";
+                                                    echo "<th scope='col'>Title</th>";
+                                                    echo "<th scope='col'>Description</th>";
+                                                    echo "<th scope='col'>Lawer</th>";
+                                                    echo "<th scope='col'>Type</th>";
+                                                echo "</tr>";
+                                            echo "</thead>";
+
+                                            do{
+                                                echo "<tr>";
+                                                    echo "<td>".$row["title"]."</td>";
+                                                    echo "<td>".$row["description"]."</td>";
+
+                                                    // Extract lawer name from lawer_ID of $row
+                                                    $lawerName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = '$row[lawer_ID]'"));
+                                                    echo "<td>".$lawerName["name"]." ".$lawerName["surname"]."</td>";
+                                                    
+                                                    echo "<td>".$row["type"]."</td>";
+                                                echo "</tr>";
+                                            }while($row = mysqli_fetch_array($listQuery));
+                                    }else{
+                                        echo "There is no record";
+                                    }
+                                ?>
                             </div>
                         <!-- /Main content -->
 

@@ -1,5 +1,5 @@
 <!-- Extract session -->
-<?php
+    <?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -88,8 +88,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Your lawers</h1>
                         </div>
                     </div>
                     <br>
@@ -99,8 +99,8 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../../Client/'>Index</a>
-                                    <a class='nav-link' href='../Cases/'>Cases</a>
-                                    <a class='nav-link active' href="../Lawer/">Your lawer</a>
+                                    <a class='nav-link' href='../Cases/'>Your cases</a>
+                                    <a class='nav-link active' href="../Lawer/">Your lawers</a>
                                     <a class="nav-link" href="../Info/">Your info</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
@@ -110,7 +110,59 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
-                            
+                                <?php
+
+                                    // Extract all cases from current logued user
+                                    $caseQuery = mysqli_query($db, "SELECT * FROM cases WHERE client_ID = '$_SESSION[id_user]'");
+
+                                    // Declare array to fill with each lawer of each case that current user has
+                                    $lawers = Array();
+
+                                    if($row = mysqli_fetch_array($caseQuery)){
+                                        do{
+                                            // To avoid repeated information, check that next id is not already on array
+                                            if(!in_array($row['lawer_ID'], $lawers)){
+                                                $lawers[] = $row['lawer_ID'];
+                                            }
+                                        }while($row = mysqli_fetch_array($caseQuery));
+                                    }
+
+                                    if(!$lawers == ""){
+                                        echo "<table class  ='table table-bordered'>";
+
+                                            echo "<thead>";
+                                                echo "<tr>";
+                                                    echo "<th scope='col'>Name</th>";
+                                                    echo "<th scope='col'>Surname</th>";
+                                                    echo "<th scope='col'>Birth date</th>";
+                                                    echo "<th scope='col'>Phone</th>";
+                                                    echo "<th scope='col'>Email</th>";
+                                                echo "</tr>";
+                                            echo "</thead>";
+
+                                            echo "<tbody>";
+
+                                                // Go throught each position of array $lawers 
+                                                for($i=0; $i<sizeof($lawers); $i++){
+
+                                                    // Extract lawer info for current lawer ID of array $lawers
+                                                    $listQuery = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = '$lawers[$i]'"));
+
+                                                    echo "<tr>";
+                                                        echo "<td>".$listQuery["name"]."</td>";
+                                                        echo "<td>".$listQuery["surname"]."</td>";
+                                                        echo "<td>".$listQuery["birth_date"]."</td>";
+                                                        echo "<td>".$listQuery["phone"]."</td>";
+                                                        echo "<td>".$listQuery["email"]."</td>";
+                                                    echo "</tr>";
+                                                }
+                                            echo "</tbody>";
+
+                                        echo "</table>";
+                                    }else{
+                                        echo "There is no information because you don't have any case.";
+                                    }
+                                ?>
                             </div>
                         <!-- /Main content -->
 

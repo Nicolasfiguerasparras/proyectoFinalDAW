@@ -88,8 +88,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1>Your information</h1>
                         </div>
                     </div>
                     <br>
@@ -99,8 +99,8 @@
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class='nav-link' href='../../Client/'>Index</a>
-                                    <a class='nav-link' href='../Cases/'>Cases</a>
-                                    <a class='nav-link' href="../Lawer/">Your lawer</a>
+                                    <a class='nav-link' href='../Cases/'>Your cases</a>
+                                    <a class='nav-link' href="../Lawer/">Your lawers</a>
                                     <a class="nav-link active" href="../Info/">Your info</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
@@ -110,7 +110,56 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
-                            
+                                <?php
+                                    $listQuery = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = '$_SESSION[id_user]'"));
+
+                                    echo "Name: ".$listQuery['name'];
+                                    echo "<br>";
+                                    echo "Surname: ".$listQuery['surname'];
+                                    echo "<br>";
+                                    echo "Birth date: ".$listQuery['birth_date'];
+                                    echo "<br>";
+                                    echo "Phone: ".$listQuery['phone'];
+                                    echo "<br>";
+                                    echo "Email: ".$listQuery['email'];
+                                    echo "<br>";
+                                    echo "Username: ".$listQuery['username'];
+                                    echo "<br>";
+                                    echo "Password: ".$listQuery['password'];
+                                    echo "<br>";
+                                    echo "Bill: ".$listQuery['bill'];
+
+                                    //     echo "<table class  ='table table-bordered'>";
+
+                                    //         echo "<thead>";
+                                    //             echo "<tr>";
+                                    //                 echo "<th scope='col'>Name</th>";
+                                    //                 echo "<th scope='col'>Surname</th>";
+                                    //                 echo "<th scope='col'>Birth date</th>";
+                                    //                 echo "<th scope='col'>Phone</th>";
+                                    //                 echo "<th scope='col'>Email</th>";
+                                    //                 echo "<th scope='col'>Username</th>";
+                                    //                 echo "<th scope='col'>Password</th>";
+                                    //                 echo "<th scope='col'>Bill</th>";
+                                    //             echo "</tr>";
+                                    //         echo "</thead>";
+
+                                    //         do{
+                                    //             echo "<tr>";
+                                    //                 echo "<td>".$row["name"]."</td>";
+                                    //                 echo "<td>".$row["surname"]."</td>";
+                                    //                 echo "<td>".$row["birth_date"]."</td>";
+                                    //                 echo "<td>".$row["phone"]."</td>";
+                                    //                 echo "<td>".$row["email"]."</td>";
+                                    //                 echo "<td>".$row["username"]."</td>";
+                                    //                 echo "<td>".$row["password"]."</td>";
+                                    //                 echo "<td>".$row["bill"]."</td>";
+                                    //             echo "</tr>";
+                                    //         }while($row = mysqli_fetch_array($listQuery));
+                                    // }else{
+                                    //     echo "There is no record";
+                                    // }
+                                ?>
                             </div>
                         <!-- /Main content -->
 
