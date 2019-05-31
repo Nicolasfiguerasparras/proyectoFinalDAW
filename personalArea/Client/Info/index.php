@@ -11,14 +11,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-         <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
         <title>Document</title>
     </head>
@@ -89,7 +90,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
-                            <h1>Your information</h1>
+                            <h1 class="h1" style="text-align: center">Your information</h1>
                         </div>
                     </div>
                     <br>
@@ -113,52 +114,36 @@
                                 <?php
                                     $listQuery = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = '$_SESSION[id_user]'"));
 
-                                    echo "Name: ".$listQuery['name'];
-                                    echo "<br>";
-                                    echo "Surname: ".$listQuery['surname'];
-                                    echo "<br>";
-                                    echo "Birth date: ".$listQuery['birth_date'];
-                                    echo "<br>";
-                                    echo "Phone: ".$listQuery['phone'];
-                                    echo "<br>";
-                                    echo "Email: ".$listQuery['email'];
-                                    echo "<br>";
-                                    echo "Username: ".$listQuery['username'];
-                                    echo "<br>";
-                                    echo "Password: ".$listQuery['password'];
-                                    echo "<br>";
-                                    echo "Bill: ".$listQuery['bill'];
+                                    echo "<table class='table'>";
 
-                                    //     echo "<table class  ='table table-bordered'>";
+                                        echo "<thead>";
+                                            echo "<tr>";
+                                                echo "<th scope='col'>Name</th>";
+                                                echo "<th scope='col'>Surname</th>";
+                                                echo "<th scope='col'>Birth date</th>";
+                                                echo "<th scope='col'>Phone</th>";
+                                                echo "<th scope='col'>Email</th>";
+                                                echo "<th scope='col'>Username</th>";
+                                                echo "<th scope='col'>Password</th>";
+                                                echo "<th scope='col'>Bill</th>";
+                                            echo "</tr>";
+                                        echo "</thead>";
 
-                                    //         echo "<thead>";
-                                    //             echo "<tr>";
-                                    //                 echo "<th scope='col'>Name</th>";
-                                    //                 echo "<th scope='col'>Surname</th>";
-                                    //                 echo "<th scope='col'>Birth date</th>";
-                                    //                 echo "<th scope='col'>Phone</th>";
-                                    //                 echo "<th scope='col'>Email</th>";
-                                    //                 echo "<th scope='col'>Username</th>";
-                                    //                 echo "<th scope='col'>Password</th>";
-                                    //                 echo "<th scope='col'>Bill</th>";
-                                    //             echo "</tr>";
-                                    //         echo "</thead>";
-
-                                    //         do{
-                                    //             echo "<tr>";
-                                    //                 echo "<td>".$row["name"]."</td>";
-                                    //                 echo "<td>".$row["surname"]."</td>";
-                                    //                 echo "<td>".$row["birth_date"]."</td>";
-                                    //                 echo "<td>".$row["phone"]."</td>";
-                                    //                 echo "<td>".$row["email"]."</td>";
-                                    //                 echo "<td>".$row["username"]."</td>";
-                                    //                 echo "<td>".$row["password"]."</td>";
-                                    //                 echo "<td>".$row["bill"]."</td>";
-                                    //             echo "</tr>";
-                                    //         }while($row = mysqli_fetch_array($listQuery));
-                                    // }else{
-                                    //     echo "There is no record";
-                                    // }
+                                        echo "<tbody>";
+                                            echo "<tr>";
+                                                echo "<td>".$listQuery["name"]."</td>";
+                                                echo "<td>".$listQuery["surname"]."</td>";
+                                                $bDateFormatted = date("l jS F ", strtotime($listQuery["birth_date"]));   
+                                                echo "<td>".$bDateFormatted."</td>";
+                                                echo "<td>".$listQuery["phone"]."</td>";
+                                                echo "<td>".$listQuery["email"]."</td>";
+                                                echo "<td>".$listQuery["username"]."</td>";
+                                                echo "<td>".$listQuery["password"]."</td>";
+                                                echo "<td>".$listQuery["bill"]."$</td>";
+                                                echo "<td style='text-align: center'><a href='modify.php?client=$listQuery[client_ID]'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
+                                            echo "</tr>";
+                                        echo "</tbody>";
+                                    echo "</table>";
                                 ?>
                             </div>
                         <!-- /Main content -->
@@ -167,5 +152,18 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<!-- /Bootstrap JS -->
+
+        <!-- Connection close -->
+            <?php
+                mysqli_close($db);
+            ?>
+        <!-- /Connection close -->
+
     </body>
 </html>

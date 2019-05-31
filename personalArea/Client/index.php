@@ -89,7 +89,7 @@
                             <img src="../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                            <h1 class="h1" style="text-align: center">Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
                         </div>
                     </div>
                     <br>

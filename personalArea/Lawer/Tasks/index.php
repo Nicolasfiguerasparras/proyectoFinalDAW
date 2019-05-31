@@ -106,12 +106,12 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='index.php'>List clients</a>
+                                                    <a class='nav-link' href='index.php'>List tasks</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='create.php'>Create client</a>
+                                                    <a class='nav-link' href='create.php'>Create task</a>
                                                 </td>
                                             </tr>
                                         </table>

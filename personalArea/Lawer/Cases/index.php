@@ -105,12 +105,12 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='index.php'>List clients</a>
+                                                    <a class='nav-link' href='index.php'>List cases</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='create.php'>Create client</a>
+                                                    <a class='nav-link' href='create.php'>Create case</a>
                                                 </td>
                                             </tr>
                                         </table>

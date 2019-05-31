@@ -1,5 +1,5 @@
 <!-- Extract session -->
-    <?php
+<?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -18,9 +18,6 @@
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
  
 
         <title>Document</title>
@@ -71,14 +68,16 @@
         <!-- /Establish connection with DB -->
 
 		<!-- Restrictions -->
-            <?php
-				if(isset($_SESSION['login_ok'])){
-					if(!$_SESSION['id_user'] == 0){
-						header("location: ../../notAllowed.php");
-					}
-				}else{
+			<?php
+                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers where lawer_ID = '$_SESSION[id_user]'"));
+                
+                if(!isset($_SESSION['login_ok'])){
 					header("location: ../../notAllowed.php");
-				}
+                }
+                
+                if($userData == ""){
+                    header("location: ../../notAllowed.php");
+                }
 			?>
 		<!-- /Restrictions -->
 
@@ -105,8 +104,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Clients > Create clients</h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Clients > Create client</h1>
                         </div>
                     </div>
                     <br>
@@ -115,9 +114,8 @@
 
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link' href='../Lawers/'>Lawers</a>
-                                    <a class='nav-link active' href='../Clients/'>Clients</a>
+                                    <a class='nav-link' href='../../Lawer/'>Index</a>
+                                    <a class='nav-link active' href='../Clients/'>My clients</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
@@ -132,7 +130,8 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class='nav-link' href="../Workers/">Workers</a>
+                                    <a class='nav-link' href="../Cases/">My cases</a>
+                                    <a class="nav-link" href="../Tasks/">Tasks</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
@@ -196,6 +195,6 @@
                 mysqli_close($db);
             ?>
         <!-- /Connection close -->
-
+        
     </body>
 </html>

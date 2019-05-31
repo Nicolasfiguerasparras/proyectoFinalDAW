@@ -82,7 +82,7 @@
 			?>
 		<!-- /Restrictions -->
 
-         <!-- Create form action -->
+        <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
                     $createQuery = mysqli_query($db, "INSERT INTO cases (case_ID, title, description, lawer_ID, client_ID, type) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_POST[lawer_ID]', '$_POST[client_ID]', '$_POST[type]')") or die(mysqli_error($db));

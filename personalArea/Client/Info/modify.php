@@ -1,5 +1,5 @@
 <!-- Extract session -->
-    <?php
+<?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -71,32 +71,43 @@
         <!-- /Establish connection with DB -->
 
 		<!-- Restrictions -->
-            <?php
-				if(isset($_SESSION['login_ok'])){
-					if(!$_SESSION['id_user'] == 0){
-						header("location: ../../notAllowed.php");
-					}
-				}else{
-					header("location: ../../notAllowed.php");
-				}
+			<?php
+                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients where client_ID = '$_SESSION[id_user]'"));
+                
+                if(!isset($_SESSION['login_ok'])){
+					header("location: ../../../notAllowed.php");
+                }
+                
+                if($userData == ""){
+                    header("location: ../../../notAllowed.php");
+                }
 			?>
 		<!-- /Restrictions -->
 
-        <!-- Create form action -->
+        <!-- Query for Form -->
             <?php
-                if(isset($_POST['create'])){
+                $idActualClient = $_GET['client'];
+                $actualClientQuery = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = $idActualClient"));
+            ?>
+        <!-- /Query for Form -->
+
+        <!-- Form action -->
+            <?php
+                if(isset($_POST['modify'])){
                     $name = $_POST['name'];
 	                $surname = $_POST['surname'];
 	                $birth_date = $_POST['birth_date'];
 	                $phone = $_POST['phone'];
 	                $email = $_POST['email'];
 	                $username = $_POST['username'];
-	                $password = $_POST['password'];
-                    $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0')") or die(mysqli_error($db));
+                    $password = $_POST['password'];
+                    $id = $_POST['client_ID'];
+                    
+                    mysqli_query($db, "UPDATE clients SET name = '$name', surname = '$surname', birth_date = '$birth_date', phone = '$phone', email = '$email', username = '$username', password = '$password' WHERE client_ID = '$id'");
                     header("location: index.php");
                 }
             ?>
-        <!-- /Create form action -->
+        <!-- /Form action -->
 
         <div class="container-fluid content">
             <div class="row">
@@ -105,8 +116,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Clients > Create clients</h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Modify your information</h1>
                         </div>
                     </div>
                     <br>
@@ -115,24 +126,10 @@
 
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link' href='../Lawers/'>Lawers</a>
-                                    <a class='nav-link active' href='../Clients/'>Clients</a>
-                                    <div class="table-primary" style="padding-left: 20px;">
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <a class='nav-link' href='index.php'>List clients</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a class='nav-link' href='create.php'>Create client</a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <a class='nav-link' href="../Workers/">Workers</a>
+                                    <a class='nav-link' href='../../Client/'>Index</a>
+                                    <a class='nav-link' href='../Cases/'>Your cases</a>
+                                    <a class='nav-link' href="../Lawer/">Your lawers</a>
+                                    <a class="nav-link active" href="../Info/">Your info</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
@@ -141,41 +138,42 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
-                                <form action="create.php" method="post">
-                                    <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" hidden disabled>
+                                <form action="modify.php" method="post">
+                                    <input type="text" id="ID" name="ID" value="<?php echo $id ?>" hidden disabled>
                                     <div class="form-row">
                                         <div class="form-group col-md-5">
                                             <label for="name">First name</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Insert name">
+                                            <input type="text" class="form-control" id="name" name="name" value="<?php echo $actualClientQuery['name'] ?>">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="surname">Last name</label>
-                                            <input type="text" class="form-control" id="surname" name="surname" placeholder="Insert last name">
+                                            <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $actualClientQuery['surname'] ?>">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="birth_date">Birth date</label>
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date">
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" value="<?php echo $actualClientQuery['birth_date'] ?>">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-2">
                                             <label for="phone">Phone number</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="+34 639 941 992">
+                                            <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $actualClientQuery['phone'] ?>">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com">
+                                            <input type="text" class="form-control" id="email" name="email" value="<?php echo $actualClientQuery['email'] ?>">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username">
+                                            <input type="text" class="form-control" id="username" name="username" value="<?php echo $actualClientQuery['username'] ?>">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password">
+                                            <input type="password" class="form-control" id="password" name="password" value="<?php echo $actualClientQuery['password'] ?>">
                                         </div>
                                     </div>
-                                    <input type="submit" class="btn btn-primary" value="Submit" name="create">
+                                    <input type="hidden" name="client_ID" value="<?php echo $_GET['client'] ?>">
+                                    <input type="submit" class="btn btn-primary" value="Modify" name="modify">
                                 </form>
                             </div>
                         <!-- /Main content -->

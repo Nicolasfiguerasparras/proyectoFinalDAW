@@ -90,7 +90,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9">
-                            <h1>Lawers > List lawers</h1>
+                            <h1 class="h1" style="text-align: center">Lawers > List lawers</h1>
                         </div>
                     </div>
                     <br>

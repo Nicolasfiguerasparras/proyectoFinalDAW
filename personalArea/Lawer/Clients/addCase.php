@@ -18,9 +18,6 @@
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
  
 
         <title>Document</title>
@@ -71,32 +68,33 @@
         <!-- /Establish connection with DB -->
 
 		<!-- Restrictions -->
-            <?php
-				if(isset($_SESSION['login_ok'])){
-					if(!$_SESSION['id_user'] == 0){
-						header("location: ../../notAllowed.php");
-					}
-				}else{
+			<?php
+                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers where lawer_ID = '$_SESSION[id_user]'"));
+                
+                if(!isset($_SESSION['login_ok'])){
 					header("location: ../../notAllowed.php");
-				}
+                }
+                
+                if($userData == ""){
+                    header("location: ../../notAllowed.php");
+                }
 			?>
 		<!-- /Restrictions -->
 
         <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
-                    $name = $_POST['name'];
-	                $surname = $_POST['surname'];
-	                $birth_date = $_POST['birth_date'];
-	                $phone = $_POST['phone'];
-	                $email = $_POST['email'];
-	                $username = $_POST['username'];
-	                $password = $_POST['password'];
-                    $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('null', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0')") or die(mysqli_error($db));
+                    $createQuery = mysqli_query($db, "INSERT INTO cases (case_ID, title, description, lawer_ID, client_ID, type) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_SESSION[id_user]', '$_POST[client_ID]', '$_POST[type]')") or die(mysqli_error($db));
                     header("location: index.php");
                 }
             ?>
         <!-- /Create form action -->
+
+        <!-- Data extract -->
+            <?php
+                $actualBill = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE client_ID = '$_GET[client]'"));
+            ?>
+        <!-- /Data extract -->
 
         <div class="container-fluid content">
             <div class="row">
@@ -105,8 +103,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Clients > Create clients</h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Clients > Add case</h1>
                         </div>
                     </div>
                     <br>
@@ -115,9 +113,8 @@
 
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link' href='../Lawers/'>Lawers</a>
-                                    <a class='nav-link active' href='../Clients/'>Clients</a>
+                                    <a class='nav-link' href='../../Lawer/'>Index</a>
+                                    <a class='nav-link active' href='../Clients/'>My clients</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
@@ -132,7 +129,8 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class='nav-link' href="../Workers/">Workers</a>
+                                    <a class='nav-link' href="../Cases/">My cases</a>
+                                    <a class="nav-link" href="../Tasks/">Tasks</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
@@ -141,41 +139,26 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
-                                <form action="create.php" method="post">
-                                    <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" hidden disabled>
+                                <form action="addCase.php" method="POST">
+
+                                    <input type="hidden" value="<?php echo $_GET['client'] ?>" name="client_ID">
+
                                     <div class="form-row">
                                         <div class="form-group col-md-5">
-                                            <label for="name">First name</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Insert name">
+                                            <label for="title">Title</label>
+                                            <input type="title" class="form-control" id="title" name="title" placeholder="Title">
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="surname">Last name</label>
-                                            <input type="text" class="form-control" id="surname" name="surname" placeholder="Insert last name">
+                                        <div class="form-group col-md-5">
+                                            <label for="description">Description</label>
+                                            <input type="description" class="form-control" id="description" name="description" placeholder="Description">
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="birth_date">Birth date</label>
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
                                         <div class="form-group col-md-2">
-                                            <label for="phone">Phone number</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="+34 639 941 992">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password">
+                                            <label for="type">Type</label>
+                                            <input type="type" class="form-control" id="type" name="type" placeholder="Type">
                                         </div>
                                     </div>
-                                    <input type="submit" class="btn btn-primary" value="Submit" name="create">
+
+                                    <input type="submit" class="btn btn-primary" name="create" value="Add case">
                                 </form>
                             </div>
                         <!-- /Main content -->
@@ -196,6 +179,6 @@
                 mysqli_close($db);
             ?>
         <!-- /Connection close -->
-
+        
     </body>
 </html>

@@ -11,14 +11,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-         <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
         <title>Document</title>
     </head>
@@ -88,8 +89,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Clients > List clients</h1>
                         </div>
                     </div>
                     <br>
@@ -124,7 +125,64 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
-                            
+                                <?php
+                                    $listQuery = mysqli_query($db, "SELECT * FROM clients");
+
+                                    if($row = mysqli_fetch_array($listQuery)){
+                                        echo "<table class='table'>";
+
+                                            echo "<thead>";
+                                                echo "<tr>";
+                                                    echo "<th scope='col'>Name</th>";
+                                                    echo "<th scope='col'>Surname</th>";
+                                                    echo "<th scope='col'>Birth Date</th>";
+                                                    echo "<th scope='col'>Phone</th>";
+                                                    echo "<th scope='col'>Email</th>";
+                                                    echo "<th scope='col'>Username</th>";
+                                                    echo "<th scope='col'>Password</th>";
+                                                    echo "<th scope='col'>Cases</th>";
+                                                    echo "<th scope='col'>Bill</th>";
+                                                echo "</tr>";
+                                            echo "</thead>";
+
+
+                                            do{
+                                                echo "<tr>";
+                                                    $listID=$row['client_ID'];
+                                                    echo "<td>".$row["name"]."</td>";
+                                                    echo "<td>".$row["surname"]."</td>";
+                                                    $bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   
+                                                    echo "<td>".$bDateFormatted."</td>";
+                                                    echo "<td>".$row["phone"]."</td>";
+                                                    echo "<td>".$row["email"]."</td>";
+                                                    echo "<td>".$row["username"]."</td>";
+                                                    echo "<td>".$row["password"]."</td>";
+                                                    $cases = mysqli_query($db, "SELECT * FROM cases WHERE client_ID = '$row[client_ID]'");
+                                                    $num = mysqli_num_rows($cases);
+                                                    if($row_cases = mysqli_fetch_array($cases)){
+                                                        echo "<td>";
+                                                            do{
+                                                                echo $row_cases['title'];
+                                                                $num--;
+                                                                if(!$num == 0){
+                                                                    echo ", ";
+                                                                }
+                                                            }while($row_cases = mysqli_fetch_array($cases));
+                                                        echo "</td>";
+                                                    }else{
+                                                        echo "<td>No record</td>";
+                                                    }
+                                                    echo "<td>".$row["bill"]."</td>";
+                                                    echo "<td style='text-align: center'><a href='addCase.php?client=$listID'><i class='fa fa-plus' aria-hidden='true'></i></a></td>";
+                                                    echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
+                                                    echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
+                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$listID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                echo "</tr>";
+                                            }while($row = mysqli_fetch_array($listQuery));
+                                    }else{
+                                        echo "There is no record";
+                                    }
+                                ?>
                             </div>
                         <!-- /Main content -->
 
@@ -132,5 +190,29 @@
                 </div>
             </div>
         </div>
+
+        <!-- Delete confirmation -->
+            <script type="text/javascript">
+                $('.delete_button').click(function(e){
+                    var result = confirm("Are you sure you want to delete this client?");
+                    if(!result) {
+                        e.preventDefault();
+                    }
+                });
+            </script>
+        <!-- /Delete confirmation -->
+
+        <!-- Bootstrap JS -->
+			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<!-- /Bootstrap JS -->
+
+        <!-- Connection close -->
+            <?php
+                mysqli_close($db);
+            ?>
+        <!-- /Connection close -->
+
     </body>
 </html>
