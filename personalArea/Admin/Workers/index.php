@@ -89,8 +89,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Workers > List workers</h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Workers > List workers</h1>
                         </div>
                     </div>
                     <br>
@@ -129,11 +129,10 @@
                                     $listQuery = mysqli_query($db, "SELECT * FROM workers");
 
                                     if($row = mysqli_fetch_array($listQuery)){
-                                        echo "<table class='table table-bordered'>";
+                                        echo "<table class='table'>";
 
                                             echo "<thead>";
                                                 echo "<tr>";
-                                                    echo "<th scope='col'>ID</th>";
                                                     echo "<th scope='col'>Name</th>";
                                                     echo "<th scope='col'>Surname</th>";
                                                     echo "<th scope='col'>Birth Date</th>";
@@ -149,7 +148,6 @@
                                             do{
                                                 echo "<tr>";
                                                     $listID=$row['worker_ID'];
-                                                    echo "<td>".$listID."</td>";
                                                     echo "<td>".$row["name"]."</td>";
                                                     echo "<td>".$row["surname"]."</td>";
                                                     $bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   

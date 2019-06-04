@@ -30,7 +30,6 @@
                 // Establish connection
                 include('../connectDB.php');
                 $db = connectDb();
-                //$id = collectID($db, 'firmas');
             ?>
         <!-- /Establish connection with DB -->
 
