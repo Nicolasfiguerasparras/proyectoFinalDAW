@@ -21,8 +21,10 @@
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
 
-        <title>Document</title>
+        <title>Create lawer</title>
     </head>
     <style>
         html, body{
@@ -59,8 +61,7 @@
             width: 95px;
             height: 95px;
         }
-
-        
+      
         /* Form styles */
         
         .form-control {
@@ -113,27 +114,27 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
+        <!-- Restrictions -->
             <?php
-				if(isset($_SESSION['login_ok'])){
-					if(!$_SESSION['id_user'] == 0){
-						header("location: ../../notAllowed.php");
-					}
-				}else{
-					header("location: ../../notAllowed.php");
-				}
-			?>
-		<!-- /Restrictions -->
+                if(isset($_SESSION['login_ok'])){
+                    if(!$_SESSION['id_user'] == 0){
+                            header("location: ../../notAllowed.php");
+                    }
+                }else{
+                    header("location: ../../notAllowed.php");
+                }
+            ?>
+        <!-- /Restrictions -->
 
         <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
                     $name = $_POST['name'];
-	                $surname = $_POST['surname'];
-	                $birth_date = $_POST['birth_date'];
-	                $phone = $_POST['phone'];
-	                $email = $_POST['email'];
-	                $username = $_POST['username'];
+                    $surname = $_POST['surname'];
+                    $birth_date = $_POST['birth_date'];
+                    $phone = $_POST['phone'];
+                    $email = $_POST['email'];
+                    $username = $_POST['username'];
                     $password = $_POST['password'];
                     $salary = $_POST['salary'];
 
@@ -150,8 +151,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Lawers > Create lawer</h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Lawers > Create lawer</h1>
                         </div>
                     </div>
                     <br>
@@ -203,7 +204,10 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="salary">Salary</label>
-                                            <input type="text" class="form-control" id="salary" name="salary">
+                                            <div class="input-group-prepend">
+                                                <input type="text" class="form-control" id="salary" name="salary" placeholder="ex. 800">
+                                                <span class="input-group-text" style="font-size: 15px">$</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -217,11 +221,11 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username">
+                                            <input type="text" class="form-control" id="username" name="username" placeholder="Insert username">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Insert password">
                                         </div>
                                     </div>
                                     <input type="submit" class="btn btn-primary" value="Submit" name="create">
@@ -235,10 +239,10 @@
         </div>
 
         <!-- Bootstrap JS -->
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<!-- /Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- /Bootstrap JS -->
 
         <!-- Connection close -->
             <?php
