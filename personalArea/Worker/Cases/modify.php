@@ -21,8 +21,10 @@
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
 
-        <title>Document</title>
+        <title>Modify case</title>
     </head>
     <style>
         html, body{
@@ -58,6 +60,49 @@
         .avatar img{
             width: 95px;
             height: 95px;
+        }
+        
+        /* Form styles */
+        
+        .form-control {
+            min-height: 41px;
+            background: #fff;
+            box-shadow: none !important;
+            border-color: #e3e3e3;
+        }
+        .form-control:focus {
+            border-color: #70c5c0;
+        }
+        .form-control, .btn {
+            border-radius: 2px;
+        }
+        .login-form input[type="checkbox"] {
+            margin-top: 2px;
+        }
+        .login-form .btn {
+            font-size: 16px;
+            font-weight: bold;
+            background: #70c5c0;
+            border: none;
+            margin-bottom: 20px;
+        }
+        .login-form .btn:hover, .login-form .btn:focus {
+            background: #50b8b3;
+            outline: none !important;
+        }
+        .login-form a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .login-form a:hover {
+            text-decoration: none;
+        }
+        .login-form form a {
+            color: #7a7a7a;
+            text-decoration: none;
+        }
+        .login-form form a:hover {
+            text-decoration: underline;
         }
     </style>
     <body>

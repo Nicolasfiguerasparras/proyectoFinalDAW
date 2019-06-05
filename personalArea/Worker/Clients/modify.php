@@ -114,19 +114,19 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
+        <!-- Restrictions -->
             <?php
-				$userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
+                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../../notAllowed.php");
+                    header("location: ../../notAllowed.php");
                 }
                 
                 if($userData == ""){
                     header("location: ../../notAllowed.php");
                 }
-			?>
-		<!-- /Restrictions -->
+            ?>
+        <!-- /Restrictions -->
 
         <!-- Query for Form -->
             <?php
@@ -139,11 +139,11 @@
             <?php
                 if(isset($_POST['modify'])){
                     $name = $_POST['name'];
-	                $surname = $_POST['surname'];
-	                $birth_date = $_POST['birth_date'];
-	                $phone = $_POST['phone'];
-	                $email = $_POST['email'];
-	                $username = $_POST['username'];
+                    $surname = $_POST['surname'];
+                    $birth_date = $_POST['birth_date'];
+                    $phone = $_POST['phone'];
+                    $email = $_POST['email'];
+                    $username = $_POST['username'];
                     $password = $_POST['password'];
                     $id = $_POST['client_ID'];
 
