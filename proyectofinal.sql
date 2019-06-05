@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2019 a las 02:00:29
+-- Tiempo de generación: 05-06-2019 a las 18:48:52
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -138,15 +138,17 @@ CREATE TABLE `tasks` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `worker_ID` bigint(20) NOT NULL,
-  `lawer_ID` bigint(20) NOT NULL
+  `lawer_ID` bigint(20) NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tasks`
 --
 
-INSERT INTO `tasks` (`task_ID`, `title`, `description`, `start_date`, `end_date`, `worker_ID`, `lawer_ID`) VALUES
-(1, 'Task 1', 'Descripcion', '2019-05-08', '2019-05-30', 1, 1);
+INSERT INTO `tasks` (`task_ID`, `title`, `description`, `start_date`, `end_date`, `worker_ID`, `lawer_ID`, `status`) VALUES
+(1, 'Task 1', 'Descripcion', '2019-05-08', '2019-05-30', 1, 1, 1),
+(2, 'Pruebastat', 'Desc', '2019-01-01', '2020-01-01', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -226,7 +228,7 @@ ALTER TABLE `workers`
 -- AUTO_INCREMENT de la tabla `cases`
 --
 ALTER TABLE `cases`
-  MODIFY `case_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `case_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `clients`
@@ -250,7 +252,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `task_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `task_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `workers`
