@@ -11,19 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-         <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
  
 
-        <title>Document</title>
+        <title>Create worker</title>
     </head>
     <style>
         html, body{
@@ -60,6 +62,49 @@
             width: 95px;
             height: 95px;
         }
+        
+        /* Form styles */
+        
+        .form-control {
+            min-height: 41px;
+            background: #fff;
+            box-shadow: none !important;
+            border-color: #e3e3e3;
+        }
+        .form-control:focus {
+            border-color: #70c5c0;
+        }
+        .form-control, .btn {
+            border-radius: 2px;
+        }
+        .login-form input[type="checkbox"] {
+            margin-top: 2px;
+        }
+        .login-form .btn {
+            font-size: 16px;
+            font-weight: bold;
+            background: #70c5c0;
+            border: none;
+            margin-bottom: 20px;
+        }
+        .login-form .btn:hover, .login-form .btn:focus {
+            background: #50b8b3;
+            outline: none !important;
+        }
+        .login-form a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .login-form a:hover {
+            text-decoration: none;
+        }
+        .login-form form a {
+            color: #7a7a7a;
+            text-decoration: none;
+        }
+        .login-form form a:hover {
+            text-decoration: underline;
+        }
     </style>
     <body>
 
@@ -70,27 +115,27 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
+        <!-- Restrictions -->
             <?php
-				if(isset($_SESSION['login_ok'])){
-					if(!$_SESSION['id_user'] == 0){
-						header("location: ../../notAllowed.php");
-					}
-				}else{
-					header("location: ../../notAllowed.php");
-				}
-			?>
-		<!-- /Restrictions -->
+                if(isset($_SESSION['login_ok'])){
+                    if(!$_SESSION['id_user'] == 0){
+                        header("location: ../../notAllowed.php");
+                    }
+                }else{
+                    header("location: ../../notAllowed.php");
+                }
+            ?>
+        <!-- /Restrictions -->
 
         <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
                     $name = $_POST['name'];
-	                $surname = $_POST['surname'];
-	                $birth_date = $_POST['birth_date'];
-	                $phone = $_POST['phone'];
-	                $email = $_POST['email'];
-	                $username = $_POST['username'];
+                    $surname = $_POST['surname'];
+                    $birth_date = $_POST['birth_date'];
+                    $phone = $_POST['phone'];
+                    $email = $_POST['email'];
+                    $username = $_POST['username'];
                     $password = $_POST['password'];
                     $salary = $_POST['salary'];
                     
@@ -107,8 +152,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Workers > Create worker</h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Workers > Create worker</h1>
                         </div>
                     </div>
                     <br>
@@ -142,15 +187,15 @@
                         </div>
                         
                         <!-- Main content -->
-                            <div class="col-9">
+                            <div class="col-9 login-form">
                                 <form action="create.php" method="post">
                                     <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" hidden disabled>
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="name">First name</label>
                                             <input type="text" class="form-control" id="name" name="name" placeholder="Insert name">
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="surname">Last name</label>
                                             <input type="text" class="form-control" id="surname" name="surname" placeholder="Insert last name">
                                         </div>
@@ -160,7 +205,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="salary">Salary</label>
-                                            <input type="text" class="form-control" id="salary" name="salary">
+                                            <input type="text" class="form-control" id="salary" name="salary" placeholder="ex. 800">
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -172,13 +217,13 @@
                                             <label for="email">Email</label>
                                             <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com">
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username">
+                                            <input type="text" class="form-control" id="username" name="username" placeholder="Insert username">
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Insert password">
                                         </div>
                                     </div>
                                     <input type="submit" class="btn btn-primary" value="Submit" name="create">

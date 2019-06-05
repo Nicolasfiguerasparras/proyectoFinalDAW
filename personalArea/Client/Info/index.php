@@ -21,7 +21,10 @@
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-        <title>Document</title>
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
+        
+        <title>Your info</title>
     </head>
     <style>
         html, body{

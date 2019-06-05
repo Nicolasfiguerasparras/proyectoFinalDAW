@@ -21,8 +21,10 @@
          
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
 
-        <title>Document</title>
+        <title>List clients</title>
     </head>
     <style>
         html, body{
@@ -69,19 +71,19 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
-			<?php
+        <!-- Restrictions -->
+            <?php
                 $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../../notAllowed.php");
+                    header("location: ../../notAllowed.php");
                 }
                 
                 if($userData == ""){
                     header("location: ../../notAllowed.php");
                 }
-			?>
-		<!-- /Restrictions -->
+            ?>
+        <!-- /Restrictions -->
 
         <div class="container-fluid content">
             <div class="row">
@@ -90,8 +92,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Clients > List clients</h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Clients > List clients</h1>
                         </div>
                     </div>
                     <br>
@@ -130,7 +132,7 @@
                                     $listQuery = mysqli_query($db, "SELECT * FROM clients");
 
                                     if($row = mysqli_fetch_array($listQuery)){
-                                        echo "<table class='table table-bordered'>";
+                                        echo "<table class='table'>";
 
                                             echo "<thead>";
                                                 echo "<tr>";
@@ -172,7 +174,7 @@
                                                     }else{
                                                         echo "<td>No record</td>";
                                                     }
-                                                    echo "<td>".$row["bill"]."</td>";
+                                                    echo "<td>".$row["bill"]."$</td>";
                                                     echo "<td style='text-align: center'><a href='addCase.php?client=$listID'><i class='fa fa-plus' style='font-size:20px; color:black' aria-hidden='true'></i></a></td>";
                                                     echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:#B8860B'></i></a></td>";
                                                     echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
@@ -203,10 +205,10 @@
         <!-- /Delete confirmation -->
 
         <!-- Bootstrap JS -->
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<!-- /Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- /Bootstrap JS -->
 
         <!-- Connection close -->
             <?php

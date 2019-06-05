@@ -21,6 +21,9 @@
 
         <link rel="stylesheet" type="text/css" href="styles.css">
 
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../img/tabIcon.jpg" type="image/x-icon"/>
+
         <title>Login</title>
     </head>
     <body>

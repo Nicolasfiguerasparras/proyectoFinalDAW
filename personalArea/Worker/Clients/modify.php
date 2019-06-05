@@ -11,19 +11,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-         <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
- 
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
 
-        <title>Document</title>
+        <title>Modify client</title>
     </head>
     <style>
         html, body{
@@ -59,6 +60,49 @@
         .avatar img{
             width: 95px;
             height: 95px;
+        }
+        
+        /* Form styles */
+        
+        .form-control {
+            min-height: 41px;
+            background: #fff;
+            box-shadow: none !important;
+            border-color: #e3e3e3;
+        }
+        .form-control:focus {
+            border-color: #70c5c0;
+        }
+        .form-control, .btn {
+            border-radius: 2px;
+        }
+        .login-form input[type="checkbox"] {
+            margin-top: 2px;
+        }
+        .login-form .btn {
+            font-size: 16px;
+            font-weight: bold;
+            background: #70c5c0;
+            border: none;
+            margin-bottom: 20px;
+        }
+        .login-form .btn:hover, .login-form .btn:focus {
+            background: #50b8b3;
+            outline: none !important;
+        }
+        .login-form a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .login-form a:hover {
+            text-decoration: none;
+        }
+        .login-form form a {
+            color: #7a7a7a;
+            text-decoration: none;
+        }
+        .login-form form a:hover {
+            text-decoration: underline;
         }
     </style>
     <body>
@@ -151,11 +195,11 @@
                         </div>
                         
                         <!-- Main content -->
-                            <div class="col-9">
+                            <div class="col-9 login-form">
                                 <form action="modify.php" method="post">
                                     <input type="text" id="ID" name="ID" value="<?php echo $id ?>" hidden disabled>
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-5">
                                             <label for="name">First name</label>
                                             <input type="text" class="form-control" id="name" name="name" value="<?php echo $actualClientQuery['name'] ?>">
                                         </div>
@@ -163,7 +207,7 @@
                                             <label for="surname">Last name</label>
                                             <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $actualClientQuery['surname'] ?>">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="birth_date">Birth date</label>
                                             <input type="date" class="form-control" id="birth_date" name="birth_date" value="<?php echo $actualClientQuery['birth_date'] ?>">
                                         </div>
@@ -173,11 +217,11 @@
                                             <label for="phone">Phone number</label>
                                             <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $actualClientQuery['phone'] ?>">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="email">Email</label>
                                             <input type="text" class="form-control" id="email" name="email" value="<?php echo $actualClientQuery['email'] ?>">
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="username">Username</label>
                                             <input type="text" class="form-control" id="username" name="username" value="<?php echo $actualClientQuery['username'] ?>">
                                         </div>
@@ -198,10 +242,10 @@
         </div>
 
         <!-- Bootstrap JS -->
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<!-- /Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- /Bootstrap JS -->
 
         <!-- Connection close -->
             <?php

@@ -21,7 +21,8 @@
 
          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
- 
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
 
         <title>Document</title>
     </head>
@@ -60,6 +61,49 @@
             width: 95px;
             height: 95px;
         }
+        
+        /* Form styles */
+        
+        .form-control {
+            min-height: 41px;
+            background: #fff;
+            box-shadow: none !important;
+            border-color: #e3e3e3;
+        }
+        .form-control:focus {
+            border-color: #70c5c0;
+        }
+        .form-control, .btn {
+            border-radius: 2px;
+        }
+        .login-form input[type="checkbox"] {
+            margin-top: 2px;
+        }
+        .login-form .btn {
+            font-size: 16px;
+            font-weight: bold;
+            background: #70c5c0;
+            border: none;
+            margin-bottom: 20px;
+        }
+        .login-form .btn:hover, .login-form .btn:focus {
+            background: #50b8b3;
+            outline: none !important;
+        }
+        .login-form a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .login-form a:hover {
+            text-decoration: none;
+        }
+        .login-form form a {
+            color: #7a7a7a;
+            text-decoration: none;
+        }
+        .login-form form a:hover {
+            text-decoration: underline;
+        }
     </style>
     <body>
 
@@ -70,17 +114,17 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
+        <!-- Restrictions -->
             <?php
-				if(isset($_SESSION['login_ok'])){
-					if(!$_SESSION['id_user'] == 0){
-						header("location: ../../../notAllowed.php");
-					}
-				}else{
-					header("location: ../../../notAllowed.php");
-				}
-			?>
-		<!-- /Restrictions -->
+                if(isset($_SESSION['login_ok'])){
+                    if(!$_SESSION['id_user'] == 0){
+                            header("location: ../../../notAllowed.php");
+                    }
+                }else{
+                    header("location: ../../../notAllowed.php");
+                }
+            ?>
+        <!-- /Restrictions -->
 
         <!-- Query for Form -->
             <?php
@@ -114,8 +158,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Clients > Modify client</h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Clients > Modify client</h1>
                         </div>
                     </div>
                     <br>
@@ -149,11 +193,11 @@
                         </div>
                         
                         <!-- Main content -->
-                            <div class="col-9">
+                            <div class="col-9 login-form">
                                 <form action="modify.php" method="post">
                                     <input type="text" id="ID" name="ID" value="<?php echo $id ?>" hidden disabled>
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-5">
                                             <label for="name">First name</label>
                                             <input type="text" class="form-control" id="name" name="name" value="<?php echo $actualClientQuery['name'] ?>">
                                         </div>
@@ -161,7 +205,7 @@
                                             <label for="surname">Last name</label>
                                             <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $actualClientQuery['surname'] ?>">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="birth_date">Birth date</label>
                                             <input type="date" class="form-control" id="birth_date" name="birth_date" value="<?php echo $actualClientQuery['birth_date'] ?>">
                                         </div>
@@ -171,11 +215,11 @@
                                             <label for="phone">Phone number</label>
                                             <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $actualClientQuery['phone'] ?>">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="email">Email</label>
                                             <input type="text" class="form-control" id="email" name="email" value="<?php echo $actualClientQuery['email'] ?>">
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="username">Username</label>
                                             <input type="text" class="form-control" id="username" name="username" value="<?php echo $actualClientQuery['username'] ?>">
                                         </div>

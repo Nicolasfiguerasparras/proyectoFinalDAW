@@ -11,16 +11,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-         <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <title>Document</title>
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../img/tabIcon.jpg" type="image/x-icon"/>
+        
+        <title>Worker panel</title>
     </head>
     <style>
         html, body{
@@ -67,19 +69,19 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
-			<?php
+        <!-- Restrictions -->
+            <?php
                 $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../notAllowed.php");
+                    header("location: ../notAllowed.php");
                 }
                 
                 if($userData == ""){
                     header("location: ../notAllowed.php");
                 }
-			?>
-		<!-- /Restrictions -->
+            ?>
+        <!-- /Restrictions -->
 
         <div class="container-fluid content">
             <div class="row">
@@ -88,8 +90,8 @@
                         <div class="col-2 avatar">
                             <img src="../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
                         </div>
                     </div>
                     <br>

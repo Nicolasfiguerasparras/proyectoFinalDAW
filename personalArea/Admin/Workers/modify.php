@@ -21,8 +21,11 @@
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
 
-        <title>Document</title>
+
+        <title>Modify worker</title>
     </head>
     <style>
         html, body{
@@ -112,17 +115,17 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
+        <!-- Restrictions -->
             <?php
-				if(isset($_SESSION['login_ok'])){
-					if(!$_SESSION['id_user'] == 0){
-						header("location: ../../notAllowed.php");
-					}
-				}else{
-					header("location: ../../notAllowed.php");
-				}
-			?>
-		<!-- /Restrictions -->
+                if(isset($_SESSION['login_ok'])){
+                    if(!$_SESSION['id_user'] == 0){
+                            header("location: ../../notAllowed.php");
+                    }
+                }else{
+                    header("location: ../../notAllowed.php");
+                }
+            ?>
+        <!-- /Restrictions -->
 
         <!-- Query for Form -->
             <?php
@@ -135,11 +138,11 @@
             <?php
                 if(isset($_POST['modify'])){
                     $name = $_POST['name'];
-	                $surname = $_POST['surname'];
-	                $birth_date = $_POST['birth_date'];
-	                $phone = $_POST['phone'];
-	                $email = $_POST['email'];
-	                $username = $_POST['username'];
+                    $surname = $_POST['surname'];
+                    $birth_date = $_POST['birth_date'];
+                    $phone = $_POST['phone'];
+                    $email = $_POST['email'];
+                    $username = $_POST['username'];
                     $password = $_POST['password'];
                     $salary = $_POST['salary'];
                     $id = $_POST['worker_ID'];
@@ -206,11 +209,11 @@
                             <div class="col-9 login-form">
                                 <form action="modify.php" method="post">
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="name">First name</label>
                                             <input type="text" class="form-control" id="name" name="name" value="<?php echo $actualWorkerQuery['name'] ?>">
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="surname">Last name</label>
                                             <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $actualWorkerQuery['surname'] ?>">
                                         </div>
@@ -232,11 +235,11 @@
                                             <label for="email">Email</label>
                                             <input type="text" class="form-control" id="email" name="email" value="<?php echo $actualWorkerQuery['email'] ?>">
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="username">Username</label>
                                             <input type="text" class="form-control" id="username" name="username" value="<?php echo $actualWorkerQuery['username'] ?>">
                                         </div>
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-4">
                                             <label for="password">Password</label>
                                             <input type="password" class="form-control" id="password" name="password" value="<?php echo $actualWorkerQuery['password'] ?>">
                                         </div>
