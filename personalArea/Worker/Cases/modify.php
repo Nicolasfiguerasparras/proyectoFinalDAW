@@ -114,19 +114,19 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
+        <!-- Restrictions -->
             <?php
-				$userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
+                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../../notAllowed.php");
+                    header("location: ../../notAllowed.php");
                 }
                 
                 if($userData == ""){
                     header("location: ../../notAllowed.php");
                 }
-			?>
-		<!-- /Restrictions -->
+            ?>
+        <!-- /Restrictions -->
 
         <!-- Data extract -->
             <?php
@@ -152,8 +152,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Cases > Modify case</h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Cases > Modify case</h1>
                         </div>
                     </div>
                     <br>
@@ -187,7 +187,7 @@
                         </div>
 
                         <!-- Main content -->
-                            <div class="col-9">
+                            <div class="col-9 login-form">
                                 <form action="modify.php" method="POST">
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
@@ -200,7 +200,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="lawer">Lawer</label>
                                             <select id="lawer" name="lawer_ID" class="form-control">
                                                 <?php
@@ -220,7 +220,7 @@
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="client">Client</label>
                                             <select id="client" name="client_ID" class="form-control">
                                                 <?php
@@ -240,7 +240,7 @@
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-6">
                                             <label for="description">Type</label>
                                             <input type="type" class="form-control" id="type" name="type" value="<?php echo $caseData['type'] ?>">
                                         </div>
@@ -257,10 +257,10 @@
         </div>
 
         <!-- Bootstrap JS -->
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<!-- /Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- /Bootstrap JS -->
 
         <!-- Connection close -->
             <?php

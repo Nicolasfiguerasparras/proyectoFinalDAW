@@ -1,5 +1,5 @@
 <!-- Extract session -->
-<?php
+    <?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -11,16 +11,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-         <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <title>Document</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        
+        <!-- Tab icon -->
+        <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
+        
+        <title>List tasks</title>
     </head>
     <style>
         html, body{
@@ -67,19 +71,19 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
-			<?php
+        <!-- Restrictions -->
+            <?php
                 $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers where lawer_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../../notAllowed.php");
+                    header("location: ../../notAllowed.php");
                 }
                 
                 if($userData == ""){
                     header("location: ../../notAllowed.php");
                 }
-			?>
-		<!-- /Restrictions -->
+            ?>
+        <!-- /Restrictions -->
 
         <div class="container-fluid content">
             <div class="row">
@@ -88,8 +92,8 @@
                         <div class="col-2 avatar">
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
-                        <div class="col-9">
-                            <h1>Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                        <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
+                            <h1 class="h1" style="text-align: center">Tasks > List tasks</h1>
                         </div>
                     </div>
                     <br>
@@ -106,12 +110,17 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='index.php'>List tasks</a>
+                                                    <a class='nav-link' href='index.php'>My tasks</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <a class='nav-link' href='create.php'>Create task</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a class='nav-link' href='finished.php'>Finished tasks</a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -124,7 +133,45 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
-                            
+                                <?php
+                                    $listQuery = mysqli_query($db, "SELECT * FROM tasks");
+
+                                    if($row = mysqli_fetch_array($listQuery)){
+
+                                        echo "<table class  ='table'>";
+
+                                            echo "<thead>";
+                                                echo "<tr>";
+                                                    echo "<th scope='col'>Title</th>";
+                                                    echo "<th scope='col'>Description</th>";
+                                                    echo "<th scope='col'>Start date</th>";
+                                                    echo "<th scope='col'>End date</th>";
+                                                    echo "<th scope='col'>Worker</th>";
+                                                echo "</tr>";
+                                            echo "</thead>";
+
+                                            do{
+                                                if($row['status'] == 0){
+
+                                                    echo "<tr>";
+                                                        $taskID=$row['task_ID'];
+                                                        echo "<td>".$row["title"]."</td>";
+                                                        echo "<td>".$row["description"]."</td>";
+                                                        echo "<td>".$row["start_date"]."</td>";
+                                                        echo "<td>".$row["end_date"]."</td>";
+                                                        
+                                                        $clientName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE worker_ID = '$row[worker_ID]'"));
+                                                        echo "<td>".$clientName["name"]." ".$clientName["surname"]."</td>";
+                                                        echo "<td style='text-align: center'><a class='done_button' href='done.php?task=$taskID'><i class='fa fa-check-circle' style='font-size:20px;color:blue'></i></a></td>";
+                                                        echo "<td style='text-align: center'><a href='modify.php?task=$taskID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
+                                                        echo "<td style='text-align: center'><a class='delete_button' href='delete.php?task=$taskID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                    echo "</tr>";
+                                                }
+                                            }while($row = mysqli_fetch_array($listQuery));
+                                    }else{
+                                        echo "There is no record";
+                                    }
+                                ?>
                             </div>
                         <!-- /Main content -->
 
@@ -132,5 +179,40 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Delete confirmation -->
+            <script type="text/javascript">
+                $('.delete_button').click(function(e){
+                    var result = confirm("Are you sure you want to delete this task?");
+                    if(!result) {
+                        e.preventDefault();
+                    }
+                });
+            </script>
+        <!-- /Delete confirmation -->
+
+        <!-- Done confirmation -->
+            <script type="text/javascript">
+                $('.done_button').click(function(e){
+                    var result = confirm("Are you sure you want to finish this task?");
+                    if(!result) {
+                        e.preventDefault();
+                    }
+                });
+            </script>
+        <!-- /Done confirmation -->
+
+        <!-- Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- /Bootstrap JS -->
+
+        <!-- Connection close -->
+            <?php
+                mysqli_close($db);
+            ?>
+        <!-- /Connection close -->
+        
     </body>
 </html>

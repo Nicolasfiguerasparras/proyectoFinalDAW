@@ -1,5 +1,5 @@
 <!-- Extract session -->
-    <?php
+<?php
         session_start();
     ?>
 <!-- /Extract session -->
@@ -22,7 +22,7 @@
         <!-- Tab icon -->
         <link rel="shortcut icon" href="../../../img/tabIcon.jpg" type="image/x-icon"/>
 
-        <title>Create task</title>
+        <title>Create case</title>
     </head>
     <style>
         html, body{
@@ -112,29 +112,29 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
-			<?php
-                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
+        <!-- Restrictions -->
+            <?php
+                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers where lawer_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../../notAllowed.php");
+                    header("location: ../../../notAllowed.php");
                 }
                 
                 if($userData == ""){
-                    header("location: ../../notAllowed.php");
+                    header("location: ../../../notAllowed.php");
                 }
-			?>
-		<!-- /Restrictions -->
+            ?>
+        <!-- /Restrictions -->
 
         <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
-                    $createQuery = mysqli_query($db, "INSERT INTO tasks (task_ID, title, description, start_date, end_date, worker_ID, lawer_ID) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_POST[start_date]', '$_POST[end_date]', '$_POST[worker_ID]', '$_POST[lawer_ID]')") or die(mysqli_error($db));
+                    $createQuery = mysqli_query($db, "INSERT INTO cases (case_ID, title, description, lawer_ID, client_ID, type) VALUES ('null', '$_POST[title]', '$_POST[description]', '$_SESSION[id_user]]', $_POST[client_ID], '$_POST[type]')") or die(mysqli_error($db));
                     header("location: index.php");
                 }
             ?>
         <!-- /Create form action -->
-
+        
         <div class="container-fluid content">
             <div class="row">
                 <div class="col-10 offset-1 insideContainer">
@@ -143,7 +143,7 @@
                             <img src="../../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
-                            <h1 class="h1" style="text-align: center">Tasks > Create task</h1>
+                            <h1 class="h1" style="text-align: center">Cases > Create case</h1>
                         </div>
                     </div>
                     <br>
@@ -152,29 +152,24 @@
 
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link' href='../Clients/'>Clients</a>
-                                    <a class='nav-link active' href="../Tasks/">Tasks</a>
+                                    <a class='nav-link' href='../../Lawer/'>Index</a>
+                                    <a class='nav-link' href='../Clients/'>My clients</a>
+                                    <a class='nav-link active' href="../Cases/">My cases</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='index.php'>My tasks</a>
+                                                    <a class='nav-link' href='index.php'>List cases</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class='nav-link' href='create.php'>Create task</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a class='nav-link' href='finished.php'>Finished tasks</a>
+                                                    <a class='nav-link' href='create.php'>Create case</a>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class="nav-link" href="../Cases/">Cases</a>
+                                    <a class="nav-link" href="../Tasks/">Tasks</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
@@ -184,56 +179,37 @@
                         <!-- Main content -->
                             <div class="col-9 login-form">
                                 <form action="create.php" method="post">
+                                    <input type="text" id="ID" name="ID" placeholder="<?php echo $id ?>" hidden disabled>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="title">Title</label>
                                             <input type="text" class="form-control" id="title" name="title" placeholder="Insert title">
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <label for="description">Description</label>
                                             <input type="text" class="form-control" id="description" name="description" placeholder="Insert description">
                                         </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="lawer_ID">Lawer</label>
-                                            <select id="client" name="lawer_ID" class="form-control">
+                                        <div class="form-group col-md-2">
+                                            <label for="client_ID">Client</label>
+                                            <select id="client_ID" name="client_ID" class="form-control">
                                                 <option value="0" selected disabled>Choose...</option>
                                                 <?php
-                                                    $lawers = mysqli_query($db, "SELECT * FROM lawers");
+                                                    $clients = mysqli_query($db, "SELECT * FROM clients");
 
-                                                    if($row = mysqli_fetch_array($lawers)){
+                                                    if($row = mysqli_fetch_array($clients)){
                                                         do{
-                                                            echo "<option value='$row[lawer_ID]'>".$row['name']." ".$row['surname']."</option>";
-                                                        }while($row = mysqli_fetch_array($lawers));
-                                                    }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="worker_ID">Worker</label>
-                                            <select id="worker_ID" name="worker_ID" class="form-control">
-                                                <option value="0" selected disabled>Choose...</option>
-                                                <?php
-                                                    $workers = mysqli_query($db, "SELECT * FROM workers");
-
-                                                    if($row = mysqli_fetch_array($workers)){
-                                                        do{
-                                                            echo "<option value='$row[worker_ID]'>".$row['name']." ".$row['surname']."</option>";
-                                                        }while($row = mysqli_fetch_array($workers));
+                                                            echo "<option value='$row[client_ID]'>".$row['name']." ".$row['surname']."</option>";
+                                                        }while($row = mysqli_fetch_array($clients));
                                                     }
                                                 ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <label for="start_date">Start date</label>
-                                            <input type="date" class="form-control" id="start_date" name="start_date">
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label for="end_date">End date</label>
-                                            <input type="date" class="form-control" id="end_date" name="end_date">
+                                            <label for="type">Type</label>
+                                            <input type="text" class="form-control" id="type" name="type" placeholder="Insert type">
                                         </div>
                                     </div>
+                                    
                                     <input type="submit" class="btn btn-primary" value="Submit" name="create">
                                 </form>
                             </div>
@@ -243,18 +219,5 @@
                 </div>
             </div>
         </div>
-
-        <!-- Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <!-- /Bootstrap JS -->
-
-        <!-- Connection close -->
-            <?php
-                mysqli_close($db);
-            ?>
-        <!-- /Connection close -->
-
     </body>
 </html>

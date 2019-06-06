@@ -112,24 +112,24 @@
             ?>
         <!-- /Establish connection with DB -->
 
-		<!-- Restrictions -->
-			<?php
-                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers where worker_ID = '$_SESSION[id_user]'"));
+	<!-- Restrictions -->
+            <?php
+                $userData = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers where lawer_ID = '$_SESSION[id_user]'"));
                 
                 if(!isset($_SESSION['login_ok'])){
-					header("location: ../../notAllowed.php");
+                    header("location: ../../notAllowed.php");
                 }
                 
                 if($userData == ""){
                     header("location: ../../notAllowed.php");
                 }
-			?>
-		<!-- /Restrictions -->
+            ?>
+        <!-- /Restrictions -->
 
         <!-- Create form action -->
             <?php
                 if(isset($_POST['create'])){
-                    $createQuery = mysqli_query($db, "INSERT INTO tasks (task_ID, title, description, start_date, end_date, worker_ID, lawer_ID) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_POST[start_date]', '$_POST[end_date]', '$_POST[worker_ID]', '$_POST[lawer_ID]')") or die(mysqli_error($db));
+                    $createQuery = mysqli_query($db, "INSERT INTO tasks (task_ID, title, description, start_date, end_date, worker_ID, lawer_ID) VALUES ('NULL', '$_POST[title]', '$_POST[description]', '$_POST[start_date]', '$_POST[end_date]', '$_POST[worker_ID]', '$_SESSION[user_id]')") or die(mysqli_error($db));
                     header("location: index.php");
                 }
             ?>
@@ -152,9 +152,10 @@
 
                             <!-- Lateral NavBar -->
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class='nav-link' href='../index.php'>Index</a>
-                                    <a class='nav-link' href='../Clients/'>Clients</a>
-                                    <a class='nav-link active' href="../Tasks/">Tasks</a>
+                                    <a class='nav-link' href='../../Lawer/'>Index</a>
+                                    <a class='nav-link' href='../Clients/'>My clients</a>
+                                    <a class='nav-link' href="../Cases/">My cases</a>
+                                    <a class="nav-link active" href="../Tasks/">Tasks</a>
                                     <div class="table-primary" style="padding-left: 20px;">
                                         <table>
                                             <tr>
@@ -174,7 +175,6 @@
                                             </tr>
                                         </table>
                                     </div>
-                                    <a class="nav-link" href="../Cases/">Cases</a>
                                     <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
@@ -195,22 +195,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="lawer_ID">Lawer</label>
-                                            <select id="client" name="lawer_ID" class="form-control">
-                                                <option value="0" selected disabled>Choose...</option>
-                                                <?php
-                                                    $lawers = mysqli_query($db, "SELECT * FROM lawers");
-
-                                                    if($row = mysqli_fetch_array($lawers)){
-                                                        do{
-                                                            echo "<option value='$row[lawer_ID]'>".$row['name']." ".$row['surname']."</option>";
-                                                        }while($row = mysqli_fetch_array($lawers));
-                                                    }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-6">
                                             <label for="worker_ID">Worker</label>
                                             <select id="worker_ID" name="worker_ID" class="form-control">
                                                 <option value="0" selected disabled>Choose...</option>
@@ -225,11 +210,11 @@
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="start_date">Start date</label>
                                             <input type="date" class="form-control" id="start_date" name="start_date">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="end_date">End date</label>
                                             <input type="date" class="form-control" id="end_date" name="end_date">
                                         </div>

@@ -193,7 +193,7 @@
                                         
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="lawer">Lawer</label>
                                             <select id="lawer" name="lawer_ID" class="form-control">
                                                 <option value="0" selected disabled>Choose...</option>
@@ -208,7 +208,7 @@
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="client">Client</label>
                                             <select id="client" name="client_ID" class="form-control">
                                                 <option value="0" selected disabled>Choose...</option>
@@ -223,7 +223,7 @@
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-6">
                                             <label for="description">Type</label>
                                             <input type="type" class="form-control" id="type" name="type" placeholder="Type">
                                         </div>
