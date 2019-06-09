@@ -138,8 +138,22 @@
                     $email = $_POST['email'];
                     $username = $_POST['username'];
                     $password = $_POST['password'];
-                    $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('NULL', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0')") or die(mysqli_error($db));
-                    header("location: index.php");
+                    
+                    /* Check if already exist */
+                    $phoneCheck = mysqli_query($db, "SELECT * FROM clients WHERE phone = '$_POST[phone]]'");
+                    $userCheck = mysqli_query($db, "SELECT * FROM clients WHERE username = '$_POST[username]]'");
+                    $nameSurnameCheck = mysqli_query($db, "SELECT * FROM clients WHERE name = '$_POST[name]]' & surname = '$_POST[surname]]'");
+
+                    if(sizeof($phoneCheck) > 0 || sizeof($userCheck) > 0 || sizeof($nameSurnameCheck) > 0){
+                        echo "<meta http-equiv='refresh' content='0; url=create.php?error=true'>";
+                    }else{
+                        if(strtotime($birth_date) > (time() - (18 * 60 * 60 * 24 * 365))){
+                            echo "<meta http-equiv='refresh' content='0; url=create.php?error=age'>";
+                        }else{
+                            $createQuery = mysqli_query($db, "INSERT INTO clients (client_ID, name, surname, birth_date, phone, email, username, password, case_ID, bill) VALUES ('NULL', '$name', '$surname', '$birth_date', $phone, '$email', '$username', '$password', '0')") or die(mysqli_error($db));
+                            echo "<meta http-equiv='refresh' content='0; url=index.php'>";
+                        }
+                    }
                 }
             ?>
         <!-- /Create form action -->
@@ -192,37 +206,50 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-5">
                                             <label for="name">First name</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Insert name">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Insert name" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="surname">Last name</label>
-                                            <input type="text" class="form-control" id="surname" name="surname" placeholder="Insert last name">
+                                            <input type="text" class="form-control" id="surname" name="surname" placeholder="Insert last name" required>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="birth_date">Birth date</label>
-                                            <input type="date" class="form-control" id="birth_date" name="birth_date">
+                                            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-2">
                                             <label for="phone">Phone number</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="+34 639 941 992">
+                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="+34 639 941 992" required>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com">
+                                            <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username" placeholder="Insert username">
+                                            <input type="text" class="form-control" id="username" name="username" placeholder="Insert username" required>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Insert password">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Insert password" required>
                                         </div>
                                     </div>
                                     <input type="submit" class="btn btn-primary" value="Submit" name="create">
                                 </form>
+                                
+                                <!-- Error message -->
+                                    <?php
+                                        if(isset($_GET['error'])){
+                                            if($_GET['error'] == 'age'){
+                                                echo "<h2 style='color:red'>Must be 18 or older</h2>";
+                                            }else{
+                                                echo "<h2 style='color:red'>Phone, username or name already exist</h2>";
+                                            }
+                                        }  
+                                    ?>
+                                <!-- /Error message -->
+                                
                             </div>
                         <!-- /Main content -->
 
@@ -232,10 +259,10 @@
         </div>
 
         <!-- Bootstrap JS -->
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<!-- /Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- /Bootstrap JS -->
 
         <!-- Connection close -->
             <?php

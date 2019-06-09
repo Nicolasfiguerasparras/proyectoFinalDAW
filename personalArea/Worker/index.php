@@ -91,7 +91,7 @@
                             <img src="../../img/iconAvatar.png" alt="Avatar">
                         </div>
                         <div class="col-9 shadow-lg p-3 mb-5 bg-#70c5c0 rounded">
-                            <h1 class="h1" style="text-align: center">Welcome back, <?php echo $userData['name']." ".$userData['surname'] ?></h1>
+                            <h1 class="h1" style="text-align: center">Today's tasks for <?php echo $userData['name']." ".$userData['surname'] ?>:</h1>
                         </div>
                     </div>
                     <br>
@@ -112,7 +112,45 @@
                         
                         <!-- Main content -->
                             <div class="col-9">
-                            
+                                <?php
+                                    $today = date('o-m-d');
+                                    $listQuery = mysqli_query($db, "SELECT * FROM tasks where end_date = '$today' and status = '0'");
+
+                                    if($row = mysqli_fetch_array($listQuery)){
+
+                                        echo "<table class  ='table'>";
+
+                                            echo "<thead>";
+                                                echo "<tr>";
+                                                    echo "<th scope='col'>Title</th>";
+                                                    echo "<th scope='col'>Description</th>";
+                                                    echo "<th scope='col'>Start date</th>";
+                                                    echo "<th scope='col'>End date</th>";
+                                                    echo "<th scope='col'>Worker</th>";
+                                                    echo "<th scope='col'>Lawer</th>";
+                                                echo "</tr>";
+                                            echo "</thead>";
+
+                                            do{
+                                                echo "<tr>";
+                                                    $taskID=$row['task_ID'];
+                                                    echo "<td>".$row["title"]."</td>";
+                                                    echo "<td>".$row["description"]."</td>";
+                                                    echo "<td>".$row["start_date"]."</td>";
+                                                    echo "<td>".$row["end_date"]."</td>";
+
+                                                    $lawerName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = '$row[lawer_ID]'"));
+                                                    echo "<td>".$lawerName["name"]." ".$lawerName["surname"]."</td>";
+
+                                                    $clientName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE worker_ID = '$row[worker_ID]'"));
+                                                    echo "<td>".$clientName["name"]." ".$clientName["surname"]."</td>";
+                                                    echo "<td style='text-align: center'><a class='done_button' href='Tasks/done.php?task=$taskID'><i class='fa fa-check-circle' style='font-size:20px;color:blue'></i></a></td>";
+                                                echo "</tr>";
+                                            }while($row = mysqli_fetch_array($listQuery));
+                                    }else{
+                                        echo "There is no task for today";
+                                    }
+                                ?>
                             </div>
                         <!-- /Main content -->
 

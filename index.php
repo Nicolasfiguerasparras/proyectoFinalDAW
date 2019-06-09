@@ -29,6 +29,7 @@
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="#">FAQ</a></li>
+                        <li><a href="login/">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -72,7 +73,6 @@
         <!-- Footer -->
         <footer class="container-fluid bg-4 text-center">
             <p>Footer</p>
-            <a href="login/">Login</a>
         </footer>
     </body>
 </html>

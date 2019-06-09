@@ -44,9 +44,9 @@
                     $password = $_POST['password'];
 
                     // Create query for all possible login
-                    $queryClient = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE username = '$user' && password = '$password'"));
-                    $queryWorker = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE username = '$user' && password = '$password'"));
-                    $queryLawer = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE username = '$user' && password = '$password'"));
+                    $queryClient = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM clients WHERE username = '$user' and password = '$password'"));
+                    $queryWorker = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE username = '$user' and password = '$password'"));
+                    $queryLawer = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE username = '$user' and password = '$password'"));
 
                     // Possible actions
                     if($queryClient != ""){
@@ -88,14 +88,14 @@
                         }
 
                         header("Location: ../personalArea/Worker/");
-                    }elseif($user == 'admin' && $password = 'admin'){
+                    }elseif($user == 'admin' && $password == 'admin'){
                         $_SESSION['login_ok'] = true;
                         $_SESSION['user'] = "admin";
                         $_SESSION['id_user']= 0;
-                        
+
                         // Codificate session and save in cookie if openSession exist
                         $dataSesion = session_encode();
-                        
+
                         if(isset($_POST['openSession'])){
                             setcookie("sesion", $dataSesion, time()+(60*60*60), "/");
                         }
