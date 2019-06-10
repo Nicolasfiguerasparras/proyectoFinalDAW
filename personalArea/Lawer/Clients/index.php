@@ -193,37 +193,40 @@
 
 
                                             do{
-                                                echo "<tr>";
-                                                    $listID=$row['client_ID'];
-                                                    echo "<td>".$row["name"]."</td>";
-                                                    echo "<td>".$row["surname"]."</td>";
-                                                    $bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   
-                                                    echo "<td>".$bDateFormatted."</td>";
-                                                    echo "<td>".$row["phone"]."</td>";
-                                                    echo "<td>".$row["email"]."</td>";
-                                                    echo "<td>".$row["username"]."</td>";
-                                                    echo "<td>".$row["password"]."</td>";
-                                                    $cases = mysqli_query($db, "SELECT * FROM cases WHERE client_ID = '$row[client_ID]'");
-                                                    $num = mysqli_num_rows($cases);
-                                                    if($row_cases = mysqli_fetch_array($cases)){
-                                                        echo "<td>";
-                                                            do{
-                                                                echo $row_cases['title'];
-                                                                $num--;
-                                                                if(!$num == 0){
-                                                                    echo ", ";
-                                                                }
-                                                            }while($row_cases = mysqli_fetch_array($cases));
-                                                        echo "</td>";
-                                                    }else{
-                                                        echo "<td>No record</td>";
-                                                    }
-                                                    echo "<td>".$row["bill"]."$</td>";
-                                                    echo "<td style='text-align: center'><a href='addCase.php?client=$listID'><i class='fa fa-plus' aria-hidden='true'></i></a></td>";
-                                                    echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
-                                                    echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
-                                                    echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$listID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
-                                                echo "</tr>";
+                                                $listID=$row['client_ID'];
+                                                $valid = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM cases WHERE client_ID = '$listID' and lawer_ID = '$_SESSION[id_user]'"));
+                                                if(!$valid == ""){
+                                                    echo "<tr>";
+                                                        echo "<td>".$row["name"]."</td>";
+                                                        echo "<td>".$row["surname"]."</td>";
+                                                        $bDateFormatted = date("l jS F ", strtotime($row["birth_date"]));   
+                                                        echo "<td>".$bDateFormatted."</td>";
+                                                        echo "<td>".$row["phone"]."</td>";
+                                                        echo "<td>".$row["email"]."</td>";
+                                                        echo "<td>".$row["username"]."</td>";
+                                                        echo "<td>".$row["password"]."</td>";
+                                                        $cases = mysqli_query($db, "SELECT * FROM cases WHERE client_ID = '$row[client_ID]'");
+                                                        $num = mysqli_num_rows($cases);
+                                                        if($row_cases = mysqli_fetch_array($cases)){
+                                                            echo "<td>";
+                                                                do{
+                                                                    echo $row_cases['title'];
+                                                                    $num--;
+                                                                    if(!$num == 0){
+                                                                        echo ", ";
+                                                                    }
+                                                                }while($row_cases = mysqli_fetch_array($cases));
+                                                            echo "</td>";
+                                                        }else{
+                                                            echo "<td>No record</td>";
+                                                        }
+                                                        echo "<td>".$row["bill"]."$</td>";
+                                                        echo "<td style='text-align: center'><a href='addCase.php?client=$listID'><i class='fa fa-plus' aria-hidden='true'></i></a></td>";
+                                                        echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
+                                                        echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
+                                                        echo "<td style='text-align: center'><a class='delete_button' href='delete.php?client=$listID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
+                                                    echo "</tr>";
+                                                }
                                             }while($row = mysqli_fetch_array($listQuery));
                                     }else{
                                         echo "There is no record";
