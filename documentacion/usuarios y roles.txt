@@ -1,0 +1,20 @@
+   ---MODELO---
+usuario || contraseña     
+
+     ---CLIENTS---
+nicoClient || nicoClient
+fernando   || fernando
+joseluis   || joseluis
+luis       || rubio
+patricia   || mesosaurus
+
+       ---LAWERS---
+soniaparras || lawoffice
+noemi       || parrasCasas
+mark        || Konrad
+
+     ---WORKERS---
+raulmendez || mendeznuñez
+tania      || rodriguez
+olivia     || piñero
+alicia     || martin
