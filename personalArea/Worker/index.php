@@ -103,7 +103,7 @@
                                     <a class='nav-link active' href='index.php'>Index</a>
                                     <a class='nav-link' href='Clients/'>Clients</a>
                                     <a class='nav-link' href="Tasks/">Tasks</a>
-                                    <a class="nav-link" href="../Cases/">Cases</a>
+                                    <a class="nav-link" href="Cases/">Cases</a>
                                     <a class="nav-link" href="../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->

@@ -172,7 +172,7 @@
                                                     }else{
                                                         echo "<td>No record</td>";
                                                     }
-                                                    echo "<td>".$row["bill"]."</td>";
+                                                    echo "<td>".$row["bill"]."$</td>";
                                                     echo "<td style='text-align: center'><a href='addCase.php?client=$listID'><i class='fa fa-plus' aria-hidden='true'></i></a></td>";
                                                     echo "<td style='text-align: center'><a href='payment.php?client=$listID'><i class='fas fa-dollar-sign' style='font-size:20px; color:black'></i></a></td>";
                                                     echo "<td style='text-align: center'><a href='modify.php?client=$listID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";

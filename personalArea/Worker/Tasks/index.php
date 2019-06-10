@@ -134,7 +134,7 @@
                         <!-- Main content -->
                             <div class="col-9">
                                 <?php
-                                    $listQuery = mysqli_query($db, "SELECT * FROM tasks");
+                                    $listQuery = mysqli_query($db, "SELECT * FROM tasks where worker_ID = '$_SESSION[id_user]'");
 
                                     if($row = mysqli_fetch_array($listQuery)){
 
@@ -146,7 +146,6 @@
                                                     echo "<th scope='col'>Description</th>";
                                                     echo "<th scope='col'>Start date</th>";
                                                     echo "<th scope='col'>End date</th>";
-                                                    echo "<th scope='col'>Worker</th>";
                                                     echo "<th scope='col'>Lawer</th>";
                                                 echo "</tr>";
                                             echo "</thead>";
@@ -163,9 +162,7 @@
                                                         
                                                         $lawerName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM lawers WHERE lawer_ID = '$row[lawer_ID]'"));
                                                         echo "<td>".$lawerName["name"]." ".$lawerName["surname"]."</td>";
-                                                        
-                                                        $clientName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE worker_ID = '$row[worker_ID]'"));
-                                                        echo "<td>".$clientName["name"]." ".$clientName["surname"]."</td>";
+
                                                         echo "<td style='text-align: center'><a class='done_button' href='done.php?task=$taskID'><i class='fa fa-check-circle' style='font-size:20px;color:blue'></i></a></td>";
                                                         echo "<td style='text-align: center'><a href='modify.php?task=$taskID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
                                                         echo "<td style='text-align: center'><a class='delete_button' href='delete.php?task=$taskID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";

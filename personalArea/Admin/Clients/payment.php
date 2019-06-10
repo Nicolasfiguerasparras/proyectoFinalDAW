@@ -191,7 +191,7 @@
                                         </table>
                                     </div>
                                     <a class='nav-link' href="../Tasks/">Workers</a>
-                                    <a class="nav-link" href="../../login/logout.php">Logout</a>
+                                    <a class="nav-link" href="../../../login/logout.php">Logout</a>
                                 </div>
                             <!-- /Lateral NavBar -->
 

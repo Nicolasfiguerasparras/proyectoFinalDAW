@@ -134,7 +134,7 @@
                         <!-- Main content -->
                             <div class="col-9">
                                 <?php
-                                    $listQuery = mysqli_query($db, "SELECT * FROM tasks");
+                                    $listQuery = mysqli_query($db, "SELECT * FROM tasks where lawer_ID = '$_SESSION[id_user]'");
 
                                     if($row = mysqli_fetch_array($listQuery)){
 
@@ -162,7 +162,6 @@
                                                         
                                                         $clientName = mysqli_fetch_array(mysqli_query($db, "SELECT * FROM workers WHERE worker_ID = '$row[worker_ID]'"));
                                                         echo "<td>".$clientName["name"]." ".$clientName["surname"]."</td>";
-                                                        echo "<td style='text-align: center'><a class='done_button' href='done.php?task=$taskID'><i class='fa fa-check-circle' style='font-size:20px;color:blue'></i></a></td>";
                                                         echo "<td style='text-align: center'><a href='modify.php?task=$taskID'><i class='fa fa-edit' style='font-size:20px;color:green'></i></a></td>";
                                                         echo "<td style='text-align: center'><a class='delete_button' href='delete.php?task=$taskID'><i class='fa fa-trash' style='font-size:20px;color:red'></i></a></td>";
                                                     echo "</tr>";

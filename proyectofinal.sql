@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2019 a las 18:48:52
+-- Tiempo de generación: 10-06-2019 a las 02:50:04
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -42,7 +42,9 @@ CREATE TABLE `cases` (
 --
 
 INSERT INTO `cases` (`case_ID`, `title`, `description`, `lawer_ID`, `client_ID`, `type`) VALUES
-(1, 'Titulo', 'Descripcion', 1, 2, 'AOWA');
+(1, 'Infracción por conducción temeraria', 'El cliente pide asesoría legal para mantener su ciudadanía tras haber cometido una infracción de tráfico', 1, 2, 'Tráfico'),
+(2, 'Permiso laboral', 'El cliente desea obtener el permiso laboral en el país', 2, 1, 'Permiso laboral'),
+(3, 'Obtención de la nacionalidad', 'El cliente desea obtener la nacionalidad por medio de un familiar que reside en el país', 1, 4, 'Nacionalidad');
 
 -- --------------------------------------------------------
 
@@ -67,8 +69,11 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`client_ID`, `name`, `surname`, `birth_date`, `phone`, `email`, `username`, `password`, `bill`) VALUES
-(2, 'Nicolás', 'Figueras Parras', '1999-03-22', 639941992, 'nicolasfiguerasparras@gmail.com', 'nicoClient', 'nicoClient', 850),
-(3, 'Fernando', 'Juanez ', '1998-12-03', 626451200, 'fernando@gmail.com', 'fernando', 'fernando', 0);
+(1, 'Nicolás', 'Figueras Parras', '1999-03-22', 639941992, 'nicolasfiguerasparras@gmail.com', 'nicoClient', 'nicoClient', 850),
+(2, 'Fernando', 'Juanez ', '1998-12-03', 626451200, 'fernando@gmail.com', 'fernando', 'fernando', 0),
+(3, 'Jose Luis', 'Jimenez Marquez', '1980-05-06', 621545898, 'joseluis@gmail.com', 'joseluis', 'joseluis', 0),
+(4, 'Luis', 'Vigo Pérez', '1996-07-02', 722154535, 'luisrubio@gmail.com', 'luis', 'rubio', 0),
+(5, 'Patricia Elvira', 'Jimenez Martín', '2000-05-24', 645512466, 'mesosaurus_zen@gmail.com', 'patricia', 'mesosaurus', 0);
 
 -- --------------------------------------------------------
 
@@ -93,7 +98,9 @@ CREATE TABLE `lawers` (
 --
 
 INSERT INTO `lawers` (`lawer_ID`, `name`, `surname`, `birth_date`, `phone`, `email`, `username`, `password`, `salary`) VALUES
-(1, 'Nicolás', 'Figueras Parras', '1999-03-22', 639941992, 'nico@law.com', 'nicoLawer', 'nicoLawer', 1999);
+(1, 'Sonia', 'Parras', '1976-03-25', 639941992, 'soniaparras@law.com', 'soniaparras', 'lawoffice', 3500),
+(2, 'Noemí', 'Casas', '1978-03-21', 649310891, 'noemi@law.com', 'noemi', 'parrasCasas', 1500),
+(3, 'Mark', 'Konrad', '1984-08-15', 712245165, 'mark@law.com', 'mark', 'Konrad', 3400);
 
 -- --------------------------------------------------------
 
@@ -147,8 +154,10 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`task_ID`, `title`, `description`, `start_date`, `end_date`, `worker_ID`, `lawer_ID`, `status`) VALUES
-(1, 'Task 1', 'Descripcion', '2019-05-08', '2019-05-30', 1, 1, 1),
-(2, 'Pruebastat', 'Desc', '2019-01-01', '2020-01-01', 1, 1, 1);
+(1, 'Llamada', 'Llamar a todos los clientes que tuvieron cita ayer', '2019-06-02', '2019-06-11', 1, 1, 0),
+(2, 'Recopilar datos', 'Pedir datos a los clientes para resgistrar en la aplicación', '2019-01-01', '2019-06-10', 1, 3, 0),
+(3, 'Recordatorio de cita', 'Llamar a Olivia Piñero Viñolo para recordarle su juicio del viernes 14/06', '2019-06-10', '2019-06-11', 2, 2, 0),
+(4, 'Organizar facturas', 'Ordenar todas las facturas para pasarlas a la aplicación', '2019-06-01', '2019-06-20', 3, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -173,7 +182,10 @@ CREATE TABLE `workers` (
 --
 
 INSERT INTO `workers` (`worker_ID`, `name`, `surname`, `birth_date`, `phone`, `email`, `username`, `password`, `salary`) VALUES
-(1, 'Nicolás', 'Figueras Parras', '1999-03-22', 639941992, 'nicolas@worker.com', 'nicoWorker', 'nicoWorker', 800);
+(1, 'Raúl', 'Méndez Núñez', '1990-03-22', 639941992, 'raul@worker.com', 'raulmendez', 'mendeznuñez', 800),
+(2, 'Tania', 'Rodríguez Gutiérrez', '1980-03-06', 61542451, 'tania@worker.com', 'tania', 'rodriguez', 1200),
+(3, 'Olivia', 'Piñero Viñolo', '1977-11-14', 615124351, 'olivia@worker.com', 'olivia', 'piñero', 2500),
+(4, 'Alicia', 'Martín Vicente', '1988-09-14', 655255135, 'alicia@worker.com', 'alicia', 'martin', 1000);
 
 --
 -- Índices para tablas volcadas
@@ -228,19 +240,19 @@ ALTER TABLE `workers`
 -- AUTO_INCREMENT de la tabla `cases`
 --
 ALTER TABLE `cases`
-  MODIFY `case_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `case_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `client_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `client_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `lawers`
 --
 ALTER TABLE `lawers`
-  MODIFY `lawer_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `lawer_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `payment`
@@ -252,13 +264,13 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `task_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `task_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `workers`
 --
 ALTER TABLE `workers`
-  MODIFY `worker_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `worker_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

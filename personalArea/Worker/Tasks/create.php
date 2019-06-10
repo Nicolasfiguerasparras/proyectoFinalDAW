@@ -195,7 +195,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="lawer_ID">Lawer</label>
                                             <select id="client" name="lawer_ID" class="form-control">
                                                 <option value="0" selected disabled>Choose...</option>
@@ -210,7 +210,7 @@
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <label for="worker_ID">Worker</label>
                                             <select id="worker_ID" name="worker_ID" class="form-control">
                                                 <option value="0" selected disabled>Choose...</option>
@@ -225,11 +225,11 @@
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="start_date">Start date</label>
                                             <input type="date" class="form-control" id="start_date" name="start_date">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label for="end_date">End date</label>
                                             <input type="date" class="form-control" id="end_date" name="end_date">
                                         </div>
